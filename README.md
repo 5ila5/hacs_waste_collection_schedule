@@ -312,6 +312,7 @@ Waste collection schedules in the following formats and countries are supported.
 - [Abfallwirtschaftszweckverband Wartburgkreis (AZV)](/doc/source/hausmuell_info.md) / azv-wak-ea.de
 - [Abfallzweckverband Rhein-Mosel-Eifel (Landkreis Mayen-Koblenz)](/doc/source/abfall_io.md) / azv-rme.de
 - [ALBA Berlin](/doc/source/abfall_io.md) / berlin.alba.info
+- [ALBA Braunschweig](/doc/ics/alba_bs_de.md) / alba-bs.de
 - [Altötting (LK)](/doc/source/jumomind_de.md) / lra-aoe.de
 - [ART Trier](/doc/source/art_trier_de.md) / art-trier.de
 - [Aschaffenburg (MyMuell App)](/doc/source/jumomind_de.md) / mymuell.de
