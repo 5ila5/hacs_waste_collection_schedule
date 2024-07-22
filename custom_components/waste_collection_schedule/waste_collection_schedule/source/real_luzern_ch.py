@@ -1,8 +1,8 @@
 import datetime
-from waste_collection_schedule import Collection
 
 import requests
 from bs4 import BeautifulSoup
+from waste_collection_schedule import Collection
 
 TITLE = "Real Luzern"
 DESCRIPTION = "Source script for Real Luzern, Switzerland"
@@ -11,7 +11,7 @@ URL = "https://www.real-luzern.ch"
 TEST_CASES = {
     "Luzern - Heimatweg": {"municipality_id": 13, "street_id": 766},
     "Luzern - Pliatusblick": {"municipality_id": 13, "street_id": 936},
-    "Emmen": {"municipality_id": 6}
+    "Emmen": {"municipality_id": 6},
 }
 
 ICON_MAP = {
@@ -42,6 +42,14 @@ GERMAN_MONTH_STRING_TO_INT = {
 API_URL = "https://www.real-luzern.ch/abfall/sammeldienst/abfallkalender/"
 
 
+PARAM_TRANSLATIONS = {
+    "de": {
+        "municipality_id": "Orts ID",
+        "street_id": "Strassen ID",
+    },
+}
+
+
 class Source:
     def __init__(self, municipality_id, street_id=None):
         self._municipality_id = municipality_id
@@ -56,17 +64,23 @@ class Source:
 
         # extract entries
         entries = []
-        waste_type_containers = soup.find(
-            "div", class_='tab-content').findChildren('div', recursive=False)
+        waste_type_containers = soup.find("div", class_="tab-content").findChildren(
+            "div", recursive=False
+        )
         for waste_type_container in waste_type_containers:
-            waste_type = waste_type_container.get('id')
-            years = [int(y.text) for y in waste_type_container.findChildren("h3", recursive=False)]
-            
-            dates_per_year = [c.text.replace(". ", ".").split(
-            ) for c in waste_type_container.find_all("div", class_='cols')]
+            waste_type = waste_type_container.get("id")
+            years = [
+                int(y.text)
+                for y in waste_type_container.findChildren("h3", recursive=False)
+            ]
 
-            for (year, dates) in zip(years, dates_per_year):
-                for (day, month) in [split_german_date(date) for date in dates]:
+            dates_per_year = [
+                c.text.replace(". ", ".").split()
+                for c in waste_type_container.find_all("div", class_="cols")
+            ]
+
+            for year, dates in zip(years, dates_per_year):
+                for day, month in [split_german_date(date) for date in dates]:
                     entries.append(
                         Collection(
                             date=datetime.date(year, month, day),
