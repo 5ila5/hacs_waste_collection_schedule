@@ -4,6 +4,10 @@ from urllib.parse import parse_qs, urlparse
 import requests
 from bs4 import BeautifulSoup
 from waste_collection_schedule import Collection  # type: ignore[attr-defined]
+from waste_collection_schedule.exceptions import (
+    SourceArgumentNotFoundWithSuggestions,
+    SourceArgumentRequiredWithSuggestions,
+)
 
 TITLE = "A-Region"
 DESCRIPTION = "Source for A-Region, Switzerland waste collection."
@@ -72,7 +76,9 @@ class Source:
         # municipalities = self.get_municipalities()
         municipalities = MUNICIPALITIES
         if self._municipality not in municipalities:
-            raise Exception(f"municipality '{self._municipality}' not found")
+            raise SourceArgumentNotFoundWithSuggestions(
+                "municipality", self._municipality, municipalities.keys()
+            )
 
         waste_types = self.get_waste_types(municipalities[self._municipality])
 
@@ -174,9 +180,13 @@ class Source:
                 # only one district found -> use it
                 return self.get_dates(list(districts.values())[0])
             if self._district is None:
-                raise Exception("district is missing")
+                raise SourceArgumentRequiredWithSuggestions(
+                    "district", districts.keys()
+                )
             if self._district not in districts:
-                raise Exception(f"district '{self._district}' not found")
+                raise SourceArgumentNotFoundWithSuggestions(
+                    "district", self._district, districts.keys()
+                )
             return self.get_dates(districts[self._district])
 
         dates = set()

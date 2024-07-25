@@ -38,7 +38,8 @@ class Source:
 
     def fetch(self):
         r = requests.post(
-            "https://pre.southkesteven.gov.uk/BinSearch.aspx", data={"address": self._address_id}
+            "https://pre.southkesteven.gov.uk/BinSearch.aspx",
+            data={"address": self._address_id},
         )
         r.raise_for_status()
 
@@ -84,12 +85,11 @@ class Source:
             if (collection_futher_info_link is None):
                 garden_check = (collections_ul.find_previous_sibling("ul").find("li").text)
                 if garden_check == "Leaves":
-                    bin_type = "green"
-            else:
-                bin_type = FUTURE_BIN_TYPE_REGEX.search(collection_futher_info_link.text).group(
-                    1
-                )
-
+                    bin_type = "green"    {
+        "title": "Gemeinde Lindlar",
+        "url": "https://www.lindlar.de/",
+        "service_id": "lindlar",
+    },
             for collection in collections_list.find_next_sibling("ul").find_all("li"):
                 # like: "Thu 29 August 2024"
                 date_str = collection.text

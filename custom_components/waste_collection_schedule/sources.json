@@ -425,17 +425,23 @@
     {
       "title": "Abfallverband Hollabrunn",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "hollabrunn"
+      }
     },
     {
       "title": "Abfallverband Korneuburg",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "korneuburg"
+      }
     },
     {
       "title": "Abfallverband Schwechat",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "schwechat"
+      }
     },
     {
       "title": "Abfallwirtschaft der Stadt St. P\u00f6lten",
@@ -447,7 +453,16 @@
     {
       "title": "Abfallwirtschaft Stadt Krems",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "kremsstadt"
+      }
+    },
+    {
+      "title": "Abfallwirtschaft Stadt St P\u00f6lten",
+      "module": "umweltverbaende_at",
+      "default_params": {
+        "district": "stpoelten"
+      }
     },
     {
       "title": "Afritz am See",
@@ -502,12 +517,16 @@
     {
       "title": "AWV Neunkirchen",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "neunkirchen"
+      }
     },
     {
       "title": "AWV Wr. Neustadt",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "wrneustadt"
+      }
     },
     {
       "title": "Bad Blumau",
@@ -832,7 +851,9 @@
     {
       "title": "GABL",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "bruck"
+      }
     },
     {
       "title": "Gattendorf",
@@ -842,22 +863,30 @@
     {
       "title": "GAUL Laa an der Thaya",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "laa"
+      }
     },
     {
       "title": "GAUM Mistelbach",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "mistelbach"
+      }
     },
     {
       "title": "GDA Amstetten",
-      "module": "ics",
-      "default_params": {}
+      "module": "umweltverbaende_at",
+      "default_params": {
+        "district": "amstetten"
+      }
     },
     {
       "title": "Gemeindeverband Horn",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "horn"
+      }
     },
     {
       "title": "Gitschtal",
@@ -952,17 +981,23 @@
     {
       "title": "GV Gm\u00fcnd",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "gmuend"
+      }
     },
     {
       "title": "GV Krems",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "krems"
+      }
     },
     {
       "title": "GV Zwettl",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "zwettl"
+      }
     },
     {
       "title": "GVA Baden",
@@ -972,37 +1007,51 @@
     {
       "title": "GVA Baden",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "baden"
+      }
     },
     {
       "title": "GVA Lilienfeld",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "lilienfeld"
+      }
     },
     {
       "title": "GVA M\u00f6dling",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "moedling"
+      }
     },
     {
       "title": "GVA Tulln",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "tulln"
+      }
     },
     {
       "title": "GVA Waidhofen/Thaya",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "waidhofen"
+      }
     },
     {
       "title": "GVU Bezirk G\u00e4nserndorf",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "gaenserndorf"
+      }
     },
     {
       "title": "GVU Melk",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "melk"
+      }
     },
     {
       "title": "GVU Scheibbs",
@@ -1012,12 +1061,16 @@
     {
       "title": "GVU Scheibbs",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "scheibbs"
+      }
     },
     {
       "title": "GVU St. P\u00f6lten",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "stpoeltenland"
+      }
     },
     {
       "title": "G\u00fcssing",
@@ -1229,7 +1282,9 @@
     {
       "title": "Klosterneuburg",
       "module": "umweltverbaende_at",
-      "default_params": {}
+      "default_params": {
+        "district": "klosterneuburg"
+      }
     },
     {
       "title": "Kl\u00f6ch",
