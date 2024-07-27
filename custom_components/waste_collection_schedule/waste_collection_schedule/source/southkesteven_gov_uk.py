@@ -85,11 +85,7 @@ class Source:
             if (collection_futher_info_link is None):
                 garden_check = (collections_ul.find_previous_sibling("ul").find("li").text)
                 if garden_check == "Leaves":
-                    bin_type = "green"    {
-        "title": "Gemeinde Lindlar",
-        "url": "https://www.lindlar.de/",
-        "service_id": "lindlar",
-    },
+                    bin_type = "green"
             for collection in collections_list.find_next_sibling("ul").find_all("li"):
                 # like: "Thu 29 August 2024"
                 date_str = collection.text

@@ -458,13 +458,6 @@
       }
     },
     {
-      "title": "Abfallwirtschaft Stadt St P\u00f6lten",
-      "module": "umweltverbaende_at",
-      "default_params": {
-        "district": "stpoelten"
-      }
-    },
-    {
       "title": "Afritz am See",
       "module": "ics",
       "default_params": {}
@@ -876,10 +869,8 @@
     },
     {
       "title": "GDA Amstetten",
-      "module": "umweltverbaende_at",
-      "default_params": {
-        "district": "amstetten"
-      }
+      "module": "ics",
+      "default_params": {}
     },
     {
       "title": "Gemeindeverband Horn",
