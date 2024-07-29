@@ -4268,21 +4268,21 @@
       },
       "args_ics": {
         "title": "Configure Source",
-        "description": "Configure your service provider. More detailes: https://github.com/mampfes/hacs_waste_collection_schedule/blob/master/doc/source/ics.md.",
+        "description": "Configure your service provider. For details see the source documentation.",
         "data": {
           "calendar_title": "Calendar Title",
-          "file": "File",
-          "headers": "Headers",
-          "method": "Method",
-          "offset": "Offset",
-          "params": "Parameters",
-          "regex": "Regex",
-          "split_at": "Split At",
-          "title_template": "Title Template",
           "url": "Url",
-          "verify_ssl": "Verify Ssl",
+          "file": "File",
+          "offset": "Offset",
+          "params": "Params",
+          "year_field": "Year Field",
+          "method": "Method",
+          "regex": "Regex",
+          "title_template": "Title Template",
+          "split_at": "Split At",
           "version": "Version",
-          "year_field": "Year Field"
+          "verify_ssl": "Verify Ssl",
+          "headers": "Headers"
         },
         "data_description": {
           "calendar_title": "A more readable, or user-friendly, name for the waste calendar. If nothing is provided, the name returned by the source will be used."
@@ -4290,21 +4290,21 @@
       },
       "reconfigure_ics": {
         "title": "Reconfigure Source",
-        "description": "Configure your service provider. More detailes: https://github.com/mampfes/hacs_waste_collection_schedule/blob/master/doc/source/ics.md.",
+        "description": "Configure your service provider. For details see the source documentation.",
         "data": {
           "calendar_title": "Calendar Title",
-          "file": "File",
-          "headers": "Headers",
-          "method": "Method",
-          "offset": "Offset",
-          "params": "Parameters",
-          "regex": "Regex",
-          "split_at": "Split At",
-          "title_template": "Title Template",
           "url": "Url",
-          "verify_ssl": "Verify Ssl",
+          "file": "File",
+          "offset": "Offset",
+          "params": "Params",
+          "year_field": "Year Field",
+          "method": "Method",
+          "regex": "Regex",
+          "title_template": "Title Template",
+          "split_at": "Split At",
           "version": "Version",
-          "year_field": "Year Field"
+          "verify_ssl": "Verify Ssl",
+          "headers": "Headers"
         },
         "data_description": {}
       },
@@ -7740,17 +7740,17 @@
       },
       "args_static": {
         "title": "Configure Source",
-        "description": "Configure your service provider. More detailes: https://github.com/mampfes/hacs_waste_collection_schedule/blob/master/doc/source/static.md.",
+        "description": "Configure your service provider. For details see the source documentation.",
         "data": {
           "calendar_title": "Calendar Title",
-          "count": "Count",
+          "type": "Type",
           "dates": "Dates",
-          "excludes": "Excludes",
           "frequency": "Frequency",
           "interval": "Interval",
           "start": "Start",
-          "type": "Type",
           "until": "Until",
+          "count": "Count",
+          "excludes": "Excludes",
           "weekdays": "Weekdays"
         },
         "data_description": {
@@ -7759,17 +7759,17 @@
       },
       "reconfigure_static": {
         "title": "Reconfigure Source",
-        "description": "Configure your service provider. More detailes: https://github.com/mampfes/hacs_waste_collection_schedule/blob/master/doc/source/static.md.",
+        "description": "Configure your service provider. For details see the source documentation.",
         "data": {
           "calendar_title": "Calendar Title",
-          "count": "Count",
+          "type": "Type",
           "dates": "Dates",
-          "excludes": "Excludes",
           "frequency": "Frequency",
           "interval": "Interval",
           "start": "Start",
-          "type": "Type",
           "until": "Until",
+          "count": "Count",
+          "excludes": "Excludes",
           "weekdays": "Weekdays"
         },
         "data_description": {}
@@ -9897,6 +9897,52 @@
           "house_number": "House Number",
           "addition": "Addition",
           "region": "Region"
+        },
+        "data_description": {}
+      },
+      "args_ceb_coburg_de": {
+        "title": "Configure Source",
+        "description": "Configure your service provider. For details see the source documentation.",
+        "data": {
+          "calendar_title": "Calendar Title",
+          "street": "Street"
+        },
+        "data_description": {
+          "calendar_title": "A more readable, or user-friendly, name for the waste calendar. If nothing is provided, the name returned by the source will be used."
+        }
+      },
+      "reconfigure_ceb_coburg_de": {
+        "title": "Reconfigure Source",
+        "description": "Configure your service provider. For details see the source documentation.",
+        "data": {
+          "calendar_title": "Calendar Title",
+          "street": "Street"
+        },
+        "data_description": {}
+      },
+      "args_sammelkalender_ch": {
+        "title": "Configure Source",
+        "description": "Configure your service provider. For details see the source documentation.",
+        "data": {
+          "calendar_title": "Calendar Title",
+          "service_provider": "Service Provider",
+          "municipality": "Municipality",
+          "street": "Street",
+          "hnr": "Hnr"
+        },
+        "data_description": {
+          "calendar_title": "A more readable, or user-friendly, name for the waste calendar. If nothing is provided, the name returned by the source will be used."
+        }
+      },
+      "reconfigure_sammelkalender_ch": {
+        "title": "Reconfigure Source",
+        "description": "Configure your service provider. For details see the source documentation.",
+        "data": {
+          "calendar_title": "Calendar Title",
+          "service_provider": "Service Provider",
+          "municipality": "Municipality",
+          "street": "Street",
+          "hnr": "Hnr"
         },
         "data_description": {}
       }

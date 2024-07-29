@@ -280,6 +280,7 @@ class SourceDict(TypedDict):
     title: str
     module: str
     default_params: dict[str, Any]
+    id: str
 
 
 class WasteCollectionConfigFlow(ConfigFlow, domain=DOMAIN):  # type: ignore[call-arg]
@@ -296,21 +297,24 @@ class WasteCollectionConfigFlow(ConfigFlow, domain=DOMAIN):  # type: ignore[call
         super().__init__(*args, **kwargs)
         self._sources = self._get_source_list()
         self._options: dict = {}
+
+        async def args_method(args_input):
+            return await self.async_step_args(args_input)
+
+        async def reconfigure_method(args_input):
+            return await self.async_step_reconfigure(args_input)
+
         for _, sources in self._sources.items():
             for source in sources:
-
-                async def args_method(args_input):
-                    return await self.async_step_args(args_input)
-
                 setattr(
                     self,
-                    f"async_step_args_{source['module']}",
+                    f"async_step_args_{source['id']}",
                     args_method,
                 )
                 setattr(
                     self,
-                    f"async_step_reconfigure_{source['module']}",
-                    args_method,
+                    f"async_step_reconfigure_{source['id']}",
+                    reconfigure_method,
                 )
 
     # Get source list from JSON
@@ -349,7 +353,7 @@ class WasteCollectionConfigFlow(ConfigFlow, domain=DOMAIN):  # type: ignore[call
         sources = self._sources[self._country]
         sources_options = [SelectOptionDict(value="", label="")] + [
             SelectOptionDict(
-                value=f"{x['module']}\t({x['title']})",
+                value=f"{x['module']}\t({x['title']})\t{x['id']}",
                 label=f"{x['title']} ({x['module']})",
             )
             for x in sources
@@ -379,6 +383,7 @@ class WasteCollectionConfigFlow(ConfigFlow, domain=DOMAIN):  # type: ignore[call
                 errors[CONF_SOURCE_NAME] = "invalid_source"
             else:
                 self._source = info[CONF_SOURCE_NAME].split("\t")[0]
+                self._id = info[CONF_SOURCE_NAME].split("\t")[2]
                 self._extra_info_default_params = next(
                     (
                         x["default_params"]
@@ -650,7 +655,7 @@ class WasteCollectionConfigFlow(ConfigFlow, domain=DOMAIN):  # type: ignore[call
 
         setattr(
             self,
-            f"async_step_args_{self._source}",
+            f"async_step_args_{self._id}",
             args_method,
         )
         return await self.async_step_args()
@@ -686,7 +691,7 @@ class WasteCollectionConfigFlow(ConfigFlow, domain=DOMAIN):  # type: ignore[call
                 self.async_show_form(step_id="options")
                 return await self.async_step_flow_type()
         return self.async_show_form(
-            step_id=f"args_{self._source}",
+            step_id=f"args_{self._id}",
             data_schema=schema,
             errors=errors,
             description_placeholders=description_placeholders,
