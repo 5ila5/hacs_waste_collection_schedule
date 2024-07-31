@@ -11,7 +11,8 @@ URL = "https://abki.de/"
 TEST_CASES = {
     "auguste-viktoria-straße, 14": {"street": "auguste-viktoria-straße", "number": 14},
     "Achterwehrer Straße, 1 A": {"street": "Achterwehrer Straße", "number": "1 a"},
-    "Boltenhagener Straße, 4-8": {"street": "Boltenhagener Straße", "number": "4-8"},
+    "Boltenhagener Straße, 4-8": 
+    {"street": "Boltenhagener Straße", "number": "4-8"},
 }
 
 
@@ -25,13 +26,21 @@ ICON_MAP = {
 
 
 ICAL_URL = "https://abki.de/abki-services/abki-leerungen-ical"
+
+
 _LOGGER = logging.getLogger(__name__)
 
 
+a:int = 1
+a = "hallo"
+
 class Source:
     def __init__(self, street: str, number: str | int):
+
         self._street: str = street
+
         self._number: str = str(number)
+
         self._ics = ICS()
 
     def fetch(self):
@@ -104,6 +113,7 @@ class Source:
                 pass
 
         entries = []
+
         for d in dates:
             entries.append(Collection(
                 d[0], d[1], ICON_MAP.get(d[1].split(" ")[0])))
