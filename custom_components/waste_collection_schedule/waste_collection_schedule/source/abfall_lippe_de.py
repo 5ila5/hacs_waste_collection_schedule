@@ -34,7 +34,7 @@ class WrongURLError(Exception):
     pass
 
 
-class Source:
+class Source1:
     def __init__(self, gemeinde: str, bezirk: str | None = None):
         self._gemeinde: str = gemeinde
         self._bezirk: str = bezirk if bezirk is not None else ""
