@@ -3530,12 +3530,12 @@
       "module": "ics",
       "default_params": {
         "method": "POST",
-        "url": "https://www.abfallwirtschaft-sonneberg.de/PHPtoICS{%Y}.php",
         "params": {
           "ort": "",
           "stadtteil": "",
           "strasse": ""
-        }
+        },
+        "url": "https://www.abfallwirtschaft-sonneberg.de/PHPtoICS{%Y}.php"
       },
       "id": "ics_abfallwirtschaft_sonneberg_de"
     },
@@ -3759,8 +3759,8 @@
       "title": "Allendorf",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Hessen",
-        "city": "Allendorf"
+        "city": "Allendorf",
+        "state": "Hessen"
       },
       "id": "lobbe_app"
     },
@@ -3768,8 +3768,8 @@
       "title": "Altena",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Altena"
+        "city": "Altena",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -3777,8 +3777,8 @@
       "title": "Altenbeken",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Altenbeken"
+        "city": "Altenbeken",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -3806,8 +3806,8 @@
       "title": "Arnsberg",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Arnsberg"
+        "city": "Arnsberg",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -3815,8 +3815,8 @@
       "title": "ART Trier",
       "module": "ics",
       "default_params": {
-        "split_at": " & ",
-        "regex": "(.*) - .* - A.R.T. Abfuhrtermin"
+        "regex": "(.*) - .* - A.R.T. Abfuhrtermin",
+        "split_at": " & "
       },
       "id": "ics_art_trier_de"
     },
@@ -4032,8 +4032,8 @@
       "title": "Bad Arolsen",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Hessen",
-        "city": "Bad Arolsen"
+        "city": "Bad Arolsen",
+        "state": "Hessen"
       },
       "id": "lobbe_app"
     },
@@ -4049,8 +4049,8 @@
       "title": "Bad Berleburg",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Bad Berleburg"
+        "city": "Bad Berleburg",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -4058,8 +4058,8 @@
       "title": "Bad Driburg",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Bad Driburg"
+        "city": "Bad Driburg",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -4083,8 +4083,8 @@
       "title": "Bad W\u00fcnnenberg",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Bad W\u00fcnnenberg"
+        "city": "Bad W\u00fcnnenberg",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -4100,8 +4100,8 @@
       "title": "Balve",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Balve"
+        "city": "Balve",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -4123,8 +4123,8 @@
       "title": "Battenberg",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Hessen",
-        "city": "Battenberg"
+        "city": "Battenberg",
+        "state": "Hessen"
       },
       "id": "lobbe_app"
     },
@@ -4176,8 +4176,8 @@
       "title": "Bestwig",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Bestwig"
+        "city": "Bestwig",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -4221,8 +4221,8 @@
       "title": "Borchen",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Borchen"
+        "city": "Borchen",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -4230,8 +4230,8 @@
       "title": "Borgentreich",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Borgentreich"
+        "city": "Borgentreich",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -4239,8 +4239,8 @@
       "title": "Brakel",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Brakel"
+        "city": "Brakel",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -4256,8 +4256,8 @@
       "title": "Breckerfeld",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Breckerfeld"
+        "city": "Breckerfeld",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -4289,8 +4289,8 @@
       "title": "Brilon",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Brilon"
+        "city": "Brilon",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -4306,8 +4306,8 @@
       "title": "Bromskirchen",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Hessen",
-        "city": "Bromskirchen"
+        "city": "Bromskirchen",
+        "state": "Hessen"
       },
       "id": "lobbe_app"
     },
@@ -4323,8 +4323,8 @@
       "title": "Burgwald",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Hessen",
-        "city": "Burgwald"
+        "city": "Burgwald",
+        "state": "Hessen"
       },
       "id": "lobbe_app"
     },
@@ -4332,8 +4332,8 @@
       "title": "B\u00fcren",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "B\u00fcren"
+        "city": "B\u00fcren",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -4431,8 +4431,8 @@
       "title": "Delbr\u00fcck",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Delbr\u00fcck"
+        "city": "Delbr\u00fcck",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -4440,8 +4440,8 @@
       "title": "Diemelsee",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Hessen",
-        "city": "Diemelsee"
+        "city": "Diemelsee",
+        "state": "Hessen"
       },
       "id": "lobbe_app"
     },
@@ -4449,8 +4449,8 @@
       "title": "Diemelstadt",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Hessen",
-        "city": "Diemelstadt"
+        "city": "Diemelstadt",
+        "state": "Hessen"
       },
       "id": "lobbe_app"
     },
@@ -4506,8 +4506,8 @@
       "title": "Edertal",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Hessen",
-        "city": "Edertal"
+        "city": "Edertal",
+        "state": "Hessen"
       },
       "id": "lobbe_app"
     },
@@ -4653,8 +4653,8 @@
       "title": "Eslohe",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Eslohe"
+        "city": "Eslohe",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -4709,8 +4709,8 @@
       "title": "Frankenau",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Hessen",
-        "city": "Frankenau"
+        "city": "Frankenau",
+        "state": "Hessen"
       },
       "id": "lobbe_app"
     },
@@ -4870,8 +4870,8 @@
       "title": "Hallenberg",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Hallenberg"
+        "city": "Hallenberg",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -4895,8 +4895,8 @@
       "title": "Halver",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Halver"
+        "city": "Halver",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -4912,8 +4912,8 @@
       "title": "Hatzfeld",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Hessen",
-        "city": "Hatzfeld"
+        "city": "Hatzfeld",
+        "state": "Hessen"
       },
       "id": "lobbe_app"
     },
@@ -4953,8 +4953,8 @@
       "title": "Hemer",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Hemer"
+        "city": "Hemer",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -5028,8 +5028,8 @@
       "title": "Iserlohn",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Iserlohn"
+        "city": "Iserlohn",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -5063,8 +5063,8 @@
       "title": "Kierspe",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Kierspe"
+        "city": "Kierspe",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -5086,8 +5086,8 @@
       "title": "Korbach",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Hessen",
-        "city": "Korbach"
+        "city": "Korbach",
+        "state": "Hessen"
       },
       "id": "lobbe_app"
     },
@@ -5835,9 +5835,7 @@
       "title": "Landkreis Heidenheim",
       "module": "ics",
       "default_params": {
-        "url": "https://mobil.abfallwirtschaft-heidenheim.de/icalendar/download.php",
         "method": "POST",
-        "year_field": "jahr",
         "params": {
           "tag": "0",
           "uhrzeit": "",
@@ -5847,7 +5845,9 @@
           "rest": "1",
           "papier": "1",
           "papiertonne": "1"
-        }
+        },
+        "url": "https://mobil.abfallwirtschaft-heidenheim.de/icalendar/download.php",
+        "year_field": "jahr"
       },
       "id": "ics_abfall_hdh_de"
     },
@@ -6253,8 +6253,8 @@
       "title": "Lichtenau",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Lichtenau"
+        "city": "Lichtenau",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -6262,8 +6262,8 @@
       "title": "Lichtenfels",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Hessen",
-        "city": "Lichtenfels"
+        "city": "Lichtenfels",
+        "state": "Hessen"
       },
       "id": "lobbe_app"
     },
@@ -6353,8 +6353,8 @@
       "title": "Marienm\u00fcnster",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Marienm\u00fcnster"
+        "city": "Marienm\u00fcnster",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -6362,8 +6362,8 @@
       "title": "Marsberg",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Marsberg"
+        "city": "Marsberg",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -6379,8 +6379,8 @@
       "title": "Medebach",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Medebach"
+        "city": "Medebach",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -6394,8 +6394,8 @@
       "title": "Meinerzhagen",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Meinerzhagen"
+        "city": "Meinerzhagen",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -6403,8 +6403,8 @@
       "title": "Menden",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Menden"
+        "city": "Menden",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -6412,8 +6412,8 @@
       "title": "Meschede",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Meschede"
+        "city": "Meschede",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -6497,8 +6497,8 @@
       "title": "Nachrodt-Wiblingwerde",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Nachrodt-Wiblingwerde"
+        "city": "Nachrodt-Wiblingwerde",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -6605,8 +6605,8 @@
       "title": "Olsberg",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Olsberg"
+        "city": "Olsberg",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -6638,8 +6638,8 @@
       "title": "Plettenberg",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Plettenberg"
+        "city": "Plettenberg",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -6765,8 +6765,8 @@
       "title": "Rosenthal",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Hessen",
-        "city": "Rosenthal"
+        "city": "Rosenthal",
+        "state": "Hessen"
       },
       "id": "lobbe_app"
     },
@@ -6806,8 +6806,8 @@
       "title": "R\u00fcthen",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "R\u00fcthen"
+        "city": "R\u00fcthen",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -6831,8 +6831,8 @@
       "title": "Schalksm\u00fchle",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Schalksm\u00fchle"
+        "city": "Schalksm\u00fchle",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -6846,8 +6846,8 @@
       "title": "Schmallenberg",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Schmallenberg"
+        "city": "Schmallenberg",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -7177,8 +7177,8 @@
       "title": "Steinheim",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Steinheim"
+        "city": "Steinheim",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -7200,8 +7200,8 @@
       "title": "Sundern",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Sundern"
+        "city": "Sundern",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -7281,8 +7281,8 @@
       "title": "Twistetal",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Hessen",
-        "city": "Twistetal"
+        "city": "Twistetal",
+        "state": "Hessen"
       },
       "id": "lobbe_app"
     },
@@ -7352,8 +7352,8 @@
       "title": "V\u00f6hl",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Hessen",
-        "city": "V\u00f6hl"
+        "city": "V\u00f6hl",
+        "state": "Hessen"
       },
       "id": "lobbe_app"
     },
@@ -7393,8 +7393,8 @@
       "title": "Warburg",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Warburg"
+        "city": "Warburg",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -7402,8 +7402,8 @@
       "title": "Warstein",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Warstein"
+        "city": "Warstein",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -7433,8 +7433,8 @@
       "title": "Werdohl",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Werdohl"
+        "city": "Werdohl",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -7480,8 +7480,8 @@
       "title": "Willebadessen",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Willebadessen"
+        "city": "Willebadessen",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -7489,8 +7489,8 @@
       "title": "Willingen",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Hessen",
-        "city": "Willingen"
+        "city": "Willingen",
+        "state": "Hessen"
       },
       "id": "lobbe_app"
     },
@@ -7498,8 +7498,8 @@
       "title": "Winterberg",
       "module": "lobbe_app",
       "default_params": {
-        "state": "Nordrhein-Westfalen",
-        "city": "Winterberg"
+        "city": "Winterberg",
+        "state": "Nordrhein-Westfalen"
       },
       "id": "lobbe_app"
     },
@@ -7655,9 +7655,9 @@
       "title": "Contarina S.p.A",
       "module": "ics",
       "default_params": {
-        "url": "https://contarina.it/ajax/moduli/appbugfixapi/genera_ics_calendari?id_zona={zone}",
+        "regex": ".*: (.*)",
         "split_at": ", ",
-        "regex": ".*: (.*)"
+        "url": "https://contarina.it/ajax/moduli/appbugfixapi/genera_ics_calendari?id_zona={zone}"
       },
       "id": "ics_contarina_it"
     },
@@ -8475,12 +8475,12 @@
       "title": "Canton of Z\u00fcrich",
       "module": "ics",
       "default_params": {
-        "regex": "(.*), .*",
         "params": {
           "region": "",
           "zip": "",
           "area": ""
-        }
+        },
+        "regex": "(.*), .*"
       },
       "id": "ics_openerz_metaodi_ch"
     },
