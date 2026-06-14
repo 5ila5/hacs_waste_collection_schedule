@@ -3,7 +3,7 @@ import logging
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import coords, text_field
 from waste_collection_schedule.exceptions import SourceArgumentNotFound
-from waste_collection_schedule.retrievers import http_get
+from waste_collection_schedule.retrievers import HttpGetRetriever
 from waste_collection_schedule.service.ArcGis import ArcGisGeocodeError, geocode
 from waste_collection_schedule.transformers import KeyValueTransformer
 from waste_collection_schedule.waste_types import (
@@ -33,7 +33,6 @@ class Source(BaseSource):
     URL = "https://www.stirling.wa.gov.au"
     COUNTRY = "au"
     CODEOWNERS = ["@markvp"]
-    API_URL = "https://www.stirling.wa.gov.au/bincollectioncheck/getresult"
 
     TEST_CASES = {
         "by_address": {"address": "100 Cedric Street, Stirling, WA, Australia"},
@@ -80,24 +79,32 @@ class Source(BaseSource):
                 "Either 'address' or both 'lat' and 'lon' must be provided.",
             )
 
-    def _resolve_coordinates(self) -> tuple[float, float]:
-        if self._lat is not None and self._lon is not None:
-            return self._lat, self._lon
+    @staticmethod
+    def _resolve_coordinates(
+        address: str | None, lat: float | None, lon: float | None
+    ) -> tuple[float, float]:
+        if lat is not None and lon is not None:
+            return lat, lon
         try:
-            location = geocode(self._address)
+            location = geocode(address)
         except ArcGisGeocodeError as e:
-            raise SourceArgumentNotFound("address", self._address) from e
+            raise SourceArgumentNotFound("address", address) from e
         return location["y"], location["x"]
 
-    def retrieve(self):
-        lat, lon = self._resolve_coordinates()
-        self._headers = {
+    @staticmethod
+    def headers(address, lat, lon):
+        lat, lon = Source._resolve_coordinates(address, lat, lon)
+        return {
             "Accept": "application/json, text/javascript, */*; q=0.01",
             "configid": "7c833520-7b62-4228-8522-fb1a220b32e8",
             "form": "57753bab-f589-44d7-8934-098b6d5c572f",
             "fields": f"{lon},{lat}",
             "apikeylookup": "Bin Day",
-            "Origin": self.URL,
-            "Referer": f"{self.URL}/waste-and-environment/waste-and-recycling/bin-collections",
+            "Origin": Source.URL,
+            "Referer": f"{Source.URL}/waste-and-environment/waste-and-recycling/bin-collections",
         }
-        return http_get(self)
+
+    retrieve = HttpGetRetriever(
+        url="https://www.stirling.wa.gov.au/bincollectioncheck/getresult",
+        headers=Source.headers,  # TODO: Fix this does work like this
+    )

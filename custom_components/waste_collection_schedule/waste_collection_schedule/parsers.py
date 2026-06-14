@@ -14,13 +14,37 @@ Factory parsers (call to configure, then assign):
 """
 
 import datetime
-from typing import List, Tuple
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    List,
+    Protocol,
+    Tuple,
+    TypeAlias,
+)
 
-import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
+from waste_collection_schedule.service.ICS import (
+    IcsEvent,
+)
+
+if TYPE_CHECKING:
+    import requests
+    from curl_cffi import requests as _cffi_requests
+
+    # type alias Response = requests.Response | _cffi_requests.Response
+
+    Response: TypeAlias = requests.Response | _cffi_requests.Response
+else:
+    Response = object
 
 
-def json(*keys):
+class Parser[T](Protocol):
+    def __call__(self, request: Response) -> T:  #
+        ...
+
+
+class JsonParser(Parser[Any]):
     """Parse response as JSON, optionally drilling into a nested key path.
 
     With no arguments, returns the top-level parsed value::
@@ -35,45 +59,47 @@ def json(*keys):
     If the response is already a list at the top level, omit keys entirely.
     """
 
-    def _parse(self, response: requests.Response):
+    def __init__(self, *keys):
+        self.keys = keys
+
+    def __call__(self, response: Response):
         data = response.json()
-        for key in keys:
+        for key in self.keys:
             data = data[key]
         return data
 
-    return _parse
 
-
-def text(self, response: requests.Response) -> str:
+class TextParser(Parser[str]):
     """Return response as plain text."""
-    return response.text
+
+    def __call__(self, response: Response) -> str:
+        return response.text
 
 
-def html(selector: str, skip: int = 0):
-    """Return a parser that extracts matching elements from HTML.
+class HtmlParser(Parser[list[Tag]]):
+    """Parse response as HTML and select elements by CSS selector.
 
-    Use with HtmlTransformer. The returned parser selects all elements
-    matching ``selector`` (CSS selector syntax) and skips the first ``skip``
-    results (handy for stripping header rows)::
-
-        parse = parsers.html("tr", skip=1)   # all rows, skip header
-        parse = parsers.html("ul.bins > li") # list items
-
-    Each element is passed individually to the transformer.
+    Use with HtmlTransformer. The returned list of elements is passed
+    individually to the transformer.
 
     Args:
         selector: CSS selector string passed to BeautifulSoup.select().
         skip:     Number of leading elements to drop (default 0).
     """
 
-    def _parse(self, response: requests.Response) -> list:
+    def __init__(self, selector: str, skip: int = 0):
+        self.selector = selector
+        self.skip = skip
+
+    def __call__(self, response: Response) -> list[Tag]:
+        print(f"request to {response.url}")
+        print(f"{response}, {response.text[:200]}")  # DEBUG
         soup = BeautifulSoup(response.text, "html.parser")
-        return soup.select(selector)[skip:]
+        print(soup.select(self.selector)[self.skip :])
+        return soup.select(self.selector)[self.skip :]
 
-    return _parse
 
-
-def ics(self, response: requests.Response) -> List[Tuple[datetime.date, str]]:
+class IcsParser(Parser[list[Tuple[datetime.date, str]]]):
     """Parse response as an iCalendar feed.
 
     Returns a list of (date, summary) tuples for all events in the next year.
@@ -85,12 +111,14 @@ def ics(self, response: requests.Response) -> List[Tuple[datetime.date, str]]:
             date, summary = record
             return Collection(date=date, waste_type=self._classify_type(summary))
     """
-    from waste_collection_schedule.service.ICS import ICS
 
-    return ICS().convert(response.text)
+    def __call__(self, response: Response) -> list[Tuple[datetime.date, str]]:
+        from waste_collection_schedule.service.ICS import ICS
+
+        return ICS().convert(response.text)
 
 
-def ics_events(self, response: requests.Response) -> list:
+class IcsEventsParser(Parser[List[IcsEvent]]):
     """Parse response as an iCalendar feed, exposing full event fields.
 
     Like :func:`ics`, but returns ``IcsEvent(date, title, location,
@@ -104,6 +132,8 @@ def ics_events(self, response: requests.Response) -> list:
             # record.title / record.location / record.description available
             return Collection(date=record.date, waste_type=...)
     """
-    from waste_collection_schedule.service.ICS import ICS
 
-    return ICS().convert_events(response.text)
+    def __call__(self, response: Response) -> list:
+        from waste_collection_schedule.service.ICS import ICS
+
+        return ICS().convert_events(response.text)

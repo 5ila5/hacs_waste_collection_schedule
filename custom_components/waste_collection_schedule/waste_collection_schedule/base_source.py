@@ -30,15 +30,31 @@ For complex sources that don't fit the standard transformers, implement
 """
 
 import logging
+from abc import ABC
+from typing import TYPE_CHECKING, Generic, TypeVar
 
-from waste_collection_schedule import date_parsers, parsers, retrievers
+from waste_collection_schedule import (
+    date_parsers,
+    parsers,
+    transformers,
+)
 from waste_collection_schedule.collection import Collection
+from waste_collection_schedule.preprocessors import (
+    IdentityPreprocessor,
+    Preprocessor,
+)
 from waste_collection_schedule.waste_types import WasteType
+
+if TYPE_CHECKING:
+    from waste_collection_schedule.retrievers import RetrieverFunc
 
 _LOGGER = logging.getLogger(__name__)
 
+ParserType = TypeVar("ParserType")
+TransformerType = TypeVar("TransformerType", default=ParserType)
 
-class BaseSource:
+
+class BaseSource(ABC, Generic[ParserType, TransformerType]):
     """Optional base class for waste collection sources."""
 
     # --- Metadata (replaces module-level vars) ---
@@ -66,7 +82,8 @@ class BaseSource:
 
     # --- Pipeline steps (override to customise) ---
 
-    retrieve = retrievers.http_get
+    retrieve: RetrieverFunc
+
     """Fetch raw data from the remote service. Returns a requests.Response.
 
     Default: HTTP GET to API_URL with _params, _headers, TIMEOUT.
@@ -77,7 +94,7 @@ class BaseSource:
         retrieve = retrievers.http_post    # POST instead of GET
     """
 
-    parse = parsers.json()
+    parse: parsers.Parser[ParserType] = parsers.JsonParser()
     """Convert the raw response into an iterable of records.
 
     Default: parse as JSON (response.json()).
@@ -91,7 +108,13 @@ class BaseSource:
         parse = parsers.ics                      # iCalendar (date, summary) tuples
     """
 
-    transformer = None
+    preprocessor: Preprocessor[ParserType, TransformerType] = IdentityPreprocessor()
+    """Prepares parsed records for the transformer.
+
+       It gets the parsed output and returns an iterable of records to feed into the transformer.
+    """
+
+    transformer: transformers.BaseTransformer[TransformerType] | None
     """Convert each record into a Collection.
 
     Set to a typed transformer instance instead of implementing classify()::
@@ -106,7 +129,7 @@ class BaseSource:
     ICSTransformer, HtmlTransformer. See waste_collection_schedule.transformers.
     """
 
-    parse_date = date_parsers.auto
+    parse_date = date_parsers.DateParserAuto()
     """Parse a date string into a datetime.date. Used inside classify().
 
     Default: auto-detect format via dateutil.
@@ -115,23 +138,24 @@ class BaseSource:
         parse_date = date_parsers.for_format("%d %B %Y")
     """
 
+    def __init__(self, **kwargs):
+        """Store constructor args as instance attributes for the retriever to use."""
+        self.params = kwargs
+
     # --- Pipeline orchestration ---
 
     def fetch(self) -> list[Collection]:
         """Orchestrate the pipeline: retrieve → parse → transform/classify."""
-        response = self.retrieve()
+        response = self.retrieve(self)
         records = self.parse(response)
 
         if not records:
             return []
 
-        if isinstance(records, dict):
-            records = [records]
-
         entries = []
-        for record in records:
+        for record in self.preprocessor(records):
             if self.transformer is not None:
-                collection = self.transformer.transform(record)
+                collection = self.transformer(record)
             else:
                 collection = self.classify(record)
             if collection is not None:

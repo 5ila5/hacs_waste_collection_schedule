@@ -64,6 +64,7 @@ def main():
 
     # add module directory to path
     site.addsitedir(str(package_dir))
+    from waste_collection_schedule.base_source import BaseSource
 
     # find all source files for testing
     if args.source is not None:
@@ -83,9 +84,13 @@ def main():
         # iterate through all *.py files in waste_collection_schedule/source
         print(f"Testing source {f} ...")
         module = importlib.import_module(f"waste_collection_schedule.source.{f}")
-
-        # get all names within module
-        names = set(dir(module))
+        if hasattr(module, "Source") and issubclass(module.Source, BaseSource):
+            names = set(dir(module.Source))
+            TEST_CASES = module.Source.TEST_CASES
+        else:
+            # get all names within module
+            names = set(dir(module))
+            TEST_CASES = module.TEST_CASES
 
         # test if all mandatory names exist
         assert "TITLE" in names
@@ -94,7 +99,7 @@ def main():
         assert "TEST_CASES" in names
 
         # run through all test-cases
-        for name, tc in module.TEST_CASES.items():
+        for name, tc in TEST_CASES.items():
             # replace secrets in arguments
             replace_secret(secrets, tc)
 

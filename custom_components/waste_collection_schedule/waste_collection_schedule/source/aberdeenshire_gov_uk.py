@@ -1,3 +1,5 @@
+from typing import final
+
 from waste_collection_schedule import date_parsers, parsers, retrievers
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import uprn
@@ -8,6 +10,7 @@ from waste_collection_schedule.waste_types import GENERAL_WASTE, OTHER, RECYCLAB
 # No custom methods needed — retrieve and parse are declarative class attributes.
 
 
+@final
 class Source(BaseSource):
     TITLE = "Aberdeenshire Council"
     DESCRIPTION = "Source for Aberdeenshire Council, UK."
@@ -23,8 +26,12 @@ class Source(BaseSource):
 
     PARAMS = [uprn()]
 
-    retrieve = retrievers.legacy_ssl_http_get
-    parse = parsers.html("tr", skip=1)  # table rows, skip header
+    retrieve = retrievers.HttpGetLegacySSL(
+        url=lambda uprn: (
+            f"https://online.aberdeenshire.gov.uk/Apps/Waste-Collections/Routes/Route/{str(uprn).zfill(12)}"
+        )
+    )
+    parse = parsers.HtmlParser("tr", skip=1)  # table rows, skip header
 
     # Explicit WASTE_TYPES: OTHER covers any bin types not in the map below.
     WASTE_TYPES = [RECYCLABLES, GENERAL_WASTE, OTHER]
@@ -32,12 +39,9 @@ class Source(BaseSource):
     transformer = HtmlTransformer(
         date_getter=lambda el: el.select_one("td:nth-child(1)").text.split(" ")[0],
         type_getter=lambda el: el.select_one("td:nth-child(2)").text,
-        parse_date=date_parsers.for_format("%d/%m/%Y"),
+        parse_date=date_parsers.DateParserForFormat("%d/%m/%Y"),
         type_value_map={
             "Mixed recycling and food waste": RECYCLABLES,
             "Refuse and food waste": GENERAL_WASTE,
         },
     )
-
-    def __init__(self, uprn):
-        self.API_URL = f"https://online.aberdeenshire.gov.uk/Apps/Waste-Collections/Routes/Route/{str(uprn).zfill(12)}"
