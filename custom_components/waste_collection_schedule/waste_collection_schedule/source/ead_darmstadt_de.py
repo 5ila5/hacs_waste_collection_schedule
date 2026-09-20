@@ -3,6 +3,9 @@ from datetime import datetime
 import requests
 from waste_collection_schedule import Collection, Icons
 from waste_collection_schedule.exceptions import SourceArgumentNotFound
+from waste_collection_schedule.locations import (
+    Locations,
+)
 
 TITLE = "EAD Darmstadt"  # Title will show up in README.md and info.md
 DESCRIPTION = "Source script for waste collection in Darmstadt ead.darmstadt.de"  # Describe your source
@@ -31,6 +34,9 @@ PARAM_TRANSLATIONS = {
         "street": "Straße",
     }
 }
+
+
+LOCATIONS: Locations = [{"id": "R62581"}]
 
 
 class Source:

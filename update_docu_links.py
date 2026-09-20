@@ -9,10 +9,20 @@ import site
 from functools import cache
 from pathlib import Path
 from types import ModuleType
-from typing import Any, NotRequired, TypedDict, TypeVar
+from typing import Any, NotRequired, TypedDict, TypeVar, cast
 
+import osmnx as ox
+import shapely
 import yaml
+from shapely.geometry.base import BaseGeometry
 
+from custom_components.waste_collection_schedule.waste_collection_schedule.locations import (
+    Location,
+    Locations,
+    LocationsDataClass,
+    is_location_id,
+    is_location_query,
+)
 from default_translations import default_descriptions, default_translations
 from doc_generator import _is_base_source, render_source_doc
 
@@ -158,6 +168,7 @@ class SourceInfo:
         custom_param_description: dict[str, dict[str, str]] | None = None,
         custom_howto: dict[str, str] | None = None,
         source_owners: list[str] | None = None,
+        osm_locations: Locations | None = None,
     ):
         if custom_howto is None:
             custom_howto = {}
@@ -174,6 +185,7 @@ class SourceInfo:
         self._country = country
         self._params = sorted(params)
         self._extra_info_default_params = sort_param_dict(extra_info_default_params)
+        self._osm_locations = osm_locations
 
         url_placeholders: dict[str, str] = {}
 
@@ -303,6 +315,10 @@ class SourceInfo:
     def source_owners(self):
         return self._source_owners
 
+    @property
+    def osm_locations(self):
+        return self._osm_locations
+
 
 class Section:
     def __init__(self, section):
@@ -324,6 +340,7 @@ class IcsRegionDict(TypedDict):
     url: NotRequired[str]
     country: NotRequired[str]
     default_params: NotRequired[dict[str, Any]]
+    locations: NotRequired[Locations]
 
 
 class IcsSourceData(TypedDict):
@@ -340,6 +357,7 @@ class IcsSourceData(TypedDict):
     regions: NotRequired[list[IcsRegionDict]]
     extra_info: NotRequired[list[IcsRegionDict]]
     codeowners: NotRequired[list]
+    locations: NotRequired[Locations]
 
 
 def split_camel_and_snake_case(s: str) -> list[str]:
@@ -493,6 +511,7 @@ def get_source_by_file(file: str) -> tuple[ModuleType, list[SourceInfo]]:
     source_owners = getattr(source_cls, "SOURCE_CODEOWNERS", None) or getattr(
         module, "SOURCE_CODEOWNERS", []
     )
+    locations: Locations | None = getattr(source_cls, "LOCATIONS", None)
 
     filename = f"/doc/source/{file}.md"
 
@@ -520,6 +539,7 @@ def get_source_by_file(file: str) -> tuple[ModuleType, list[SourceInfo]]:
                 custom_param_description=param_descriptions,
                 custom_howto=howto,
                 source_owners=source_owners,
+                osm_locations=locations,
             )
         )
 
@@ -556,6 +576,7 @@ def get_source_by_file(file: str) -> tuple[ModuleType, list[SourceInfo]]:
                 extra_info_default_params=r.params,
                 custom_howto=r.howto or howto,
                 source_owners=r.source_owners or source_owners,
+                osm_locations=r.get("locations", None),
             )
         )
     return module, sources
@@ -702,10 +723,150 @@ def beautify_url(url):
     return url
 
 
+class OsmLocationCacheEntry(TypedDict):
+    id: dict[str, str]
+    query: dict[tuple[str | dict[str, str], ...], str]
+    locations: dict[LocationsDataClass, str]
+
+
+OSM_LOCATION_CACHE: OsmLocationCacheEntry = {
+    "id": {},
+    "query": {},
+    "locations": {},
+}
+
+
+def query_osm_polygon(location: Location) -> BaseGeometry:
+
+    if is_location_id(location):
+        loc_id = location["id"]
+        if loc_id in OSM_LOCATION_CACHE["id"]:
+            return shapely.from_wkt(OSM_LOCATION_CACHE["id"][loc_id])
+        region_gdf = ox.geocode_to_gdf(loc_id, by_osmid=True)
+        geom = cast(BaseGeometry, region_gdf.geometry.iloc[0])
+        polygon_wkt = shapely.to_wkt(geom)
+        OSM_LOCATION_CACHE["id"][loc_id] = polygon_wkt
+        return geom
+    if is_location_query(location):
+        query = location["query"]
+        if not isinstance(query, (str, dict, list)):
+            raise ValueError("Location query must be a string, dict, or list.")
+        query_tuple: tuple[str | dict[str, str], ...]
+        if isinstance(query, (str, dict)):
+            query_tuple = (query,)
+        else:
+            query_tuple = tuple(query)
+
+        if query_tuple in OSM_LOCATION_CACHE["query"]:
+            return shapely.from_wkt(OSM_LOCATION_CACHE["query"][query_tuple])
+        region_gdf = ox.geocode_to_gdf(query)
+        geom = cast(BaseGeometry, region_gdf.geometry.iloc[0])
+        polygon_wkt = shapely.to_wkt(geom)
+        OSM_LOCATION_CACHE["query"][query_tuple] = polygon_wkt
+        return geom
+    raise ValueError("Location must have either 'id' or 'query' key.")
+
+
+osm_chace_dir = Path(__file__).resolve().parents[0] / "cache"
+osm_chace_dir.mkdir(exist_ok=True)
+osm_cache_file = osm_chace_dir / "osm_location_cache.json"
+
+locations_file = "custom_components/waste_collection_schedule/source_locations.json"
+
+
+def load_osm_cach_from_file() -> None:
+    try:
+        with open(osm_cache_file, encoding="utf-8") as f:
+            cache_data = json.load(f)
+            OSM_LOCATION_CACHE["id"] = cache_data.get("id", {})
+            OSM_LOCATION_CACHE["query"] = {
+                tuple(k): v for k, v in cache_data.get("query", {}).items()
+            }
+    except FileNotFoundError:
+        pass
+
+    # Load source_locations.json to populate OSM_LOCATION_CACHE["location"]
+    try:
+        with open(locations_file, encoding="utf-8") as f:
+            source_locations = json.load(f)
+            for entry in source_locations:
+                locations = LocationsDataClass.from_locations(
+                    entry.get("locations", [])
+                )
+                polygon_wkt = entry.get("polygon")
+                OSM_LOCATION_CACHE["locations"][locations] = polygon_wkt
+
+    except FileNotFoundError:
+        pass
+
+
+def save_osm_cache_to_file() -> None:
+    with open(osm_cache_file, "w", encoding="utf-8") as f:
+        to_cache = {
+            "id": OSM_LOCATION_CACHE["id"],
+            "query": OSM_LOCATION_CACHE["query"],
+        }
+        json.dump(to_cache, f, indent=2)
+
+
+def osm_polygon(locations: Locations) -> str:
+    if LocationsDataClass.from_locations(locations) in OSM_LOCATION_CACHE["locations"]:
+        return OSM_LOCATION_CACHE["locations"][
+            LocationsDataClass.from_locations(locations)
+        ]
+
+    polies = (query_osm_polygon(location) for location in locations)
+    union_poly = next(polies)
+    for poly in polies:
+        union_poly = shapely.union(union_poly, poly)
+
+    return shapely.to_wkt(union_poly)
+
+
+class SourceLocationDict(TypedDict):
+    title: str
+    id: str
+    polygon: str
+    locations: list[Location]
+
+
+def generate_polygon_geojson(
+    source_locations: list[SourceLocationDict],
+) -> None:
+    """Generate a GeoJSON FeatureCollection from source locations with polygons."""
+    features = []
+    for entry in source_locations:
+        polygon_wkt = entry.get("polygon")
+        if not polygon_wkt:
+            continue
+        geom = shapely.from_wkt(polygon_wkt)
+        feature = {
+            "type": "Feature",
+            "geometry": shapely.geometry.mapping(geom),
+            "properties": {
+                "title": entry.get("title"),
+                "id": entry.get("id"),
+            },
+        }
+        features.append(feature)
+
+    geojson = {
+        "type": "FeatureCollection",
+        "features": features,
+    }
+
+    geojson_file = "source-map.geojson"
+    with open(geojson_file, "w", encoding="utf-8") as f:
+        json.dump(geojson, f, indent=2)
+
+
 def update_sources_json(countries: dict[str, list[SourceInfo]]) -> None:
     output: dict[str, list[dict[str, str | dict[str, Any]]]] = {}
     source_metadata_by_module: dict[str, dict[str, Any]] = {}
     source_owners_by_module: dict[str, list[str]] = {}
+    source_locations: list[SourceLocationDict] = []
+
+    load_osm_cach_from_file()
 
     for country in ["Generic", *sorted(c for c in countries if c != "Generic")]:
         output[country] = []
@@ -736,6 +897,17 @@ def update_sources_json(countries: dict[str, list[SourceInfo]]) -> None:
                     "urls": e.url_placeholders,
                 }
 
+            if e.osm_locations is not None:
+                poly = osm_polygon(e.osm_locations)
+                source_locations.append(
+                    {
+                        "title": e.title,
+                        "id": id,
+                        "polygon": poly,
+                        "locations": list(e.osm_locations),
+                    }
+                )
+
             # ICS providers are keyed by their YAML file stem (e.g. "ab_peine_de")
             # so the notify workflow can match what a bug reporter types in the
             # "Source Name" field (module == "ics" for all ICS providers).
@@ -751,6 +923,8 @@ def update_sources_json(countries: dict[str, list[SourceInfo]]) -> None:
             source_owners_by_module[owner_key] = sorted(
                 set(source_owners_by_module[owner_key]) | set(e.source_owners)
             )
+
+    save_osm_cache_to_file()
 
     with open(
         PACKAGE_DIR / "sources.json",
@@ -776,6 +950,11 @@ def update_sources_json(countries: dict[str, list[SourceInfo]]) -> None:
     }
     with open(source_owner_file, "w", encoding="utf-8") as f:
         json.dump(source_owner_output, f, indent=2, ensure_ascii=False)
+
+    with open(locations_file, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(source_locations, f, indent=2, ensure_ascii=False)
+
+    generate_polygon_geojson(source_locations)
 
 
 def get_custom_translations(
