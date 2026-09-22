@@ -51,7 +51,9 @@ class Source(BaseSource):
         expand="cities",
         title_suffix="comment",
         service_id="service_id",
-        locations="cities",
+        location_queries="cities",
+        location_query_override="locations",
+        expand_locations=True,
     )
 
     TEST_CASES: ClassVar[dict] = {

@@ -6,10 +6,11 @@ import inspect
 import json
 import re
 import site
+from collections.abc import Callable, Iterable
 from functools import cache
 from pathlib import Path
 from types import ModuleType
-from typing import Any, NotRequired, TypeAlias, TypedDict, TypeVar, cast
+from typing import Any, NotRequired, TypedDict, TypeVar, cast
 
 import osmnx as ox
 import shapely
@@ -21,6 +22,10 @@ from custom_components.waste_collection_schedule.waste_collection_schedule.locat
     Locations,
     is_location_id,
     is_location_query,
+)
+from custom_components.waste_collection_schedule.waste_collection_schedule.regions import (
+    Region,
+    from_extra_info,
 )
 from default_translations import default_descriptions, default_translations
 from doc_generator import _is_base_source, render_source_doc
@@ -510,7 +515,9 @@ def get_source_by_file(file: str) -> tuple[ModuleType, list[SourceInfo]]:
     source_owners = getattr(source_cls, "SOURCE_CODEOWNERS", None) or getattr(
         module, "SOURCE_CODEOWNERS", []
     )
-    locations: Locations | None = getattr(source_cls, "LOCATIONS", None)
+    locations: Locations | None = getattr(source_cls, "LOCATIONS", None) or getattr(
+        module, "LOCATIONS", None
+    )
 
     filename = f"/doc/source/{file}.md"
 
@@ -546,9 +553,10 @@ def get_source_by_file(file: str) -> tuple[ModuleType, list[SourceInfo]]:
     # list (REGIONS) is the canonical structure; the deprecated EXTRA_INFO dict
     # list is adapted into Regions at this boundary so the rest of the
     # generation works in Region terms only.
-    from waste_collection_schedule.regions import from_extra_info
 
-    region_list = getattr(source_cls, "REGIONS", None)
+    region_list: Iterable[Region] | Callable[[], Iterable[Region]] | None = getattr(
+        source_cls, "REGIONS", None
+    )
     if region_list:
         region_list = list(region_list() if callable(region_list) else region_list)
     else:
@@ -575,7 +583,7 @@ def get_source_by_file(file: str) -> tuple[ModuleType, list[SourceInfo]]:
                 extra_info_default_params=r.params,
                 custom_howto=r.howto or howto,
                 source_owners=r.source_owners or source_owners,
-                osm_locations=r.get("locations", None),
+                osm_locations=r.locations,
             )
         )
     return module, sources
@@ -750,7 +758,7 @@ class SourceLocationDict(TypedDict):
     locations: list[Location]
 
 
-SourceLocationJSON: TypeAlias = list[SourceLocationDict]
+type SourceLocationJSON = list[SourceLocationDict]
 
 
 locations_file = "custom_components/waste_collection_schedule/source_locations.json"
@@ -781,6 +789,59 @@ def osm_polygon(locations: Locations) -> str:
     return shapely.to_wkt(union_poly)
 
 
+class Compact:
+    """Wrapper class to mark data that should stay on a single line."""
+
+    def __init__(self, value):
+        self.value = value
+
+
+class CompactEncoder(json.JSONEncoder):
+    """Custom encoder that restores compact single-line representation for marked objects."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.replacements = {}
+
+    def default(self, obj):
+        if isinstance(obj, Compact):
+            # Create a unique placeholder string
+            placeholder = f"__COMPACT_PLACEHOLDER_{id(obj)}__"
+            # Dump the wrapped value without indentation (compact single line)
+            self.replacements[f'"{placeholder}"'] = json.dumps(obj.value)
+            return placeholder
+        return super().default(obj)
+
+    def encode(self, obj):
+        result = super().encode(obj)
+        # Swap placeholders with single-line serialized JSON
+        for placeholder, compact_json in self.replacements.items():
+            result = result.replace(placeholder, compact_json)
+        return result
+
+    def iterencode(self, obj, _one_shot=False):
+        for chunk in super().iterencode(obj, _one_shot=_one_shot):
+            for placeholder, compact_json in self.replacements.items():
+                chunk = chunk.replace(placeholder, compact_json)
+            yield chunk
+
+
+def compact_prepare(data, target_keys=("coordinates",)):
+    """Recursively wraps target keys in Compact() and dumps the JSON with specified indent."""
+
+    def _prepare(obj):
+        if isinstance(obj, dict):
+            return {
+                k: Compact(v) if k in target_keys else _prepare(v)
+                for k, v in obj.items()
+            }
+        if isinstance(obj, list):
+            return [_prepare(item) for item in obj]
+        return obj
+
+    return _prepare(data)
+
+
 def generate_polygon_geojson(
     source_locations: list[SourceLocationDict],
 ) -> None:
@@ -807,8 +868,10 @@ def generate_polygon_geojson(
     }
 
     geojson_file = "source_map/source-map.geojson"
+
     with open(geojson_file, "w", encoding="utf-8") as f:
-        json.dump(geojson, f, indent=2)
+        json.dump(compact_prepare(geojson), f, cls=CompactEncoder, indent=2)
+        # json.dump(geojson, f, indent=2)
 
 
 def update_sources_json(countries: dict[str, list[SourceInfo]]) -> None:

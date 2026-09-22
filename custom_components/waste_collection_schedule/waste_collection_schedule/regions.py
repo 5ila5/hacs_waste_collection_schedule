@@ -19,10 +19,14 @@ is validated against the source's ``PARAMS`` rather than being free-form.
 
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass, field
+from itertools import chain, repeat
 from pathlib import Path
 from typing import Any
 
-from waste_collection_schedule.locations import Location, LocationID, LocationQuery
+from waste_collection_schedule.locations import (
+    Location,
+    LocationQueryType,
+)
 
 
 @dataclass(frozen=True)
@@ -96,6 +100,91 @@ def _registry_path(name: str) -> Path:
     return Path(__file__).resolve().parents[3] / REGISTRY_DIR / f"{name}.yaml"
 
 
+def _parse_location_yaml_not_expanded(
+    entry: dict,
+    key_location_queries: str | None,
+    key_location_query_overrides: str | None,
+    key_location_ids: str | None,
+) -> list[Location] | None:
+
+    location_query: Sequence[LocationQueryType] | str | dict[str, str] | None = (
+        entry.get(key_location_queries)
+    )
+    location_query_override: (
+        Sequence[LocationQueryType] | str | dict[str, str] | None
+    ) = entry.get(key_location_query_overrides)
+    location_id: Sequence[str] | str | None = entry.get(key_location_ids)
+    location_id_list = [location_id] if isinstance(location_id, str) else location_id
+    location_query_list = (
+        [location_query] if isinstance(location_query, (str, dict)) else location_query
+    )
+    location_override_list = (
+        [location_query_override]
+        if isinstance(location_query_override, (str, dict))
+        else location_query_override
+    )
+
+    locations: list[Location] | None = (
+        [{"id": id} for id in location_id_list or []]
+        or [{"query": override} for override in location_override_list or []]
+        or [{"query": query} for query in location_query_list or []]
+        or None
+    )
+    return locations
+
+
+def _parse_location_yaml_expanded(
+    entry: dict,
+    key_location_queries: str | None,
+    key_location_query_overrides: str | None,
+    key_location_ids: str | None,
+) -> list[list[Location]] | None:
+    location_query: list[Sequence[LocationQueryType] | str | dict[str, str]] | None = (
+        entry.get(key_location_queries)
+    )
+    location_query_override: (
+        list[Sequence[LocationQueryType] | str | dict[str, str]] | None
+    ) = entry.get(key_location_query_overrides)
+    location_id: list[Sequence[str] | str] | None = entry.get(key_location_ids)
+    location_id_list = (
+        [[l_id] if isinstance(l_id, str) else l_id for l_id in location_id]
+        if location_id
+        else None
+    )
+    location_query_list = (
+        [
+            [l_query] if isinstance(l_query, (str, dict)) else l_query
+            for l_query in location_query
+        ]
+        if location_query
+        else None
+    )
+    location_override_list = (
+        [
+            [l_override] if isinstance(l_override, (str, dict)) else l_override
+            for l_override in location_query_override
+        ]
+        if location_query_override
+        else None
+    )
+    locations: list[list[Location]] | None = (
+        [
+            [{"id": id} for id in location_id_elem or []]
+            for location_id_elem in location_id_list or []
+        ]
+        or [
+            [{"query": override} for override in location_override_elem or []]
+            for location_override_elem in location_override_list or []
+        ]
+        or [
+            [{"query": query} for query in location_query_elem or []]
+            for location_query_elem in location_query_list or []
+        ]
+        or None
+    )
+    return locations
+
+
 def from_yaml(
     name: str,
     *,
@@ -107,6 +196,7 @@ def from_yaml(
     location_queries: str | None = None,
     location_ids: str | None = None,
     location_query_override: str | None = None,
+    expand_locations: bool = False,
     **param_fields: str,
 ) -> "Callable[[], list[Region]]":
     """Load a source's regions from ``doc/regions/<name>.yaml``.
@@ -140,8 +230,8 @@ def from_yaml(
     the YAML as one might want to use an existing key for locations.
     The ``location_query_override`` argument names a key in the YAML that will
     override the location queries for a region if it is present.
-    Regsion has a city attribute that should also be used as a location but some
-    entries might not produce the corect nominatim result so the override can be
+    Region has a city attribute that should also be used as a location but some
+    entries might not produce the correct nominatim result so the override can be
     used to provide a more specific query for those entries.
 
     **Build-time only.** A HACS install ships ``custom_components/`` and not the
@@ -171,34 +261,43 @@ def from_yaml(
                 "url": entry.get(url),
                 "country": entry.get(country) if country else None,
             }
-            location_override: Sequence[LocationQuery] | LocationQuery | None = (
-                entry.get(location_query_override) if location_query_override else None
-            )
-            location_query: Sequence[LocationQuery] | LocationQuery | None = (
-                entry.get(location_queries) if location_queries else None
-            )
-            location_id: Sequence[LocationID] | LocationID | None = (
-                entry.get(location_ids) if location_ids else None
-            )
-            locations: Location | Sequence[Location] | None = (
-                location_override or location_id or location_query
-            )
-            final_locations: list[Location] | None = None
-            if locations and not isinstance(locations, Sequence):
-                final_locations = [locations]
-            elif locations and isinstance(locations, Sequence):
-                final_locations = list(locations)
+
+            expanded_locations: list[list[Location]] | None = None
+            locations: list[Location] | None = None
+
+            if expand_locations:
+                expanded_locations = _parse_location_yaml_expanded(
+                    entry,
+                    key_location_queries=location_queries,
+                    key_location_query_overrides=location_query_override,
+                    key_location_ids=location_ids,
+                )
+            else:
+                locations = _parse_location_yaml_not_expanded(
+                    entry,
+                    key_location_queries=location_queries,
+                    key_location_query_overrides=location_query_override,
+                    key_location_ids=location_ids,
+                )
 
             suffix = ""
             if title_suffix and entry.get(title_suffix):
                 suffix = f" ({entry[title_suffix]})"
             if expand:
-                for element in entry.get(expand, []):
+                expand_list = entry.get(expand, [])
+                locations_to_expand = (
+                    chain(expanded_locations or [], repeat(None))
+                    if expand_locations
+                    else repeat(locations)
+                )
+                for element, locations_elem in zip(
+                    expand_list, locations_to_expand, strict=False
+                ):
                     out.append(
                         Region(
                             title=f"{element}{suffix}",
                             params=params,
-                            locations=final_locations,
+                            locations=locations_elem,
                             **shared,
                         )
                     )
@@ -207,7 +306,7 @@ def from_yaml(
                     Region(
                         title=f"{entry[title]}{suffix}",
                         params=params,
-                        locations=final_locations,
+                        locations=locations,
                         **shared,
                     )
                 )

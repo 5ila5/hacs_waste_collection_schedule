@@ -1,5 +1,7 @@
 from collections.abc import Collection
-from typing import TypeAlias, TypedDict, TypeGuard
+from typing import TypedDict, TypeGuard
+
+type LocationQueryType = str | dict[str, str] | list[str | dict[str, str]]
 
 
 class LocationID(TypedDict):
@@ -11,11 +13,11 @@ class LocationID(TypedDict):
 class LocationQuery(TypedDict):
     """A TypedDict for locations."""
 
-    query: str | dict[str, str] | list[str | dict[str, str]]
+    query: LocationQueryType
 
 
-Location: TypeAlias = LocationID | LocationQuery
-Locations: TypeAlias = Collection[Location]
+type Location = LocationID | LocationQuery
+type Locations = Collection[Location]
 
 
 def is_location_id(data: Location) -> TypeGuard[LocationID]:
