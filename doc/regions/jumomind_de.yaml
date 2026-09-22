@@ -8,6 +8,8 @@
     url: https://www.zaw-online.de
     cities:
       - Darmstadt-Dieburg (ZAW)
+    locations:
+      - Landkreis Darmstadt-Dieburg
   - service_id: aoe
     url: https://www.lra-aoe.de
     cities:
@@ -16,10 +18,14 @@
     url: https://mkw-grossefehn.de
     cities:
       - Aurich (MKW)
+    locations:
+      - Landkreis Aurich
   - service_id: hom
     url: https://www.bad-homburg.de
     cities:
       - Bad Homburg vdH
+    locations:
+      - Bad Homburg vor der Höhe
   - service_id: bdg
     url: https://www.kreiswerke-barnim.de/
     cities:
@@ -131,3 +137,5 @@
     url: https://www.alw-wf.de
     cities:
       - ALW Wolfenbüttel
+    locations:
+      - Landkreis Wolfenbüttel

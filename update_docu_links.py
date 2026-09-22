@@ -9,7 +9,7 @@ import site
 from functools import cache
 from pathlib import Path
 from types import ModuleType
-from typing import Any, NotRequired, TypedDict, TypeVar, cast
+from typing import Any, NotRequired, TypeAlias, TypedDict, TypeVar, cast
 
 import osmnx as ox
 import shapely
@@ -19,7 +19,6 @@ from shapely.geometry.base import BaseGeometry
 from custom_components.waste_collection_schedule.waste_collection_schedule.locations import (
     Location,
     Locations,
-    LocationsDataClass,
     is_location_id,
     is_location_query,
 )
@@ -723,104 +722,25 @@ def beautify_url(url):
     return url
 
 
-class OsmLocationCacheEntry(TypedDict):
-    id: dict[str, str]
-    query: dict[tuple[str | dict[str, str], ...], str]
-    locations: dict[LocationsDataClass, str]
+OSM_LOCATION_CACHE: dict[str, str] = {}
 
 
-OSM_LOCATION_CACHE: OsmLocationCacheEntry = {
-    "id": {},
-    "query": {},
-    "locations": {},
-}
+def osm_locations_to_cache_key(locations: Locations) -> str:
+    """Convert a Locations object to a hashable key for caching."""
+    return json.dumps(list(locations), sort_keys=True)
 
 
 def query_osm_polygon(location: Location) -> BaseGeometry:
-
     if is_location_id(location):
-        loc_id = location["id"]
-        if loc_id in OSM_LOCATION_CACHE["id"]:
-            return shapely.from_wkt(OSM_LOCATION_CACHE["id"][loc_id])
-        region_gdf = ox.geocode_to_gdf(loc_id, by_osmid=True)
+        region_gdf = ox.geocode_to_gdf(location["id"], by_osmid=True)
         geom = cast(BaseGeometry, region_gdf.geometry.iloc[0])
-        polygon_wkt = shapely.to_wkt(geom)
-        OSM_LOCATION_CACHE["id"][loc_id] = polygon_wkt
         return geom
     if is_location_query(location):
         query = location["query"]
-        if not isinstance(query, (str, dict, list)):
-            raise ValueError("Location query must be a string, dict, or list.")
-        query_tuple: tuple[str | dict[str, str], ...]
-        if isinstance(query, (str, dict)):
-            query_tuple = (query,)
-        else:
-            query_tuple = tuple(query)
-
-        if query_tuple in OSM_LOCATION_CACHE["query"]:
-            return shapely.from_wkt(OSM_LOCATION_CACHE["query"][query_tuple])
         region_gdf = ox.geocode_to_gdf(query)
         geom = cast(BaseGeometry, region_gdf.geometry.iloc[0])
-        polygon_wkt = shapely.to_wkt(geom)
-        OSM_LOCATION_CACHE["query"][query_tuple] = polygon_wkt
         return geom
     raise ValueError("Location must have either 'id' or 'query' key.")
-
-
-osm_chace_dir = Path(__file__).resolve().parents[0] / "cache"
-osm_chace_dir.mkdir(exist_ok=True)
-osm_cache_file = osm_chace_dir / "osm_location_cache.json"
-
-locations_file = "custom_components/waste_collection_schedule/source_locations.json"
-
-
-def load_osm_cach_from_file() -> None:
-    try:
-        with open(osm_cache_file, encoding="utf-8") as f:
-            cache_data = json.load(f)
-            OSM_LOCATION_CACHE["id"] = cache_data.get("id", {})
-            OSM_LOCATION_CACHE["query"] = {
-                tuple(k): v for k, v in cache_data.get("query", {}).items()
-            }
-    except FileNotFoundError:
-        pass
-
-    # Load source_locations.json to populate OSM_LOCATION_CACHE["location"]
-    try:
-        with open(locations_file, encoding="utf-8") as f:
-            source_locations = json.load(f)
-            for entry in source_locations:
-                locations = LocationsDataClass.from_locations(
-                    entry.get("locations", [])
-                )
-                polygon_wkt = entry.get("polygon")
-                OSM_LOCATION_CACHE["locations"][locations] = polygon_wkt
-
-    except FileNotFoundError:
-        pass
-
-
-def save_osm_cache_to_file() -> None:
-    with open(osm_cache_file, "w", encoding="utf-8") as f:
-        to_cache = {
-            "id": OSM_LOCATION_CACHE["id"],
-            "query": OSM_LOCATION_CACHE["query"],
-        }
-        json.dump(to_cache, f, indent=2)
-
-
-def osm_polygon(locations: Locations) -> str:
-    if LocationsDataClass.from_locations(locations) in OSM_LOCATION_CACHE["locations"]:
-        return OSM_LOCATION_CACHE["locations"][
-            LocationsDataClass.from_locations(locations)
-        ]
-
-    polies = (query_osm_polygon(location) for location in locations)
-    union_poly = next(polies)
-    for poly in polies:
-        union_poly = shapely.union(union_poly, poly)
-
-    return shapely.to_wkt(union_poly)
 
 
 class SourceLocationDict(TypedDict):
@@ -828,6 +748,37 @@ class SourceLocationDict(TypedDict):
     id: str
     polygon: str
     locations: list[Location]
+
+
+SourceLocationJSON: TypeAlias = list[SourceLocationDict]
+
+
+locations_file = "custom_components/waste_collection_schedule/source_locations.json"
+
+
+def load_osm_cach_from_file() -> None:
+    try:
+        with open(locations_file, encoding="utf-8") as f:
+            source_locations: SourceLocationJSON = json.load(f)
+            for entry in source_locations:
+                cache_key = osm_locations_to_cache_key(entry["locations"])
+                polygon_wkt = entry["polygon"]
+                OSM_LOCATION_CACHE[cache_key] = polygon_wkt
+    except FileNotFoundError:
+        pass
+
+
+def osm_polygon(locations: Locations) -> str:
+    cache_key = osm_locations_to_cache_key(locations)
+    if cache_key in OSM_LOCATION_CACHE:
+        return OSM_LOCATION_CACHE[cache_key]
+
+    polies = (query_osm_polygon(location) for location in locations)
+    union_poly = next(polies)
+    for poly in polies:
+        union_poly = shapely.union(union_poly, poly)
+
+    return shapely.to_wkt(union_poly)
 
 
 def generate_polygon_geojson(
@@ -855,7 +806,7 @@ def generate_polygon_geojson(
         "features": features,
     }
 
-    geojson_file = "source-map.geojson"
+    geojson_file = "source_map/source-map.geojson"
     with open(geojson_file, "w", encoding="utf-8") as f:
         json.dump(geojson, f, indent=2)
 
@@ -923,8 +874,6 @@ def update_sources_json(countries: dict[str, list[SourceInfo]]) -> None:
             source_owners_by_module[owner_key] = sorted(
                 set(source_owners_by_module[owner_key]) | set(e.source_owners)
             )
-
-    save_osm_cache_to_file()
 
     with open(
         PACKAGE_DIR / "sources.json",

@@ -17,10 +17,12 @@ This is the typed successor to the legacy ``EXTRA_INFO`` dict list: ``params``
 is validated against the source's ``PARAMS`` rather than being free-form.
 """
 
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
+
+from waste_collection_schedule.locations import Location, LocationID, LocationQuery
 
 
 @dataclass(frozen=True)
@@ -40,6 +42,7 @@ class Region:
             defaulting to the source's own ``HOWTO``/``HOW_TO_GET_ARGUMENTS_DESCRIPTION``.
         source_owners: Optional per-region codeowners override (``["@handle"]``),
             defaulting to the source's own ``SOURCE_CODEOWNERS``.
+        locations: Optional per-region list of locations (``[{query: str}]``),
     """
 
     title: str
@@ -49,6 +52,7 @@ class Region:
     doc_filename: str | None = None
     howto: dict[str, str] | None = None
     source_owners: list[str] | None = None
+    locations: list[Location] | None = None
 
 
 def region(
@@ -100,6 +104,9 @@ def from_yaml(
     title_suffix: str | None = None,
     url: str = "url",
     country: str | None = None,
+    location_queries: str | None = None,
+    location_ids: str | None = None,
+    location_query_override: str | None = None,
     **param_fields: str,
 ) -> "Callable[[], list[Region]]":
     """Load a source's regions from ``doc/regions/<name>.yaml``.
@@ -125,6 +132,17 @@ def from_yaml(
     element becomes each Region's title. ``title_suffix`` names a key whose value
     is then appended in parentheses, so a group of municipalities reached through
     one branded app is labelled once in the data rather than repeated per member.
+
+    Locations should be nominatim.openstreetmap.org regions, they can be supplid
+    either as ids or as query in the form of a query string, a dict of query
+    parameters, or a list of either.
+    The ``location_queries`` and ``location_ids`` arguments name the keys in
+    the YAML as one might want to use an existing key for locations.
+    The ``location_query_override`` argument names a key in the YAML that will
+    override the location queries for a region if it is present.
+    Regsion has a city attribute that should also be used as a location but some
+    entries might not produce the corect nominatim result so the override can be
+    used to provide a more specific query for those entries.
 
     **Build-time only.** A HACS install ships ``custom_components/`` and not the
     repo's ``doc/`` tree, so a missing directory yields ``[]`` rather than an
@@ -153,17 +171,45 @@ def from_yaml(
                 "url": entry.get(url),
                 "country": entry.get(country) if country else None,
             }
+            location_override: Sequence[LocationQuery] | LocationQuery | None = (
+                entry.get(location_query_override) if location_query_override else None
+            )
+            location_query: Sequence[LocationQuery] | LocationQuery | None = (
+                entry.get(location_queries) if location_queries else None
+            )
+            location_id: Sequence[LocationID] | LocationID | None = (
+                entry.get(location_ids) if location_ids else None
+            )
+            locations: Location | Sequence[Location] | None = (
+                location_override or location_id or location_query
+            )
+            final_locations: list[Location] | None = None
+            if locations and not isinstance(locations, Sequence):
+                final_locations = [locations]
+            elif locations and isinstance(locations, Sequence):
+                final_locations = list(locations)
+
             suffix = ""
             if title_suffix and entry.get(title_suffix):
                 suffix = f" ({entry[title_suffix]})"
             if expand:
                 for element in entry.get(expand, []):
                     out.append(
-                        Region(title=f"{element}{suffix}", params=params, **shared)
+                        Region(
+                            title=f"{element}{suffix}",
+                            params=params,
+                            locations=final_locations,
+                            **shared,
+                        )
                     )
             else:
                 out.append(
-                    Region(title=f"{entry[title]}{suffix}", params=params, **shared)
+                    Region(
+                        title=f"{entry[title]}{suffix}",
+                        params=params,
+                        locations=final_locations,
+                        **shared,
+                    )
                 )
         return out
 

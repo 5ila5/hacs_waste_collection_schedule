@@ -47,7 +47,11 @@ class Source(BaseSource):
     # One structure (the Jumomind mmapp API) covering many municipalities; the
     # full list is derived from the source's own provider registry at load time.
     REGIONS = regions.from_yaml(
-        "jumomind_de", expand="cities", title_suffix="comment", service_id="service_id"
+        "jumomind_de",
+        expand="cities",
+        title_suffix="comment",
+        service_id="service_id",
+        locations="cities",
     )
 
     TEST_CASES: ClassVar[dict] = {
