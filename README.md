@@ -1495,7 +1495,7 @@ If you already have enough information for your municipality/region, you are ver
 - [Bellenberg](/doc/source/heimat_info_de.md) / heimat-info.de/gemeinden/bellenberg/abfallkalender
 - [Beltershausen](/doc/source/123abfallkalender_de.md) / 123abfallkalender.de/abfallkalender/rpecasvg-ebsdorfergrund/1-beltershausen
 - [Bentierode](/doc/source/nerdbridge_de.md) / abfall.nerdbridge.de
-- [Bergischer Abfallwirtschaftverbund](/doc/source/abfallnavi_de.md) / bavweb.de
+- [Bergischer Abfallwirtschaftsverband](/doc/source/abfallnavi_de.md) / bavweb.de
 - [Berka](/doc/source/nerdbridge_de.md) / abfall.nerdbridge.de
 - [Berlin](/doc/source/app_abfallplus_de.md) / abfallplus.de
 - [Berlin Recycling](/doc/source/berlin_recycling_de.md) / berlin-recycling.de
