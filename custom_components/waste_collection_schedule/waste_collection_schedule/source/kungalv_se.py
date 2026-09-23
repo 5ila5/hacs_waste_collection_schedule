@@ -5,12 +5,14 @@ from datetime import date, datetime
 import requests
 from waste_collection_schedule import Collection, Icons
 from waste_collection_schedule.exceptions import SourceArgumentNotFound
+from waste_collection_schedule.locations import locations_queries
 
 _LOGGER = logging.getLogger(__name__)
 
 TITLE = "Kungälvs kommun Avfallshantering"
 DESCRIPTION = "Source script for kungalv.se"
 URL = "https://www.kungalv.se/Bygga--bo--miljo/avfall-och-atervinning/avfall-fran-hushall/"
+LOCATIONS = locations_queries("Kungälv, Sweden")
 TEST_CASES = {
     "Komministergatan": {"street_address": "Komministergatan 4, Kungälv"},
     "Violgatan": {"street_address": "Violgatan 8, Ytterby"},

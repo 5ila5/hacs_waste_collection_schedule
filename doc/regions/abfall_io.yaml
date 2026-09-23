@@ -7,6 +7,8 @@
   - title: EGST Steinfurt
     url: https://www.egst.de/
     service_id: e21758b9c711463552fb9c70ac7d4273
+    locations:
+      - Kreis Steinfurt, Germany
   - title: Stadt Landshut
     url: https://www.landshut.de/
     service_id: bd0c2d0177a0849a905cded5cb734a6f
@@ -16,9 +18,77 @@
   - title: MüllALARM / Schönmackers
     url: https://www.schoenmackers.de/
     service_id: e5543a3e190cb8d91c645660ad60965f
+    locations:
+      - Aldenhoven, Kreis Düren, Germany
+      - Alpen, Kreis Wesel, Germany
+      - Bad Münstereifel, Kreis Euskirchen, Germany
+      - Bedburg, Kreis Rhein-Erft, Germany
+      - Bedburg-Hau, Kreis Kleve, Germany
+      - Bergheim, Kreis Rhein-Erft, Germany
+      - Blankenheim, Kreis Euskirchen, Germany
+      - Brüggen, Kreis Viersen , Germany
+      - Dahlem, Kreis Euskirchen, Germany
+      - Elsdorf, Kreis Rhein-Erft, Germany
+      - Emmerich, Kreis Kleve, Germany
+      - Erftstadt, Kreis Rhein-Erft, Germany
+      - Erkelenz, Kreis Heinsberg, Germany
+      - Euskirchen, Kreis Euskirchen, Germany
+      - Gangelt, Kreis Heinsberg, Germany
+      - Geldern, Kreis Kleve, Germany
+      - Goch, Kreis Kleve, Germany
+      - Grevenbroich, Rhein-Kreis-Neuss, Germany
+      - Hamminkeln, Kreis Wesel, Germany
+      - Heimbach, Kreis Düren, Germany
+      - Heinsberg, Kreis Heinsberg, Germany
+      - Hellenthal, Kreis Euskirchen, Germany
+      - Hückelhoven, Kreis Heinsberg, Germany
+      - Hünxe, Kreis Wesel, Germany
+      - Hürth, Kreis Rhein-Erft, Germany
+      - Issum, Kreis Kleve, Germany
+      - Jüchen, Rhein-Kreis-Neuss, Germany
+      - Kaarst, Rhein-Kreis-Neuss, Germany
+      - Kalkar, Kreis Kleve, Germany
+      - Kall, Kreis Euskirchen, Germany
+      - Kempen, Kreis Viersen, Germany
+      - Kerken, Kreis Kleve, Germany
+      - Kerpen, Rhein-Erft-Kreis, Germany
+      - Kevelaer, Kreis Kleve, Germany
+      - Korschenbroich, Rhein-Kreis-Neuss, Germany
+      - Krefeld, Germany
+      - Mechernich, Kreis Euskirchen, Germany
+      - Meerbusch, Rhein-Kreis-Neuss, Germany
+      - Merzenich, Kreis Düren, Germany
+      - Nettersheim, Kreis Euskirchen, Germany
+      - Neukirchen-Vluyn, Kreis Wesel, Germany
+      - Nideggen, Kreis Düren, Germany
+      - Nörvenich, Kreis Düren, Germany
+      - Pulheim, Kreis Rhein-Erft, Germany
+      - Rees, Kreis Kleve, Germany
+      - Rheinberg, Kreis Wesel, Germany
+      - Rheurdt, Kreis Kleve, Germany
+      - Rommerskirchen, Rhein-Kreis-Neuss, Germany
+      - Schermbeck, Kreis Wesel, Germany
+      - Schleiden, Kreis Euskirchen, Germany
+      - Selfkant, Kreis Heinsberg, Germany
+      - Sonsbeck, Kreis Wesel, Germany
+      - Straelen, Kreis Kleve, Germany
+      - Uedem, Kreis Kleve, Germany
+      - Übach-Palenberg, Kreis Heinsberg, Germany
+      - Vettweiß, Kreis Düren, Germany
+      - Viersen, Kreis Viersen, Germany
+      - Voerde, Kreis Wesel, Germany
+      - Wachtendonk, Kreis Kleve, Germany
+      - Weeze, Kreis Kleve, Germany
+      - Wegberg, Kreis Heinsberg, Germany
+      - Weilerswist, Kreis Euskirchen, Germany
+      - Wesseling, Kreis Rhein-Erft, Germany
+      - Xanten, Kreis Wesel, Germany
+      - Zülpich, Kreis Euskirchen, Germany
   - title: Abfallbewirtschaftung Ostalbkreis
     url: https://www.goa-online.de/
     service_id: 3ca331fb42d25e25f95014693ebcf855
+    locations:
+      - Ostalbkreis, Germany
   - title: Landkreis Oldenburg
     url: https://www.oldenburg-kreis.de/
     service_id: 27708a019a2e35de7eb4bbe7c851609f
@@ -31,15 +101,21 @@
   - title: Landratsamt Unterallgäu
     url: https://www.landratsamt-unterallgaeu.de/
     service_id: c22b850ea4eff207a273e46847e417c5
+    locations:
+      - Landkreis Unterallgäu, Germany
   - title: AWB Westerwaldkreis
     url: https://wab.rlp.de/
     service_id: 248deacbb49b06e868d29cb53c8ef034
+    locations:
+      - Westerwaldkreis, Germany
   - title: Landkreis Weißenburg-Gunzenhausen
     url: https://www.landkreis-wug.de
     service_id: 31fb9c7d783a030bf9e4e1994c7d2a91
   - title: Abfallzweckverband Rhein-Mosel-Eifel (Landkreis Mayen-Koblenz)
     url: https://www.azv-rme.de/
     service_id: 8303df78b822c30ff2c2f98e405f86e6
+    locations:
+      - Landkreis Mayen-Koblenz, Germany
   # Team Orange (Landkreis Würzburg) migrated off abfall.io; their service key
   # now returns 403. Use the dedicated `team_orange_de` source instead. See #6041.
   - title: Landkreis Cuxhaven
@@ -48,39 +124,65 @@
   - title: AVR Kommunal, Rhein-Neckar-Kreis
     url: https://www.avr-kommunal.de/
     service_id: 914fb9d000a9a05af4fd54cfba478860
+    locations:
+      - Rhein-Neckar-Kreis
   - title: Amt Bad Wilsnack/Weisen (Landkreis Prignitz)
     url: https://www.landkreis-prignitz.de/
     service_id: 1e9592418582666e2a5d1c62b2683435
+    locations:
+      - Bad Wilsnack/Weisen, Landkreis Prignitz, Germany
   - title: Gemeinde Groß Pankow (Landkreis Prignitz)
     url: https://www.landkreis-prignitz.de/
     service_id: af91b65d2753a219309072837d8ea4e1
+    locations:
+      - Groß Pankow, Landkreis Prignitz, Germany
   - title: Gemeinde Gumtow (Landkreis Prignitz)
     url: https://www.landkreis-prignitz.de/
     service_id: 3cefa45ab357d231891bb497253c630f
+    locations:
+      - Gumtow, Landkreis Prignitz, Germany
   - title: Gemeinde Karstädt (Landkreis Prignitz)
     url: https://www.landkreis-prignitz.de/
     service_id: 798f59a75627f5d7686dab0c7226c877
+    locations:
+      - Karstädt, Landkreis Prignitz, Germany
   - title: Amt Lenzen-Elbtalaue (Landkreis Prignitz)
     url: https://www.landkreis-prignitz.de/
     service_id: bb937857acd951dfc8de5be8b8a49f6d
+    locations:
+      - Lenzen-Elbtalaue, Landkreis Prignitz, Germany
   - title: Amt Meyenburg (Landkreis Prignitz)
     url: https://www.landkreis-prignitz.de/
     service_id: 4638881e7bebe6869e2e86de5f8aa09e
+    locations:
+      - Meyenburg, Landkreis Prignitz, Germany
   - title: Stadt Perleberg (Landkreis Prignitz)
     url: https://www.landkreis-prignitz.de/
     service_id: 9fb3e2e5498e825250105ee272102a7b
+    locations:
+      - Perleberg, Landkreis Prignitz, Germany
   - title: Gemeinde Plattenburg (Landkreis Prignitz)
     url: https://www.landkreis-prignitz.de/
     service_id: a0461612534502273c518e28d4f6f1e4
+    locations:
+      - Plattenburg, Landkreis Prignitz, Germany
   - title: Stadt Pritzwalk (Landkreis Prignitz)
     url: https://www.landkreis-prignitz.de/
     service_id: d92f59ef4066ae6d299478996d1d8430
+    locations:
+      - Pritzwalk, Landkreis Prignitz, Germany
   - title: Amt Putlitz/Berge (Landkreis Prignitz)
     url: https://www.landkreis-prignitz.de/
     service_id: 4f06df48f154246415e57ce12b26abe5
+    locations:
+      - Putlitz/Berge, Landkreis Prignitz, Germany
   - title: Stadt Wittenberge (Landkreis Prignitz)
     url: https://www.landkreis-prignitz.de/
     service_id: b870ecfa6e1f882680758d374ba3fa2d
+    locations:
+      - Wittenberge, Landkreis Prignitz, Germany
   - title: Landkreis Landshut
     url: https://www.landkreis-landshut.de/
     service_id: 04b7561b94f2cbaa171cd85bb6aa56de
+    locations:
+      - Landkreis Landshut, Germany

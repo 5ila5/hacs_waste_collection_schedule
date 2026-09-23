@@ -2,6 +2,7 @@ import datetime
 
 import requests
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
+from waste_collection_schedule.locations import locations_ids
 
 TITLE = "Affärsverken"
 DESCRIPTION = "Source for Affärsverken."
@@ -19,6 +20,7 @@ ICON_MAP = {
     "Matavfall": Icons.BIO_KITCHEN,
     "Trädgårdsavfall": Icons.GARDEN,
 }
+LOCATIONS = locations_ids("R935548")
 
 API_URL = "https://kundapi.affarsverken.se/api/v1/open-api/"
 

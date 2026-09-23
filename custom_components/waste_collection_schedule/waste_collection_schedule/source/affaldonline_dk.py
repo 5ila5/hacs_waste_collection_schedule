@@ -7,6 +7,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentException,
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Affaldonline"
 DESCRIPTION = "Gather waste collection schedules from Affaldonline"
@@ -78,12 +79,14 @@ AFFALDONLINE_MUNICIPALITIES = {
         "url": "https://www.assensforsyning.dk/",
         "values": "Vandværksvej|2||||5560|Aarup|11266|456952|0",
         "client": "afd912a2-44b3-402f-9e13-5aeb701ce143",
+        "location": "Assens Kommune",
     },
     "favrskov": {
         "title": "Favrskov Forsyning",
         "url": "https://www.favrskovforsyning.dk",
         "values": "Nørregade|1||||8382|Hinnerup|6443|108156|0",
         "client": "dffcc5b6-b9ee-478d-82e2-030123485f7e",
+        "location": "Favrskov Kommune",
     },
     "fanoe": {
         "title": "Fanø Kommune",
@@ -96,24 +99,28 @@ AFFALDONLINE_MUNICIPALITIES = {
         "url": "https://affaldgenbrug-fredericia.dk/",
         "values": "Nørre Allé|5||||7000|Fredericia|11079971|1907927|0",
         "client": "dea6ff86-2ee9-4e7a-8fce-76dcb5625714",
+        "location": "Fredericia Kommune",
     },
     "ffv": {
         "title": "Faaborg Forsynings Virksomhed",
         "url": "https://www.ffv.dk/",
         "values": "Marsk Billesvej|18||||5672|Broby|36193544|576846|0",
         "client": "ceca5978-6380-4ff8-ac28-9b6505457da8",
+        "location": "Faaborg-Midtfyn Kommune",
     },
     "holbaek": {
         "title": "Fors (Holbæk)",
         "url": "https://www.fors.dk/",
         "values": "Østerled|5||||4300|Holbæk|28441|1081575|2055",
         "client": "017efd06-ac42-4b36-8a70-ab309162e988",
+        "location": "Holbæk Kommune",
     },
     "langeland": {
         "title": "Langeland Forsyning",
         "url": "https://www.langeland-forsyning.dk/",
         "values": "Nørregade|1||||5900|Rudkøbing|3535|383566|0",
         "client": "be8a9420-a9ae-42e6-83f2-eda5ec3fa29f",
+        "location": "Langeland Kommune",
     },
     "middelfart": {
         "title": "Middelfart Kommune",
@@ -132,12 +139,14 @@ AFFALDONLINE_MUNICIPALITIES = {
         "url": "https://www.nfs.as/",
         "values": "Nørregade|5||||5800|Nyborg|8896288|552542|0",
         "client": "4571D02F-602C-485A-8961-466EAA2B7B04",
+        "location": "Nyborg Kommune",
     },
     "silkeborg": {
         "title": "Silkeborg Forsyning",
         "url": "https://www.silkeborgforsyning.dk/",
         "values": "Nørregade|5||||8620|Kjellerup|45814316|1291964|0",
         "client": "eea63ff1-96fd-4288-b96e-83100ebbc378",
+        "location": "Silkeborg Kommune",
     },
     # Sorø is NOT available on the API. But was also not available on the old codebase either
     "soroe": {
@@ -162,14 +171,19 @@ AFFALDONLINE_MUNICIPALITIES = {
         "url": "https://www.revas.dk/",
         "values": "Hjultorvet|1||||8800|Viborg|8228245|8739|0",
         "client": "4EBB900C-088E-475F-83ED-B087F4AD07BA",
+        "location": "Viborg Kommune",
     },
 }
+
 
 EXTRA_INFO = [
     {
         "title": info["title"],
         "url": info["url"],
         "default_params": {"municipality": municipality},
+        "locations": locations_queries(
+            f"{info.get('location', info['title'])}, Denmark"
+        ),
     }
     for municipality, info in AFFALDONLINE_MUNICIPALITIES.items()
     if "client" in info

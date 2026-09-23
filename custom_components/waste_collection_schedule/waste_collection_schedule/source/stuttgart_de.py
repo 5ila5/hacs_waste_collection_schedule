@@ -6,6 +6,7 @@ from waste_collection_schedule.config_params import (
     street,
     text_field,
 )
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.service.StuttgartDe import (
     StuttgartParser,
     StuttgartRetriever,
@@ -23,6 +24,7 @@ class Source(BaseSource):
     TITLE = "Abfall Stuttgart"
     DESCRIPTION = "Source for waste collections for the city of Stuttgart, Germany."
     URL = "https://service.stuttgart.de"
+    LOCATIONS = locations_queries("Stuttgart, Germany")
     COUNTRY = "de"
     # The transformer resolves open-ended German labels via the shared vocabulary;
     # these are the canonical types observed from the live provider.

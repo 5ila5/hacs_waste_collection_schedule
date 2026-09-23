@@ -4,6 +4,7 @@ import requests
 from icalendar import Calendar
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "123abfallkalender"
 DESCRIPTION = "Source script for 123abfallkalender.de (Ebsdorfergrund)"
@@ -16,6 +17,7 @@ EXTRA_INFO = [
         "default_params": {
             "district": "Beltershausen",
         },
+        "locations": locations_queries("Beltershausen, Ebsdorfergrund, Germany"),
     },
     {
         "title": "Dreihausen",
@@ -23,6 +25,7 @@ EXTRA_INFO = [
         "default_params": {
             "district": "Dreihausen",
         },
+        "locations": locations_queries("Dreihausen, Ebsdorfergrund, Germany"),
     },
     {
         "title": "Ebsdorf",
@@ -30,6 +33,7 @@ EXTRA_INFO = [
         "default_params": {
             "district": "Ebsdorf",
         },
+        "locations": locations_queries("Ebsdorf, Ebsdorfergrund, Germany"),
     },
     {
         "title": "Frauenberg",
@@ -37,6 +41,7 @@ EXTRA_INFO = [
         "default_params": {
             "district": "Frauenberg",
         },
+        "locations": locations_queries("Frauenberg, Ebsdorfergrund, Germany"),
     },
     {
         "title": "Hachborn",
@@ -44,6 +49,7 @@ EXTRA_INFO = [
         "default_params": {
             "district": "Hachborn",
         },
+        "locations": locations_queries("Hachborn, Ebsdorfergrund, Germany"),
     },
     {
         "title": "Heskem",
@@ -51,6 +57,7 @@ EXTRA_INFO = [
         "default_params": {
             "district": "Heskem",
         },
+        "locations": locations_queries("Heskem, Ebsdorfergrund, Germany"),
     },
     {
         "title": "Ilschhausen",
@@ -58,6 +65,7 @@ EXTRA_INFO = [
         "default_params": {
             "district": "Ilschhausen",
         },
+        "locations": locations_queries("Ilschhausen, Ebsdorfergrund, Germany"),
     },
     {
         "title": "Leidenhofen",
@@ -65,6 +73,7 @@ EXTRA_INFO = [
         "default_params": {
             "district": "Leidenhofen",
         },
+        "locations": locations_queries("Leidenhofen, Ebsdorfergrund, Germany"),
     },
     {
         "title": "Mölln",
@@ -72,6 +81,7 @@ EXTRA_INFO = [
         "default_params": {
             "district": "Mölln",
         },
+        "locations": locations_queries("Mölln, Ebsdorfergrund, Germany"),
     },
     {
         "title": "Rauischholzhausen",
@@ -79,6 +89,7 @@ EXTRA_INFO = [
         "default_params": {
             "district": "Rauischholzhausen",
         },
+        "locations": locations_queries("Rauischholzhausen, Ebsdorfergrund, Germany"),
     },
     {
         "title": "Roßberg",
@@ -86,6 +97,7 @@ EXTRA_INFO = [
         "default_params": {
             "district": "Roßberg",
         },
+        "locations": locations_queries("Roßberg, Ebsdorfergrund, Germany"),
     },
     {
         "title": "Wermertshausen",
@@ -93,6 +105,7 @@ EXTRA_INFO = [
         "default_params": {
             "district": "Wermertshausen",
         },
+        "locations": locations_queries("Wermertshausen, Ebsdorfergrund, Germany"),
     },
     {
         "title": "Wittelsberg",
@@ -100,6 +113,7 @@ EXTRA_INFO = [
         "default_params": {
             "district": "Wittelsberg",
         },
+        "locations": locations_queries("Wittelsberg, Ebsdorfergrund, Germany"),
     },
 ]
 

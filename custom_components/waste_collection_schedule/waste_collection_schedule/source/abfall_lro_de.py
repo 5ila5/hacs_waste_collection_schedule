@@ -26,12 +26,15 @@ from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import municipality, street, text_field
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_ids
 from waste_collection_schedule.parsers import IcsParser
 from waste_collection_schedule.transformers import ICSTransformer
 
 API_URL = "https://www.abfall-lro.de/de/abfuhrtermine/"
 GUESTROW_URL = "https://www.abfall-lro.de/de/abfuhrtermine/guestrow.php"
 ICAL_URL = "https://www.abfall-lro.de/default-wGlobal/wGlobal/abfuhrtermine/ical.php"
+
+LOCATIONS = locations_ids("R1739377")
 
 # The ICS regex captures everything after "Leerung " (e.g. "Schwarze Tonne
 # (2W)"); the legacy source classified by the first word only

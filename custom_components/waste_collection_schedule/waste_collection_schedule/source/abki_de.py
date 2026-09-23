@@ -27,6 +27,7 @@ from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import house_number, street
 from waste_collection_schedule.exceptions import SourceArgumentNotFound
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.transformers import ICSTransformer
 
 _STREETS_URL = "https://abki.de/abki-services/strassennamen"
@@ -109,6 +110,7 @@ class Source(BaseSource):
     DESCRIPTION = "Source for Abfallwirtschaftsbetrieb Kiel (ABK)."
     URL = "https://abki.de/"
     COUNTRY = "de"
+    LOCATIONS = locations_queries("Kiel, Germany")
     RAISE_ON_EMPTY = True
     WASTE_TYPES: ClassVar[list] = [
         wt.GENERAL_WASTE,

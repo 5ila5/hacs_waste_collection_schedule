@@ -39,7 +39,12 @@ class Source(BaseSource):
 
     # One structure (regioit.de AbfallNavi) covering many municipalities; the
     # full list is derived from the source's own provider registry at load time.
-    REGIONS = regions.from_yaml("abfallnavi_de", service="service_id")
+    REGIONS = regions.from_yaml(
+        "abfallnavi_de",
+        service="service_id",
+        location_queries="title",
+        location_query_override="locations",
+    )
 
     TEST_CASES: ClassVar[dict] = {
         "Aachen, Abteiplatz 7": {

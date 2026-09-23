@@ -8,6 +8,7 @@ from waste_collection_schedule.config_params import (
     dropdown,
 )
 from waste_collection_schedule.exceptions import SourceArgumentRequired
+from waste_collection_schedule.locations import locations_ids
 from waste_collection_schedule.preprocessors import (
     ArgumentLookup,
     Compose,
@@ -119,6 +120,7 @@ class Source(BaseSource):
     )
     URL = URL
     COUNTRY = "au"
+    LOCATIONS = locations_ids("R11676584")
     RAISE_ON_EMPTY = True
     API_URL = URL
 

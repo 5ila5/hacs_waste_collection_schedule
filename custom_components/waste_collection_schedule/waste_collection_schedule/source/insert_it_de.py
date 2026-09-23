@@ -1,4 +1,4 @@
-from typing import ClassVar
+from typing import ClassVar, NotRequired, TypedDict
 
 from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
@@ -10,6 +10,7 @@ from waste_collection_schedule.config_params import (
     street,
 )
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.regions import Region, region
 from waste_collection_schedule.service.InsertITDe import (
     BASE_URL,
@@ -26,7 +27,16 @@ from waste_collection_schedule.transformers import ICSTransformer, label_cleaner
 
 _LEERUNG = r"Leerung:\s+(.*)\s+\(.*\)"
 
-_PROVIDERS = [
+
+class Provider(TypedDict):
+    municipality: str
+    title: str
+    path: str
+    regex: str
+    types: NotRequired[dict[str, str]]
+
+
+_PROVIDERS: list[Provider] = [
     {
         "municipality": "Hattingen",
         "title": "Abfallkalender Hattingen",
@@ -127,6 +137,7 @@ class Source(BaseSource):
                 p["title"],
                 url=f"{BASE_URL}/{p['path']}",
                 municipality=p["municipality"],
+                locations=locations_queries(f"{p['municipality']}, Germany"),
             )
             for p in _PROVIDERS
         ]

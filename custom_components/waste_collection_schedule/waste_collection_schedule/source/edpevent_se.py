@@ -9,6 +9,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentExceptionMultiple,
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "EDPEvent - Multi Source"
 DESCRIPTION = "Source for all EDPEvent waste collection sources. This included multiple municipalities in Sweden."
@@ -166,26 +167,62 @@ SERVICE_PROVIDERS = {
         "title": "SSAM Södra Smalånds Avfall & Miljö",
         "url": "https://ssam.se",
         "api_url": "https://edpfuture.ssam.se/FutureWeb/SimpleWastePickup",
+        "locations": locations_queries(
+            city=[
+                "Lessebo kommun",
+                "Markaryd kommun",
+                "Tingsryd kommun",
+                "Växjö kommun",
+                "Älmhult kommun",
+            ],
+            country=COUNTRY,
+        ),
     },
     "uppsalavatten": {
         "title": "Uppsala Vatten",
         "url": "https://uppsalavatten.se",
         "api_url": "https://futureweb.uppsalavatten.se/Uppsala/FutureWeb/SimpleWastePickup",
+        "locations": locations_queries(city="Uppsala kommun", country=COUNTRY),
     },
     "boras": {
         "title": "Borås Energi och Miljö",
         "url": "https://www.borasem.se",
         "api_url": "https://kundportal.borasem.se/EDPFutureWeb/SimpleWastePickup",
+        "locations": locations_queries(city="Borås kommun", country=COUNTRY),
     },
     "roslagsvatten": {
         "title": "Roslagsvatten",
         "url": "https://roslagsvatten.se",
         "api_url": "https://edpmypage.roslagsvatten.se/FutureWebOS/SimpleWastePickup",
+        "locations": locations_queries(
+            city=[
+                "Ekerö kommun",
+                "Knivsta kommun",
+                "Täby kommun",
+                "Vallentuna kommun",
+                "Vaxholm kommun",
+                "Österåker kommun",
+            ],
+            country=COUNTRY,
+        ),
     },
     "kretslopp-sydost": {
         "title": "Kretslopp Sydost",
         "url": "https://kretsloppsydost.se",
         "api_url": "https://kundportal.kretsloppsydost.se/FutureWeb/SimpleWastePickup",
+        "locations": locations_queries(
+            city=[
+                "Kalmar kommun",
+                "Mörbylånga kommun",
+                "Nybro kommun",
+                "Oskarshamn kommun",
+                "Sävsjö kommun",
+                "Torsås kommun",
+                "Uppvidinge kommun",
+                "Vetlanda kommun",
+            ],
+            country=COUNTRY,
+        ),
     },
     "marks-kommun": {
         "title": "Marks kommun",
@@ -201,6 +238,7 @@ SERVICE_PROVIDERS = {
         "title": "Kiruna - Tekniska Verken",
         "url": "https://www.tekniskaverkenikiruna.se",
         "api_url": "https://kund.tekniskaverkenikiruna.se/FutureWebBasic/SimpleWastePickup",
+        "locations": locations_queries(city="Kiruna kommun", country=COUNTRY),
     },
     "lidkopings-kommun": {
         "title": "Lidköpings kommun",
@@ -231,16 +269,25 @@ SERVICE_PROVIDERS = {
         "title": "Herrljunga & Vårgårda kommun",
         "url": "https://www.remondisrecycling.se/hushallsavfall/herrljunga-vargarda/",
         "api_url": "https://edpfuture.remondis.se/EDPFutureWeb/SimpleWastePickup",
+        "locations": locations_queries(
+            city=["Herrljunga", "Vårgårda"], country=COUNTRY
+        ),
     },
     "vafabmiljo": {
         "title": "Vafab Miljö",
         "url": "https://vafabmiljo.se",
         "api_url": "https://services.vafabmiljo.se/FutureWebVKFHus/SimpleWastePickup",
+        "locations": locations_queries(
+            city=[None, "Enköping kommun", "Heby kommun"],
+            county=["Västmanland", None, None],
+            country=COUNTRY,
+        ),
     },
     "nvoa": {
         "title": "NVOA - Nacka Vatten och Avfall",
         "url": "https://www.nacka.se/nackavattenavfall/avfall/sophamtning/tomningsdag/",
         "api_url": "https://futureweb.nvoa.se/EDP/FutureWebBasic/SimpleWastePickup",
+        "locations": locations_queries(city="Nacka kommun", country=COUNTRY),
     },
 }
 
@@ -249,6 +296,9 @@ EXTRA_INFO = [
         "title": data["title"],
         "url": data["url"],
         "default_params": {"service_provider": provider},
+        "locations": data.get(
+            "locations", locations_queries(city=data["title"], country=COUNTRY)
+        ),
     }
     for provider, data in SERVICE_PROVIDERS.items()
 ]

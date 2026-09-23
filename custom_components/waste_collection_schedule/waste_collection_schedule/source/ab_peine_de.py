@@ -20,10 +20,13 @@ from waste_collection_schedule import parsers
 from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import district, street
+from waste_collection_schedule.locations import locations_ids
 from waste_collection_schedule.service.SiteparkIES import SiteparkIESRetriever
 from waste_collection_schedule.transformers import ICSTransformer
 
 _BASE_URL = "https://www.ab-peine.de"
+
+LOCATIONS = locations_ids("R1682355")
 
 
 @final

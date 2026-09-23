@@ -3,6 +3,7 @@ from typing import ClassVar, final
 from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import house_number, street
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.service.RiSKommunalAT import (
     RiSKommunalParser,
     RiSKommunalRetriever,
@@ -18,6 +19,7 @@ class Source(BaseSource):
     DESCRIPTION = "Source for Stadtbetriebe Steyr GmbH waste collection schedule."
     URL = _BASE_URL
     COUNTRY = "at"
+    LOCATIONS = locations_queries("Steyr, Austria")
     SOURCE_CODEOWNERS: ClassVar[list] = ["@bbr111"]
     RAISE_ON_EMPTY = True
     WASTE_TYPES: ClassVar[list] = [wt.GENERAL_WASTE, wt.ORGANIC]

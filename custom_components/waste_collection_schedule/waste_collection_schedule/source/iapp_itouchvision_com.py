@@ -9,6 +9,7 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
 from waste_collection_schedule import Collection, Icons
 from waste_collection_schedule.exceptions import SourceArgumentNotFound
+from waste_collection_schedule.locations import locations_queries
 
 
 class Municipality(TypedDict):
@@ -21,6 +22,7 @@ class Municipality(TypedDict):
     # customer UID of the bin collection form, taken from the link the council
     # website points at. See _fetch_portal() below.
     PORTAL_CUID: NotRequired[str]
+    location: NotRequired[str]
 
 
 TITLE = "iTouchVision Source using the encrypted API"
@@ -192,6 +194,7 @@ MUNICIPALITIES: dict[str, Municipality] = {
         "PORTAL_CUID": BUCKINGHAMSHIRE_PORTAL_CUID,
         "title": "Buckinghamshire: Formerly (Chiltern, South Bucks, Wycombe)",
         "url": "https://www.buckinghamshire.gov.uk/",
+        "location": "Buckinghamshire, United Kingdom",
     },
     "NEWPORT": {
         "PAYLOAD": {
@@ -274,6 +277,7 @@ MUNICIPALITIES: dict[str, Municipality] = {
         "API_URL": "https://iweb.itouchvision.com/portal/itouchvision/kmbd/collectionDay",
         "title": "Somerset West & Taunton District Council",
         "url": "https://www.somersetwestandtaunton.gov.uk/",
+        "location": "Somerset West and Taunton, United Kingdom",
     },
     "SOMERSET COUNTY": {
         "PAYLOAD": {
@@ -331,12 +335,33 @@ MUNICIPALITY_LITERALS = Literal[
     "EPSOM AND EWELL",
 ]
 
+
+def remove_council_suffix(name: str) -> str:
+    """Remove common suffixes from council names to make them more readable."""
+    for suffix in (
+        "District Council",
+        "County Borough Council",
+        "County Council",
+        "Borough Council",
+        "City Council",
+        "Council",
+    ):
+        name = name.removesuffix(suffix).strip()
+    return name
+
+
 EXTRA_INFO = [
     {
         "title": m["title"],
         "url": m["url"],
         "country": COUNTRY,
         "default_params": {"municipality": key},
+        "locations": locations_queries(
+            m.get(
+                "location",
+                f"{remove_council_suffix(m['title'])}, United Kingdom",
+            )
+        ),
     }
     for key, m in MUNICIPALITIES.items()
 ]

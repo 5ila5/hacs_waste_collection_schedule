@@ -29,6 +29,7 @@ from waste_collection_schedule import field_terms, parsers
 from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import cascading_select, district
+from waste_collection_schedule.locations import locations_ids
 from waste_collection_schedule.service.SiteparkIES import SiteparkIESRetriever
 from waste_collection_schedule.transformers import ICSTransformer
 
@@ -42,6 +43,7 @@ class Source(BaseSource):
     URL = _BASE_URL
     COUNTRY = "de"
     SOURCE_CODEOWNERS: ClassVar[list] = ["@bbr111"]
+    LOCATIONS = locations_ids("R163257")
 
     TEST_CASES: ClassVar[dict] = {
         "Waldstraße (Altenseelbach)": {"strasse": "Waldstraße (Altenseelbach)"},

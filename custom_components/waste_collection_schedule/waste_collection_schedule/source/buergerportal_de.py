@@ -6,6 +6,7 @@ from typing import Literal, TypedDict
 import requests
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Bürgerportal"
 URL = "https://www.c-trace.de"
@@ -18,6 +19,7 @@ def EXTRA_INFO():
             "title": s["title"],
             "url": s["url"],
             "default_params": {"operator": s["operator"]},
+            "locations": s["locations"],
         }
         for s in SERVICE_MAP
     ]
@@ -72,30 +74,57 @@ SERVICE_MAP = [
         "url": "https://www.cochem-zell-online.de/",
         "api_url": "https://buerger-portal-cochemzell.azurewebsites.net/api",
         "operator": "cochem_zell",
+        "locations": locations_queries("Cochem-Zell, Germany"),
     },
     {
         "title": "Abfallwirtschaft Alb-Donau-Kreis",
         "url": "https://www.aw-adk.de/",
         "api_url": "https://buerger-portal-albdonaukreisabfallwirtschaft.azurewebsites.net/api",
         "operator": "alb_donau",
+        "locations": locations_queries("Alb-Donau-Kreis, Germany"),
     },
     {
         "title": "MZV Biedenkopf",
         "url": "https://mzv-biedenkopf.de/",
         "api_url": "https://biedenkopfmzv.buergerportal.digital/api",
         "operator": "biedenkopf",
+        "locations": locations_queries(
+            *[
+                f"{t}, Germany"
+                for t in (
+                    "Amöneburg",
+                    "Angelburg",
+                    "Bad Endbach",
+                    "Biedenkopf",
+                    "Breidenbach",
+                    "Cölbe",
+                    "Dautphetal",
+                    "Fronhausen",
+                    "Gladenbach",
+                    "Lahntal",
+                    "Lohra",
+                    "Münchhausen",
+                    "Neustadt",
+                    "Steffenberg",
+                    "Wetter",
+                    "Wohratal",
+                )
+            ]
+        ),
     },
     {
         "title": "Bürgerportal Bedburg",
         "url": "https://www.bedburg.de/",
         "api_url": "https://buerger-portal-bedburg.azurewebsites.net/api",
         "operator": "bedburg",
+        "locations": locations_queries("Bedburg, Germany"),
     },
     {
         "title": "Umweltbetriebe USK Kleve",
         "url": "https://buerger-app-klevestadt.azurewebsites.net/calendar",
         "api_url": "https://buerger-portal-klevestadt.azurewebsites.net/api",
         "operator": "klevestadt",
+        "locations": locations_queries("Kleve, Germany"),
     },
 ]
 

@@ -6,10 +6,29 @@ import requests
 from icalevents import icalevents
 from waste_collection_schedule import Collection  # type: ignore[attr-defined]
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "AWIDO Online"
 DESCRIPTION = "Source for AWIDO waste collection."
 URL = "https://www.awido-online.de/"
+
+
+def title_to_location(title: str) -> str:
+    for prefix in (
+        "Zweckverband",
+        "AWB",
+        "Abfallwirtschaftsbetrieb",
+        "Abfallwirtschafts-Zweckverband",
+        "Abfallwirtschaft",
+        "Gemeinde",
+        "Stadt",
+        "des ",
+    ):
+        title = title.removeprefix(prefix).strip()
+
+    for kreis_alias in ("Landkreisbetriebe", "Landkreises", "Landratsamt"):
+        title = title.replace(kreis_alias, "Landkreis")
+    return title
 
 
 def EXTRA_INFO():
@@ -21,6 +40,10 @@ def EXTRA_INFO():
                 "customer": s["service_id"],
                 **s.get("default_params", {}),
             },
+            "locations": s.get(
+                "locations",
+                locations_queries(f"{title_to_location(s['title'])}, Germany"),
+            ),
         }
         for s in SERVICE_MAP
     ]
@@ -31,6 +54,7 @@ SERVICE_MAP = [
         "title": "Abfallwirtschaft Rems-Murr (AWRM) - AWIDO Version",
         "url": "https://www.abfallwirtschaft-rems-murr.de/",
         "service_id": "rmk",
+        "locations": locations_queries("Rems-Murr-Kreis, Germany"),
     },
     {
         "title": "Landkreis Schweinfurt",
@@ -46,6 +70,7 @@ SERVICE_MAP = [
         "title": "Zweckverband Abfallwirtschaft Saale-Orla",
         "url": "https://www.zaso-online.de/",
         "service_id": "zaso",
+        "location": "Saale-Orla-Kreis",
     },
     {
         "title": "Gemeinde Unterhaching",
@@ -116,6 +141,19 @@ SERVICE_MAP = [
         "title": "Zweckverband München-Südost",
         "url": "https://www.zvmso.de/",
         "service_id": "zv-muc-so",
+        "locations": locations_queries(
+            city=[
+                "Ottobrunn",
+                "Höhenkirchen-Siegertsbrunn",
+                "Brunnthal",
+                "Putzbrunn",
+                "Aying",
+                "Hohenbrunn",
+                "Neubiberg",
+                "Sauerlach",
+            ],
+            country="de",
+        ),
     },
     {
         "title": "Landkreis Coburg",
@@ -141,6 +179,7 @@ SERVICE_MAP = [
         "title": "WGV Recycling GmbH",
         "url": "https://wgv-quarzbichl.de/",
         "service_id": "wgv",
+        "locations": locations_queries("Landkreis Bad Tölz-Wolfratshausen, Germany"),
     },
     {
         "title": "Neustadt a.d. Waldnaab",
@@ -183,7 +222,7 @@ SERVICE_MAP = [
         "service_id": "awb-ak",
     },
     {
-        "title": "Abfallwirtschaft Lahn-Dill-Kreises",
+        "title": "Abfallwirtschaft Lahn-Dill-Kreis",
         "url": "https://www.awld.de/",
         "service_id": "awld",
     },
@@ -196,6 +235,9 @@ SERVICE_MAP = [
         "title": "Abfall-Wirtschafts-Verband Nordschwaben",
         "url": "https://www.awv-nordschwaben.de/",
         "service_id": "awv-nordschwaben",
+        "locations": locations_queries(
+            "Landkreis Donau-Ries, Germany", "Dillingen a.d. Donau, Germany"
+        ),
     },
     {
         "title": "Stadt Regensburg",
@@ -206,6 +248,9 @@ SERVICE_MAP = [
         "title": "Abfallwirtschaft Isar-Inn",
         "url": "https://www.awv-isar-inn.de/",
         "service_id": "awv-isar-inn",
+        "locations": locations_queries(
+            "Landkreis Rottal-Inn", "Landkreis Dingolfing-Landau"
+        ),
     },
     {
         "title": "Landkreis Fulda",
@@ -256,6 +301,7 @@ SERVICE_MAP = [
         "title": "EBU Ulm",
         "url": "https://www.ebu-ulm.de/",
         "service_id": "ebu",
+        "locations": locations_queries(city="Ulm", country="DE"),
     },
     {
         "title": "Anzing",
@@ -274,6 +320,7 @@ SERVICE_MAP = [
         "url": "https://www.lra-ebe.de/",
         "service_id": "ebe",
         "default_params": {"city": "Baiern"},
+        "locations": locations_queries(city="Baiern", country="DE"),
     },
     {
         "title": "Bruck",
@@ -382,6 +429,9 @@ SERVICE_MAP = [
         "url": "https://www.lra-ebe.de/",
         "service_id": "ebe",
         "default_params": {"city": "Zorneding"},
+        "locations": locations_queries(
+            "Zorneding, Germany"
+        ),  # Ingelsberg has no dedicated entry in Nominatim, so we need to use Zorneding for geocoding
     },
     {
         "title": "Markt Schwaben",
@@ -394,12 +444,18 @@ SERVICE_MAP = [
         "url": "https://www.lra-ebe.de/",
         "service_id": "ebe",
         "default_params": {"city": "Zorneding"},
+        "locations": locations_queries(
+            "Zorneding, Germany"
+        ),  # Pöring has no dedicated entry in Nominatim, so we need to use Zorneding for geocoding
     },
     {
         "title": "Wolfesing (Zorneding)",
         "url": "https://www.lra-ebe.de/",
         "service_id": "ebe",
         "default_params": {"city": "Zorneding"},
+        "locations": locations_queries(
+            "Zorneding, Germany"
+        ),  # Wolfesing has no dedicated entry in Nominatim, so we need to use Zorneding for geocoding
     },
     {
         "title": "Abfallwirtschaft Altenburger Land",

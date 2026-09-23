@@ -4,15 +4,18 @@ import requests
 from bs4 import BeautifulSoup
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Bromsgrove & Redditch Councils"
 DESCRIPTION = "Source for the shared bin collection lookup used by Bromsgrove District Council and Redditch Borough Council, UK."
 URL = "https://bromsgrove.gov.uk"
+LOCATIONS = locations_queries("Bromsgrove, United Kingdom")
 EXTRA_INFO = [
     {
         "title": "Redditch Borough Council",
         "url": "https://www.redditchbc.gov.uk",
         "default_params": {"council": "redditch"},
+        "locations": locations_queries("Redditch, United Kingdom"),
     },
 ]
 TEST_CASES = {

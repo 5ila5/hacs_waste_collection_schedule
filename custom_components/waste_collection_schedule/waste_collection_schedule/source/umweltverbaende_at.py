@@ -1,6 +1,6 @@
 import re
 from datetime import datetime
-from typing import TypedDict
+from typing import Sequence, TypedDict
 from urllib.parse import urlparse
 
 import requests
@@ -11,6 +11,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentNotFoundWithSuggestions,
     SourceArgumentRequiredWithSuggestions,
 )
+from waste_collection_schedule.locations import LocationQuery, locations_queries
 from waste_collection_schedule.source.ics import Source as ICSSource
 
 TITLE = "Die NÖ Umweltverbände"
@@ -26,6 +27,7 @@ class E_I_TYPE(TypedDict):
     url: str
     country: str
     default_params: dict[str, str]
+    locations: Sequence[LocationQuery]
 
 
 EXTRA_INFO: list[E_I_TYPE] = [
@@ -49,6 +51,7 @@ EXTRA_INFO: list[E_I_TYPE] = [
         "default_params": {
             "district": "baden",
         },
+        "locations": locations_queries("Baden, Austria"),
     },
     {
         "title": "GV Gmünd",
@@ -57,6 +60,7 @@ EXTRA_INFO: list[E_I_TYPE] = [
         "default_params": {
             "district": "gmuend",
         },
+        "locations": locations_queries("Gmünd, Austria"),
     },
     {
         "title": "GVU Bezirk Gänserndorf",
@@ -65,6 +69,7 @@ EXTRA_INFO: list[E_I_TYPE] = [
         "default_params": {
             "district": "gaenserndorf",
         },
+        "locations": locations_queries("Gänserndorf, Austria"),
     },
     {
         "title": "Abfallverband Hollabrunn",
@@ -73,6 +78,7 @@ EXTRA_INFO: list[E_I_TYPE] = [
         "default_params": {
             "district": "hollabrunn",
         },
+        "locations": locations_queries("Hollabrunn, Austria"),
     },
     {
         "title": "Gemeindeverband Horn",
@@ -81,6 +87,7 @@ EXTRA_INFO: list[E_I_TYPE] = [
         "default_params": {
             "district": "horn",
         },
+        "locations": locations_queries("Horn, Austria"),
     },
     # {
     #     "title": "Klosterneuburg",
@@ -97,6 +104,7 @@ EXTRA_INFO: list[E_I_TYPE] = [
         "default_params": {
             "district": "korneuburg",
         },
+        "locations": locations_queries("Korneuburg, Austria"),
     },
     {
         "title": "GV Krems",
@@ -105,6 +113,7 @@ EXTRA_INFO: list[E_I_TYPE] = [
         "default_params": {
             "district": "krems",
         },
+        "locations": locations_queries("Krems, Austria"),
     },
     # { # Does not offer same schedule but is supported via generic ICS kremsstadt_umweltverbaende_at
     #     "title": "Abfallwirtschaft Stadt Krems",
@@ -121,6 +130,7 @@ EXTRA_INFO: list[E_I_TYPE] = [
         "default_params": {
             "district": "lilienfeld",
         },
+        "locations": locations_queries("Lilienfeld, Austria"),
     },
     {
         "title": "GAUL Laa an der Thaya",
@@ -129,6 +139,7 @@ EXTRA_INFO: list[E_I_TYPE] = [
         "default_params": {
             "district": "laa",
         },
+        "locations": locations_queries("Laa an der Thaya, Austria"),
     },
     {
         "title": "GVA Mödling",
@@ -137,6 +148,7 @@ EXTRA_INFO: list[E_I_TYPE] = [
         "default_params": {
             "district": "moedling",
         },
+        "locations": locations_queries("Mödling, Austria"),
     },
     {
         "title": "GVU Melk",
@@ -145,6 +157,7 @@ EXTRA_INFO: list[E_I_TYPE] = [
         "default_params": {
             "district": "melk",
         },
+        "locations": locations_queries("Melk, Austria"),
     },
     {
         "title": "GAUM Mistelbach",
@@ -153,6 +166,7 @@ EXTRA_INFO: list[E_I_TYPE] = [
         "default_params": {
             "district": "mistelbach",
         },
+        "locations": locations_queries("Mistelbach, Austria"),
     },
     # { # No schedules listed on website
     #     "title": "AWV Neunkirchen",
@@ -174,6 +188,7 @@ EXTRA_INFO: list[E_I_TYPE] = [
         "default_params": {
             "district": "stpoeltenland",
         },
+        "locations": locations_queries("St. Pölten, Austria"),
     },
     {
         "title": "GVU Scheibbs",
@@ -182,6 +197,7 @@ EXTRA_INFO: list[E_I_TYPE] = [
         "default_params": {
             "district": "scheibbs",
         },
+        "locations": locations_queries("Scheibbs, Austria"),
     },
     # { # Abfallverband Schwechat migrated to the Infeo platform; use infeo_at source with customer "av-schwechat"
     #     "title": "Abfallverband Schwechat",
@@ -206,6 +222,7 @@ EXTRA_INFO: list[E_I_TYPE] = [
         "default_params": {
             "district": "waidhofen",
         },
+        "locations": locations_queries("Waidhofen an der Thaya, Austria"),
     },
     {
         "title": "GV Zwettl",
@@ -214,6 +231,7 @@ EXTRA_INFO: list[E_I_TYPE] = [
         "default_params": {
             "district": "zwettl",
         },
+        "locations": locations_queries("Zwettl, Austria"),
     },
 ]
 

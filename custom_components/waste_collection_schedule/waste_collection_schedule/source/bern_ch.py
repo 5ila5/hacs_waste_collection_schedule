@@ -9,12 +9,15 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentNotFoundWithSuggestions,
     SourceArgumentRequired,
 )
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.service.ICS import ICS
 
 TITLE = "Entsorgung + Recycling Stadt Bern"
 DESCRIPTION = "Source for waste collection in the city of Bern, Switzerland."
 URL = "https://www.bern.ch/themen/umwelt-natur-und-energie/abfall-und-recycling"
 COUNTRY = "ch"
+LOCATIONS = locations_queries("Bern, Switzerland")
+
 SOURCE_CODEOWNERS = ["@sbaerlocher"]
 
 TEST_CASES = {

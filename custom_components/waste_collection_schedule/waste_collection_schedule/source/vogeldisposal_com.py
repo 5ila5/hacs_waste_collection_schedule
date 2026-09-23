@@ -8,6 +8,7 @@ from waste_collection_schedule import Collection, Icons  # type: ignore[attr-def
 from waste_collection_schedule.exceptions import (
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -18,6 +19,8 @@ DESCRIPTION = (
 )
 URL = "https://www.vogeldisposal.com/"
 COUNTRY = "us"
+LOCATIONS = locations_queries("Butler Township, Pennsylvania, United States")
+
 
 TEST_CASES = {
     "Butler Twp 1002 Tudor Dr": {

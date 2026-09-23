@@ -3,6 +3,7 @@ import datetime
 from curl_cffi import requests
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.service.ICS import ICS
 
 TITLE = "Mill Valley Refuse Service"
@@ -18,6 +19,7 @@ TEST_CASES = {
 }
 
 COUNTRY = "us"
+LOCATIONS = locations_queries("Mill Valley, California, United States")
 
 # MVRS publishes one alternating-week residential recycling schedule for its
 # whole service area as three public Google Calendars, embedded on

@@ -3,6 +3,7 @@ from datetime import datetime
 
 import requests
 from waste_collection_schedule import Collection, Icons
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "BinDay (South & Vale)"
 URL = "https://www.southoxon.gov.uk/"
@@ -10,10 +11,12 @@ EXTRA_INFO = [
     {
         "title": "South Oxfordshire District Council",
         "url": "https://www.southoxon.gov.uk/",
+        "locations": locations_queries("South Oxfordshire, United Kingdom"),
     },
     {
         "title": "Vale of White Horse District Council",
         "url": "https://www.whitehorsedc.gov.uk/",
+        "locations": locations_queries("Vale of White Horse, United Kingdom"),
     },
 ]
 DESCRIPTION = """Consolidated source for waste collection services from:

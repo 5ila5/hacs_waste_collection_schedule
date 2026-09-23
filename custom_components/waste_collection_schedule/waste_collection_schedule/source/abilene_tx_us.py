@@ -6,6 +6,7 @@ from waste_collection_schedule import recurrence
 from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import street_address
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.preprocessors import RecurrenceExpander, Schedule
 from waste_collection_schedule.service.ArcGis import (
     ArcGisMultiFeatureParser,
@@ -121,6 +122,7 @@ class Source(BaseSource):
     URL = "https://abilenetx.gov/426/Solid-Waste-Recycling"
     COUNTRY = "us"
     RAISE_ON_EMPTY = True
+    LOCATIONS = locations_queries("Abilene, TX, USA")
 
     TEST_CASES: ClassVar[dict] = {
         "Chimney Rock Rd (Mon/Thu trash, 4th-Monday yard)": {

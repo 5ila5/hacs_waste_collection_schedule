@@ -375,6 +375,7 @@ SERVICE_MAP = [
         "title": "Gemeinde Sulz",
         "url": "https://www.gemeinde-sulz.at",
         "country": "at",
+        "location": "Sulz, Austria",
     },
     {
         "title": "Gersdorf an der Feistritz",
@@ -590,6 +591,7 @@ SERVICE_MAP = [
         "title": "Kalsdorf bei Graz",
         "url": "https://www.kalsdorf-graz.gv.at",
         "country": "at",
+        "location": "Kalsdorf, Graz, Austria",
     },
     {
         "title": "Kapfenstein",
@@ -775,6 +777,7 @@ SERVICE_MAP = [
         "title": "Markt Piesting-Dreistetten",
         "url": "https://www.piesting.at",
         "country": "at",
+        "location": "Markt Piesting, Austria",
     },
     {
         "title": "Marz",
@@ -955,6 +958,7 @@ SERVICE_MAP = [
         "title": "Pernegg im Waldviertel",
         "url": "https://www.pernegg.info",
         "country": "at",
+        "location": "Pernegg, Niederösterreich",
     },
     {
         "title": "Perschling",
@@ -1215,6 +1219,7 @@ SERVICE_MAP = [
         "title": "St. Florian bei Linz",
         "url": "www.st-florian.at/",
         "country": "at",
+        "location": "St. Florian, Linz, Austria",
     },
     {
         "title": "St. Georgen an der Leys",

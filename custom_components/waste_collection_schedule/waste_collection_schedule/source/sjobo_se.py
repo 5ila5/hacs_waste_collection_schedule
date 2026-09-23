@@ -4,10 +4,13 @@ from urllib.parse import urlencode
 import requests
 from bs4 import BeautifulSoup, Tag
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Sjöbo kommun"
 DESCRIPTION = "Source for Sjöbo kommun waste collection."
 URL = "https://www.sjobo.se"
+LOCATIONS = locations_queries("Sjöbo, Sweden")
+
 TEST_CASES = {
     "Kommunhuset": {"address": "Gamla torg 10", "city": "Sjöbo"},
 }

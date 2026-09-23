@@ -4,10 +4,13 @@ from datetime import datetime
 import requests
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
 from waste_collection_schedule.exceptions import SourceArgumentNotFound
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "City of Ballarat"
 DESCRIPTION = "Source for City of Ballarat rubbish collection."
 URL = "https://www.ballarat.vic.gov.au"
+LOCATIONS = locations_queries("City of Ballarat, Victoria, Australia")
+
 TEST_CASES = {
     "Clothesline Cafe": {
         "street_address": "202 Humffray Street South BAKERY HILL VIC 3350"

@@ -11,6 +11,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentRequired,
     SourceArgumentRequiredWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Avfallsapp.se - Multi Source"
 DESCRIPTION = (
@@ -120,6 +121,7 @@ SERVICE_PROVIDERS = {
         "supports_registration": False,
         "requires_token": True,
         "app_version": "1.0.1.0",
+        "locations": locations_queries("Arvika Kommun, Sweden", "Eda Kommun, Sweden"),
     },
     "nodra": {
         "title": "Nodra (Norrköping)",
@@ -129,6 +131,7 @@ SERVICE_PROVIDERS = {
         "requires_token": False,
         # Public client token shipped inside the Nodra app, not a user secret.
         "app_token": "U2lXIFK6e8mVI1kU8V0F9TDpWXhwx3QwsL2t36rZPc8PPtKXmhker6nze73chWyX",
+        "locations": locations_queries("Norrköping, Sweden"),
     },
 }
 
@@ -137,6 +140,9 @@ EXTRA_INFO = [
         "title": data["title"],
         "url": data["url"],
         "default_params": {"service_provider": provider},
+        "locations": data.get(
+            "locations", locations_queries(f"{data['title']}, Sweden")
+        ),
     }
     for provider, data in SERVICE_PROVIDERS.items()
 ]

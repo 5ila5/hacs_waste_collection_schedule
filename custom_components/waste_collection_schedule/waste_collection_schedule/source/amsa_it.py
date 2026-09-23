@@ -9,6 +9,9 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentNotFound,
     SourceArgumentRequired,
 )
+from waste_collection_schedule.locations import locations_queries
+
+LOCATIONS = locations_queries("Milan, Italy")
 
 TITLE = "AMSA"
 DESCRIPTION = "Source for AMSA (Milan, Italy) waste collection."

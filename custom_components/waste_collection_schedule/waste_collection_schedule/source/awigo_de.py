@@ -21,6 +21,7 @@ from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import house_number, municipality, street
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.parsers import IcsParser
 from waste_collection_schedule.preprocessors import RowRelabel
 from waste_collection_schedule.retrievers import LookupChainRetriever
@@ -131,6 +132,8 @@ class Source(BaseSource):
     DESCRIPTION = "Source for AWIGO Abfallwirtschaft Landkreis Osnabrück GmbH."
     URL = "https://www.awigo.de/"
     COUNTRY = "de"
+    LOCATIONS = locations_queries("Osnabrück, Germany")
+
     RAISE_ON_EMPTY = True
 
     TEST_CASES: ClassVar[dict] = {

@@ -8,6 +8,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentExceptionMultiple,
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "APP Lipizzanerheimat"
 DESCRIPTION = "Source for Lipizzanerheimat App"
@@ -79,11 +80,13 @@ SERVICE_MAP = [
         "title": "Sankt Martin am Wöllmißberg",
         "url": "https://st-martin-woellmissberg.gv.at",
         "country": "at",
+        "location": "St. Martin am Wöllmißberg, Austria",
     },
     {
         "title": "Söding-Sankt Johann",
         "url": "https://www.soeding-st-johann.gv.at",
         "country": "at",
+        "location": "Söding - St. Johann, Austria",
     },
     {
         "title": "Stallhofen",
@@ -188,8 +191,22 @@ ICON_MAP = {
 }
 
 
+COUNTRIES_MAP = {
+    "at": "Austria",
+}
+
+
 def EXTRA_INFO():
-    return [{"title": s["title"], "url": s["url"]} for s in SERVICE_MAP]
+    return [
+        {
+            "title": s["title"],
+            "url": s["url"],
+            "locations": locations_queries(
+                s.get("location", f"{s['title']}, {COUNTRIES_MAP[s['country']]}")
+            ),
+        }
+        for s in SERVICE_MAP
+    ]
 
 
 API_URL = "https://app.jolioo.com"

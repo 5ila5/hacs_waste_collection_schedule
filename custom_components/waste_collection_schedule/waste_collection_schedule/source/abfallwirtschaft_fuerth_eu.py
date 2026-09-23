@@ -16,6 +16,7 @@ from waste_collection_schedule import parsers
 from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import location_id
+from waste_collection_schedule.locations import locations_ids
 from waste_collection_schedule.retrievers import HttpGetRetriever
 from waste_collection_schedule.transformers import ICSTransformer
 
@@ -33,6 +34,7 @@ class Source(BaseSource):
         "Mühltalstrasse 4": {"id": 96983001},
         "Carlo-Schmid-Strasse 27": {"id": 96975001},
     }
+    LOCATIONS = locations_ids("R62374")
 
     PARAMS = (location_id(field="id"),)
 

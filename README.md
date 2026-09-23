@@ -1346,7 +1346,7 @@ If you already have enough information for your municipality/region, you are ver
 - [Abfallwirtschaft Isar-Inn](/doc/source/awido_de.md) / awv-isar-inn.de
 - [Abfallwirtschaft Kreis Plön](/doc/source/kreis_ploen_de.md) / kreis-ploen.de
 - [Abfallwirtschaft Kyffhäuserkreis](/doc/source/abfall_kyffhaeuser_de.md) / abfall-kyffhaeuser.de
-- [Abfallwirtschaft Lahn-Dill-Kreises](/doc/source/awido_de.md) / awld.de
+- [Abfallwirtschaft Lahn-Dill-Kreis](/doc/source/awido_de.md) / awld.de
 - [Abfallwirtschaft Landkreis Böblingen](/doc/ics/abfall_io_ics.md) / awb-bb.de
 - [Abfallwirtschaft Landkreis Böblingen](/doc/source/abfall_io_graphql.md) / awb-bb.de
 - [Abfallwirtschaft Landkreis Göppingen](/doc/ics/abfall_io_ics.md) / awb-gp.de
@@ -1835,6 +1835,7 @@ If you already have enough information for your municipality/region, you are ver
 - [Kreis Lörrach](/doc/source/app_abfallplus_de.md) / abfallplus.de
 - [Kreis Lüneburg](/doc/source/app_abfallplus_de.md) / abfallplus.de
 - [Kreis Mayen-Koblenz](/doc/source/app_abfallplus_de.md) / abfallplus.de
+- [Kreis Mettmann (MyMuell App)](/doc/source/jumomind_de.md) / mymuell.de
 - [Kreis Miesbach](/doc/source/app_abfallplus_de.md) / abfallplus.de
 - [Kreis Miltenberg](/doc/source/app_abfallplus_de.md) / abfallplus.de
 - [Kreis Märkisch-Oderland](/doc/source/app_abfallplus_de.md) / abfallplus.de
@@ -1844,6 +1845,7 @@ If you already have enough information for your municipality/region, you are ver
 - [Kreis Nordfriesland](/doc/source/app_abfallplus_de.md) / abfallplus.de
 - [Kreis Ostallgäu](/doc/source/app_abfallplus_de.md) / abfallplus.de
 - [Kreis Osterholz](/doc/source/app_abfallplus_de.md) / abfallplus.de
+- [Kreis Paderborn (MyMuell App)](/doc/source/jumomind_de.md) / mymuell.de
 - [Kreis Pinneberg](/doc/source/abfallnavi_de.md) / kreis-pinneberg.de
 - [Kreis Rastatt](/doc/source/app_abfallplus_de.md) / abfallplus.de
 - [Kreis Ravensburg](/doc/source/app_abfallplus_de.md) / abfallplus.de
@@ -1927,7 +1929,6 @@ If you already have enough information for your municipality/region, you are ver
 - [Landkreis Lüchow-Dannenberg](/doc/ics/abfall_app_net.md) / luechow-dannenberg.de
 - [Landkreis Main-Spessart](/doc/source/app_abfallplus_de.md) / abfallplus.de
 - [Landkreis Mecklenburgische Seenplatte](/doc/source/lk_mecklenburgische_seenplatte_de.md) / lk-mecklenburgische-seenplatte.de
-- [Landkreis Mettmann (MyMuell App)](/doc/source/jumomind_de.md) / mymuell.de
 - [Landkreis Märkisch-Oderland](/doc/source/abfall_io_graphql.md) / maerkisch-oderland.de
 - [Landkreis Mühldorf a. Inn](/doc/source/awido_de.md) / lra-mue.de
 - [Landkreis Neumarkt](/doc/source/abfuhrplan_landkreis_neumarkt_de.md) / abfuhrplan-landkreis-neumarkt.de
@@ -1935,7 +1936,6 @@ If you already have enough information for your municipality/region, you are ver
 - [Landkreis Northeim (unofficial)](/doc/source/nerdbridge_de.md) / abfall.nerdbridge.de
 - [Landkreis Oldenburg](/doc/source/abfall_io.md) / oldenburg-kreis.de
 - [Landkreis Ostallgäu](/doc/source/abfall_io_graphql.md) / landkreis-ostallgaeu.de
-- [Landkreis Paderborn (MyMuell App)](/doc/source/jumomind_de.md) / mymuell.de
 - [Landkreis Peine](/doc/source/ab_peine_de.md) / ab-peine.de
 - [Landkreis Ravensburg](/doc/source/rv_de.md) / rv.de
 - [Landkreis Reutlingen](/doc/source/abfall_io_graphql.md) / kreis-reutlingen.de

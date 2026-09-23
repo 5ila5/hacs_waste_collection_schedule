@@ -3,10 +3,12 @@ from datetime import datetime
 
 import requests
 from waste_collection_schedule import Collection, Icons
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Dundee City Council"
 DESCRIPTION = "Source script for dundeecity.gov.uk"
 URL = "https://www.dundeecity.gov.uk"
+LOCATIONS = locations_queries(county="Dundee City", country="UK")
 EXTRA_INFO = [
     {"title": "Dundee MyBins", "url": "https://www.dundee-mybins.co.uk"},
 ]

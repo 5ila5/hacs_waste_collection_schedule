@@ -149,7 +149,12 @@ class Source(BaseSource):
     )
 
     REGIONS = regions.from_yaml(
-        "abfall_io_graphql", country="country", key="service_id"
+        "abfall_io_graphql",
+        country="country",
+        key="service_id",
+        location_queries="title",
+        location_query_override="locations",
+        expand_locations=False,
     )
 
     @classmethod

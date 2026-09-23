@@ -7,6 +7,7 @@ from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import uprn
 from waste_collection_schedule.exceptions import SourceArgumentException
+from waste_collection_schedule.locations import locations_ids
 from waste_collection_schedule.service.AchieveForms import (
     AchieveFormsDynamicRowsPreprocessor,
     AchieveFormsRetriever,
@@ -86,6 +87,7 @@ class Source(BaseSource):
     TEST_CASES: ClassVar[dict] = {
         "179 Skene Street, AB10 1QN": {"uprn": "9051064786"},
     }
+    LOCATIONS: ClassVar = locations_ids("R1900654")
 
     PARAMS = (uprn(),)
 

@@ -19,6 +19,10 @@ from waste_collection_schedule.service.AbfuhrplanDe import (
 )
 from waste_collection_schedule.transformers import ICSTransformer
 
+from custom_components.waste_collection_schedule.waste_collection_schedule.locations import (
+    locations_queries,
+)
+
 # Trailing slash is part of the provider's own URL structure; the getical
 # endpoint below is requested with a doubled slash to match, matching the
 # legacy source's (accidental but working) request shape.
@@ -36,6 +40,7 @@ class Source(BaseSource):
     URL = _BASE_URL
     COUNTRY = "de"
     RAISE_ON_EMPTY = True
+    LOCATIONS = locations_queries("Schwabach, Germany")
 
     TEST_CASES: ClassVar[dict] = {
         "Am Alten Friedhof 3, 3a": {"street": "Am Alten Friedhof 3, 3a"},

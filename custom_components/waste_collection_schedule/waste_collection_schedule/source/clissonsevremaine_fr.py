@@ -6,6 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 from waste_collection_schedule import Collection, Icons
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Clisson Sèvre et Maine Agglo"
 DESCRIPTION = (
@@ -64,6 +65,15 @@ EXTRA_INFO = [
         "title": commune,
         "url": URL,
         "default_params": {"commune": commune},
+        "locations": locations_queries(
+            commune.rstrip("1234567890AB ")
+            .removesuffix("zone")
+            .removesuffix("Zone")
+            .removesuffix("rue Saint-Antoine")
+            .rstrip(" -,")
+            .replace("La Haye-Fouassière", "La Haie-Fouassière")
+            + ", FR"
+        ),
     }
     for commune in COMMUNES
 ]

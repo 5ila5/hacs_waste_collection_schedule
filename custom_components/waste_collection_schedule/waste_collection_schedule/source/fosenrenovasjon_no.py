@@ -7,10 +7,13 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentNotFound,
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Fosen Renovasjon"
 DESCRIPTION = "Source for Fosen Renovasjon."
 URL = "https://fosenrenovasjon.no/"
+LOCATIONS = locations_queries("Fosen, Norway")
+
 TEST_CASES = {"Lysøysundveien 117": {"address": "Lysøysundveien 117"}}
 
 

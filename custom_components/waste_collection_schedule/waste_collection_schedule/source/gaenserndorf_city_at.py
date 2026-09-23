@@ -8,6 +8,7 @@ from waste_collection_schedule import Collection  # type: ignore[attr-defined]
 from waste_collection_schedule.exceptions import (
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -17,6 +18,8 @@ DESCRIPTION = (
     "Uses the Jolioo mobile app API."
 )
 URL = "https://www.gaenserndorf.at/"
+LOCATIONS = locations_queries("Gänserndorf, Austria")
+
 COUNTRY = "at"
 EXTRA_INFO = [
     {

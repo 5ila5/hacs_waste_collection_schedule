@@ -7,6 +7,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentExceptionMultiple,
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Impact Apps"
 DESCRIPTION = (
@@ -376,6 +377,9 @@ def EXTRA_INFO():
             "title": council["name"],
             "url": council["website"],
             "default_params": {"service": council["name"]},
+            "location": locations_queries(
+                council["name"].removesuffix("Council").strip()
+            ),
         }
         for council in SERVICE_MAP
     ]

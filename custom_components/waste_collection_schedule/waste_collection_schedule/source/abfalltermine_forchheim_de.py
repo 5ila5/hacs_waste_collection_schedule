@@ -8,6 +8,7 @@ from waste_collection_schedule.config_params import (
     city,
     text_field,
 )
+from waste_collection_schedule.locations import locations_ids
 from waste_collection_schedule.retrievers import HttpGetRetriever
 from waste_collection_schedule.transformers import ICSTransformer
 
@@ -32,6 +33,7 @@ class Source(BaseSource):
     DESCRIPTION = "Source for Landkreis Forchheim."
     URL = "https://www.abfalltermine-forchheim.de/"
     COUNTRY = "de"
+    LOCATIONS = locations_ids("R62687")
     WASTE_TYPES: ClassVar[list] = [
         wt.GENERAL_WASTE,
         wt.ORGANIC,

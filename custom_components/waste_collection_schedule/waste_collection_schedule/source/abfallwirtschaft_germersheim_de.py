@@ -17,6 +17,7 @@ from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import city, text_field
 from waste_collection_schedule.exceptions import SourceArgumentNotFound
 from waste_collection_schedule.field_terms import STREET
+from waste_collection_schedule.locations import locations_ids
 from waste_collection_schedule.parsers import IcsParser
 from waste_collection_schedule.retrievers import LookupChainRetriever
 from waste_collection_schedule.transformers import ICSTransformer
@@ -91,6 +92,7 @@ class Source(BaseSource):
     URL = "https://www.abfallwirtschaft-germersheim.de"
     COUNTRY = "de"
     RAISE_ON_EMPTY = True
+    LOCATIONS = locations_ids("R62698")
 
     TEST_CASES: ClassVar[dict] = {
         "Bellheim": {"city": "Bellheim", "street": "Albert-Schweitzer-Str."},

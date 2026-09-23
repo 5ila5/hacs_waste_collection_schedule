@@ -4,6 +4,7 @@ from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = (
     "Fleurieu Regional Waste Authority"  # Title will show up in README.md and info.md
@@ -12,6 +13,9 @@ DESCRIPTION = (
     "Source script for fleurieuregionalwasteauthority.com.au"  # Describe your source
 )
 URL = "https://fleurieuregionalwasteauthority.com.au"  # Insert url to service homepage. URL will show up in README.md and info.md
+
+LOCATIONS = locations_queries("Fleurieu Peninsula, South Australia")
+
 
 TEST_CASES = {  # Insert arguments for test cases to be used by test_sources.py script
     "Victor Harbor": {

@@ -4,6 +4,7 @@ from typing import Literal
 
 import requests
 from waste_collection_schedule import Collection
+from waste_collection_schedule.locations import locations_queries
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -74,42 +75,60 @@ SERVICE_MAP = [
         "url": "https://www.assen.nl/",
         "uuid": "138204213565303512",
         "organization": "assen",
+        "locations": locations_queries("Assen, NL"),
     },
     {
         "title": "Barendrecht Albrandswaard Ridderkerk",
         "url": "https://www.bar-afvalbeheer.nl/",
         "uuid": "138204213564933497",
         "organization": "afvalbeheer",
+        "locations": locations_queries(
+            "Barendrecht, NL",
+            "Albrandswaard, NL",
+            "Ridderkerk, NL",
+        ),
     },
     {
         "title": "BAT Tilburg",
         "url": "https://www.batafvalbeheer.nl/",
         "uuid": "452048812597339353",
         "organization": "bat",
+        "locations": locations_queries("Tilburg, NL"),
     },
     {
         "title": "Gemeente Breda",
         "url": "https://www.breda.nl/",
         "uuid": "452048812597352613",
         "organization": "breda",
+        "locations": locations_queries("Breda, NL"),
     },
     {
         "title": "Gemeente Groningen",
         "url": "https://gemeente.groningen.nl/",
         "uuid": "452048812597326549",
         "organization": "groningen",
+        "locations": locations_queries("Groningen, NL"),
     },
     {
         "title": "Reinigingsdienst Midden Nederland",
         "url": "https://www.rmn.nl/",
         "uuid": "138204213564933597",
         "organization": "rmn",
+        "locations": locations_queries(
+            "IJsselstein, NL",
+            "Nieuwegein, NL",
+            "Bunnik, NL",
+            "Zeist, NL",
+            "Soest, NL",
+            "Baarn, NL",
+        ),
     },
     {
         "title": "Gemeente Utrecht",
         "url": "https://www.utrecht.nl/",
         "uuid": "452048812597339479",
         "organization": "utrecht",
+        "locations": locations_queries("Utrecht, NL"),
     },
 ]
 

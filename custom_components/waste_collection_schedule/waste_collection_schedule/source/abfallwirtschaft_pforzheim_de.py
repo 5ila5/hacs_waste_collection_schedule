@@ -21,6 +21,7 @@ from waste_collection_schedule import parsers
 from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import house_number, street, text_field
+from waste_collection_schedule.locations import locations_ids
 from waste_collection_schedule.retrievers import AthosWasteManagementRetriever
 from waste_collection_schedule.transformers import ICSTransformer
 
@@ -33,6 +34,7 @@ class Source(BaseSource):
     DESCRIPTION = "Source for Abfallwirtschaft Pforzheim."
     URL = "https://www.abfallwirtschaft-pforzheim.de"
     COUNTRY = "de"
+    LOCATIONS = locations_ids("R62471")
 
     # A wrong street/house number yields an empty Athos schedule; surface it
     # as an error instead of a silently empty calendar (#6943).

@@ -10,36 +10,57 @@
   - title: Abfallwirtschaft Stadt Nürnberg
     url: https://www.nuernberg.de/
     service_id: nuernberg
+    locations:
+      - Nürnberg
   - title: Abfallwirtschaftsbetrieb Bergisch Gladbach
     url: https://www.bergischgladbach.de/
     service_id: aw-bgl2
+    locations:
+      - Bergisch Gladbach
   - title: AWA Entsorgungs GmbH
     url: https://www.awa-gmbh.de/
     service_id: zew2
+    locations:
+      - Aachen
+      - Kreis Düren
+      - Kreis Euskirchen
   - title: AWG Kreis Warendorf
     url: https://www.awg-waf.de/
     service_id: krwaf
+    locations:
+      - Kreis Warendorf
   - title: Bergischer Abfallwirtschaftsverband
     url: https://www.bavweb.de/
     service_id: bav
+    locations:
+      - Rheinisch-Bergischer Kreis
+      - Oberbergischer Kreis
   - title: Kreis Coesfeld
     url: https://wbc-coesfeld.de/
     service_id: coe
   - title: Stadt Cottbus
     url: https://www.cottbus.de/
     service_id: cottbus
+    locations:
+      - Cottbus, Germany
   - title: Dinslaken
     url: https://www.dinslaken.de/
     service_id: din
   - title: Stadt Dorsten
     url: https://www.ebd-dorsten.de/
     service_id: dorsten
+    locations:
+      - Dorsten, Germany
   - title: EGW Westmünsterland
     url: https://www.egw.de/
     service_id: wml2
+    locations:
+      - Kreis Borken
   - title: Kreis Gütersloh GEG
     url: https://www.geg-gt.de/
     service_id: krwaf
+    locations:
+      - Kreis Gütersloh
   - title: Halver
     url: https://www.halver.de/
     service_id: hlv
@@ -52,6 +73,8 @@
   - title: MHEG Mülheim an der Ruhr
     url: https://www.mheg.de/
     service_id: muelheim
+    locations:
+      - Mülheim an der Ruhr
   - title: Stadt Norderstedt
     url: https://www.betriebsamt-norderstedt.de/
     service_id: nds
@@ -61,24 +84,38 @@
   - title: Gemeinde Roetgen
     url: https://www.roetgen.de/
     service_id: roe
+    locations:
+      - Roetgen
   - title: Stadt Solingen
     url: https://www.solingen.de/
     service_id: solingen
+    locations:
+      - Solingen, Germany
   - title: STL Lüdenscheid
     url: https://www.stl-luedenscheid.de/
     service_id: stl
+    locations:
+      - Lüdenscheid
   - title: GWA - Kreis Unna mbH
     url: https://www.gwa-online.de/
     service_id: unna
+    locations:
+      - Kreis Unna
   - title: Kreis Viersen
     url: https://www.kreis-viersen.de/
     service_id: viersen
   - title: WBO Wirtschaftsbetriebe Oberhausen
     url: https://www.wbo-online.de/
     service_id: oberhausen
-  - title: ZEW Zweckverband Entsorgungsregion West
+    locations:
+      - Oberhausen
+  - title: ZEW Zweckverband Entsorgungsregion West # same as AWA Entsorgungs GmbH
     url: https://zew-entsorgung.de/
     service_id: zew2
+    locations:
+      - Aachen
+      - Kreis Düren
+      - Kreis Euskirchen
   - title: Stadt Cuxhaven
     url: https://www.cuxhaven.de/
     service_id: cux
@@ -88,9 +125,15 @@
   - title: Abfallwirtschaftsverband Lippe
     url: https://www.abfall-lippe.de/
     service_id: awvlippe
+    locations:
+      - Kreis Lippe
   - title: Gemeinde Kranenburg
     url: https://www.kranenburg.de/
     service_id: kranenburg
+    locations:
+      - Kranenburg
   - title: Stadt Porta Westfalica
     url: https://www.portawestfalica.de/
     service_id: portawestfalica
+    locations:
+      - Porta Westfalica

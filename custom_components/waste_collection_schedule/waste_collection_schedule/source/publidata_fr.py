@@ -19,6 +19,7 @@ from dateutil.rrule import (
 )
 from waste_collection_schedule import Collection, Icons
 from waste_collection_schedule.exceptions import SourceArgumentException
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Publidata generic source"
 DESCRIPTION = "Publidata is a French public operator with a reach of up to 6M inhabitants. Check if your area is concerned on their website."
@@ -223,136 +224,194 @@ EXTRA_INFO = [
         "title": "CA Saint Germain Boucles de Seine",
         "url": "https://www.saintgermainbouclesdeseine.fr/",
         "default_params": {"instance_id": 1420},
+        "location": locations_queries("Le Pecq, France"),
     },
     {
         "title": "Grand Paris Seine et Oise",
         "url": "https://infos-dechets.gpseo.fr/",
         "default_params": {"instance_id": 1294},
+        "location": locations_queries(
+            "Communauté urbaine Grand Paris Seine et Oise, France"
+        ),
     },
     {
         "title": "Orléans Métropole",
         "url": "https://triermondechet.orleans-metropole.fr/",
         "default_params": {"instance_id": 100},
+        "location": locations_queries("Orléans Métropole, France"),
     },
     {
         "title": "Tours Métropole",
         "url": "https://www.tours-metropole.fr/",
         "default_params": {"instance_id": 65},
+        "location": locations_queries("Tours Métropole, France"),
     },
     {
         "title": "Saumur Val de Loire",
         "url": "https://www.saumurvaldeloire.fr/",
         "default_params": {"instance_id": 159},
+        "location": locations_queries("Saumur Val de Loire, France"),
     },
     {
         "title": "Châteauroux Métropole",
         "url": "https://www.chateauroux-metropole.fr/",
         "default_params": {"instance_id": 897},
+        "location": locations_queries("Châteauroux Métropole, France"),
     },
     {
         "title": "Saint Quentin en Yvelines",
         "url": "https://www.saint-quentin-en-yvelines.fr/",
         "default_params": {"instance_id": 701},
+        "location": locations_queries("Saint Quentin en Yvelines, France"),
     },
     {
         "title": "Versailles Grand Parc",
         "url": "https://www.versaillesgrandparc.fr/",
         "default_params": {"instance_id": 251},
+        "location": locations_queries("Versailles Grand Parc, France"),
     },
     {
         "title": "Grand Paris Seine Ouest",
         "url": "https://www.dechets.seineouest.fr/",
         "default_params": {"instance_id": 101},
+        "location": locations_queries("Grand Paris Seine Ouest, France"),
     },
     {
         "title": "ValEco",
         "url": "https://www.valeco41.fr/",
         "default_params": {"instance_id": 750},
+        "location": locations_queries("ValEco, France"),
     },
     {
         "title": "ValDem",
         "url": "https://www.valdem.fr/",
         "default_params": {"instance_id": 751},
+        "location": locations_queries("ValDem, France"),
     },
     {
         "title": "Dreux Agglomération",
         "url": "https://www.dreux-agglomeration.fr/",
         "default_params": {"instance_id": 725},
+        "location": locations_queries("Dreux Agglomération, France"),
     },
     {
         "title": "Ardenne Métropole",
         "url": "https://www.ardenne-metropole.fr/",
         "default_params": {"instance_id": 670},
+        "location": locations_queries("Ardenne Métropole, France"),
     },
     {
         "title": "Dunkerque Grand Littoral",
         "url": "https://www.mesinfosdechets.cud.fr/",
         "default_params": {"instance_id": 673},
+        "location": locations_queries("Dunkerque Grand Littoral, France"),
     },
     {
         "title": "Grand Calais Terres et Mers",
         "url": "https://www.grandcalais.fr/",
         "default_params": {"instance_id": 679},
+        "location": locations_queries("Grand Calais Terres et Mers, France"),
     },
     {
         "title": "Métropole Européenne de Lille",
         "url": "https://www.lillemetropole.fr/",
         "default_params": {"instance_id": 876},
+        "location": locations_queries("Métropole Européenne de Lille, France"),
     },
     {
         "title": "Valcobreizh",
         "url": "https://dechets.valcobreizh.fr",
         "default_params": {"instance_id": 1003},
+        "location": locations_queries(
+            "communes de Bretagne romantique, France",
+            "Val d'Ille-Aubigné Communauté de communes, France",
+            "Communauté de communes de Saint-Méen Montauban, France",
+            "Couesnon Marches de Bretagne, France",
+            "Liffré-Cormier Communauté, France",
+        ),
     },
     {
         "title": "SIVOM Rive Droite",
         "url": "https://www.sivom-rivedroite.fr/",
         "default_params": {"instance_id": 1027},
+        "location": locations_queries(
+            "Artigues-près-Bordeaux, France",
+            "Bassens, France",
+            "Bouliac, France",
+            "Carbon-Blanc, France",
+            "Cenon, France",
+            "Floirac, France",
+            "Lormont, France",
+            "Montussan, France",
+            "Sainte-Eulalie, France",
+            "Yvrac, France",
+        ),
     },
     {
         "title": "Le Havre Seine Métropole",
         "url": "https://tripratik.lehavreseinemetropole.fr/",
         "default_params": {"instance_id": 1408},
+        "location": locations_queries("Le Havre Seine Métropole, France"),
     },
     {
         "title": "Communauté de Communes Pévèle Carembault",
         "url": "https://www.pevelecarembault.fr/",
         "default_params": {"instance_id": 1141},
+        "location": locations_queries(
+            "Communauté de Communes Pévèle Carembault, France"
+        ),
     },
     {
         "title": "Métropole du Grand Nancy",
         "url": "https://mhdd.grandnancy.eu/",
         "default_params": {"instance_id": 1436},
+        "location": locations_queries("Métropole du Grand Nancy, France"),
     },
     {
         "title": "Le Cotentin",
         "url": "https://dechets.lecotentin.fr/",
         "default_params": {"instance_id": 1011},
+        "location": locations_queries("Le Cotentin, France"),
     },
     {
         "title": "SIAVED (Valenciennes Métropole)",
         "url": "https://www.siaved.fr/votre-calendrier-de-collecte",
         "default_params": {"instance_id": 1067},
+        "location": locations_queries("Valenciennes Métropole, France"),
     },
     {
         "title": "Sud Sainte Baume",
         "url": "https://www.agglo-sudsaintebaume.fr/",
         "default_params": {"instance_id": 1483},
+        "location": locations_queries(
+            "Communauté d'agglomération Sud Sainte Baume, France"
+        ),
     },
     {
         "title": "Agglo d'Agen",
         "url": "https://www.agglo-agen.net/vie-quotidienne/collecte-et-traitement-des-dechets/particuliers/calendriers-et-informations-collecte",
         "default_params": {"instance_id": 1264},
+        "location": locations_queries("Agglomération d'Agen, Lot-et-Garonne, France"),
     },
     {
         "title": "SICTOM du Marsan",
         "url": "https://sictomdumarsan.fr/la-collecte/mes-jours-de-collecte/",
         "default_params": {"instance_id": 158},
+        "location": locations_queries(
+            "Mont-de-Marsan Agglomération, France",
+            "Communauté de communes des Landes d'Armagnac, France",
+            "Communauté de communes du Pays de Grenade, France",
+            "Communauté de communes du Pays Tarusate",
+            "Communauté de communes Cœur de Gascogne",
+        ),
     },
     {
         "title": "Valodev 18",
         "url": "https://valodev18.fr/la-collecte-des-vos-dechets/",
         "default_params": {"instance_id": 1619},
+        "location": locations_queries(
+            "Communauté d'agglomération Bourges Plus, France"
+        ),
     },
 ]
 

@@ -6,10 +6,13 @@ from waste_collection_schedule.exceptions import (
     SourceArgAmbiguousWithSuggestions,
     SourceArgumentNotFound,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Belmont City Council"
 DESCRIPTION = "Source for Belmont City Council rubbish collection."
 URL = "https://www.belmont.wa.gov.au/"
+LOCATIONS = locations_queries("Belmont, Western Australia")
+
 TEST_CASES = {
     "PETstock Belmont": {"address": "196 Abernethy Road Belmont 6104"},
     "Belgravia Medical Centre": {"address": "374 Belgravia Street Cloverdale 6105"},

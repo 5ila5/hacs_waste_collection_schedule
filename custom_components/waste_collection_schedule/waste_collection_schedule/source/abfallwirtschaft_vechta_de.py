@@ -21,6 +21,7 @@ from waste_collection_schedule import parsers
 from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import city, street
+from waste_collection_schedule.locations import locations_ids
 from waste_collection_schedule.service.ICS import IcsFeedsParser, IcsSessionRetriever
 from waste_collection_schedule.transformers import ICSTransformer
 
@@ -86,6 +87,7 @@ class Source(BaseSource):
     URL = f"{_BASE_URL}/"
     COUNTRY = "de"
     RAISE_ON_EMPTY = True
+    LOCATIONS = locations_ids("R62666")
 
     TEST_CASES: ClassVar[dict] = {
         "Vechta, An der Hasenweide": {

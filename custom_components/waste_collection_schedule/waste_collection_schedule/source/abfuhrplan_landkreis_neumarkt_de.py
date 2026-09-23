@@ -17,6 +17,10 @@ from waste_collection_schedule.service.AbfuhrplanDe import (
 )
 from waste_collection_schedule.transformers import ICSTransformer
 
+from custom_components.waste_collection_schedule.waste_collection_schedule.locations import (
+    locations_queries,
+)
+
 _BASE_URL = "https://www.abfuhrplan-landkreis-neumarkt.de"
 
 
@@ -27,6 +31,7 @@ class Source(BaseSource):
     URL = _BASE_URL
     COUNTRY = "de"
     RAISE_ON_EMPTY = True
+    LOCATIONS = locations_queries("Landkreis Neumarkt, Germany")
 
     TEST_CASES: ClassVar[dict] = {
         "dietfurt industriestrasse": {"city": "dietfurt", "street": "industriestrasse"},

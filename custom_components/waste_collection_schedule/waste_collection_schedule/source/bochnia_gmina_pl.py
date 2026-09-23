@@ -9,6 +9,7 @@ from waste_collection_schedule import Collection, Icons  # type: ignore[attr-def
 from waste_collection_schedule.exceptions import (
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Gmina Bochnia"
 DESCRIPTION = "Source for Gmina Bochnia waste collection schedule (Poland)"
@@ -80,7 +81,12 @@ TOWNS_PDF_MAP = {
 }
 
 EXTRA_INFO = [
-    {"title": town, "default_params": {"town": town}} for town in TOWNS_PDF_MAP
+    {
+        "title": town,
+        "default_params": {"town": town},
+        "locations": locations_queries(f"{town}, Bochnia, Poland"),
+    }
+    for town in TOWNS_PDF_MAP
 ]
 
 MIXED_WASTE = "Odpady zmieszane i segregowane"

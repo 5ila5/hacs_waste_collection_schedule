@@ -1,6 +1,7 @@
 import requests
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
 from waste_collection_schedule.exceptions import SourceArgumentNotFound
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.service.ICS import ICS
 
 TITLE = "De Afvalapp"
@@ -10,12 +11,15 @@ DESCRIPTION = (
 )
 URL = "https://www.deafvalapp.nl"
 COUNTRY = "nl"
-EXTRA_INFO = [
-    {"title": "Helmond", "url": "https://www.deafvalapp.nl"},
-    {"title": "Land van Cuijk", "url": "https://www.deafvalapp.nl"},
-    {"title": "Boekel", "url": "https://www.deafvalapp.nl"},
-    {"title": "Maashorst", "url": "https://www.deafvalapp.nl"},
-]
+EXTRA_INFO = (
+    (e | {"locations": locations_queries(city=e["title"], country="NL")})
+    for e in [
+        {"title": "Helmond", "url": "https://www.deafvalapp.nl"},
+        {"title": "Land van Cuijk", "url": "https://www.deafvalapp.nl"},
+        {"title": "Boekel", "url": "https://www.deafvalapp.nl"},
+        {"title": "Maashorst", "url": "https://www.deafvalapp.nl"},
+    ]
+)
 TEST_CASES = {
     "Maashorst": {"postcode": "5406XP", "house_number": "9"},
     "Helmond": {"postcode": "5701NC", "house_number": 1},

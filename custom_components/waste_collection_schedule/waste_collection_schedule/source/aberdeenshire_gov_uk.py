@@ -5,6 +5,7 @@ from waste_collection_schedule import date_parsers, parsers, retrievers
 from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import uprn
+from waste_collection_schedule.locations import locations_ids
 from waste_collection_schedule.transformers import HtmlTransformer
 
 # Demonstrates: HtmlTransformer + parsers.HtmlParser(selector) + legacy SSL GET.
@@ -30,6 +31,7 @@ class Source(BaseSource):
     DESCRIPTION = "Source for Aberdeenshire Council, UK."
     URL = "https://aberdeenshire.gov.uk"
     COUNTRY = "uk"
+    LOCATIONS: ClassVar = locations_ids("R1900655")
 
     # UPRN/property-id lookup: a wrong id yields no collections, so surface
     # it as an error instead of a silently empty calendar (#6943).

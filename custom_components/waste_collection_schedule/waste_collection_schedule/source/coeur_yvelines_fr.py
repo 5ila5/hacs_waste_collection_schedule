@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from dateutil.rrule import FR, MO, MONTHLY, SA, SU, TH, TU, WE, WEEKLY, rrule
 from waste_collection_schedule import Collection, Icons
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Coeur d'Yvelines"
 DESCRIPTION = "Source script for coeur-yvelines.fr"
@@ -68,6 +69,10 @@ EXTRA_INFO = [
         "title": commune,
         "url": URL,
         "default_params": {"commune": commune},
+        "locations": locations_queries(
+            city={"Auteuil-le-Roi": "Auteuil"}.get(commune, commune),
+            country="FR",
+        ),
     }
     for commune in COMMUNES
 ]

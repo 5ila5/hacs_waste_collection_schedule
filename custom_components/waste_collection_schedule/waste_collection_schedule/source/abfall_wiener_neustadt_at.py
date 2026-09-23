@@ -14,10 +14,12 @@ from waste_collection_schedule import Collection, Icons  # type: ignore[attr-def
 from waste_collection_schedule.exceptions import (
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_ids
 
 TITLE = "Abfallwirtschaft Wiener Neustadt"
 DESCRIPTION = "Source for abfall.wiener-neustadt.at waste collection schedule for Wiener Neustadt, Austria"
 URL = "https://abfall.wiener-neustadt.at/"
+LOCATIONS = locations_ids("R110451")
 
 # TEST_CASES: Each test should return a list[Collection] with date, type, and icon
 # Expected waste types: Restmüll, Biotonne, Wertstoffe, Altkleider, Christbaum

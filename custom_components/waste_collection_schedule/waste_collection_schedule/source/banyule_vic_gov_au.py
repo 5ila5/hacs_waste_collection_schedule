@@ -1,5 +1,6 @@
 from waste_collection_schedule import Collection, Icons
 from waste_collection_schedule.exceptions import SourceArgumentExceptionMultiple
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.service.OpenCities import (
     OpenCitiesClient,
     OpenCitiesConfig,
@@ -8,6 +9,8 @@ from waste_collection_schedule.service.OpenCities import (
 TITLE = "Banyule City Council"
 DESCRIPTION = "Source for Banyule City Council rubbish collection."
 URL = "https://www.banyule.vic.gov.au"
+LOCATIONS = locations_queries("Banyule, Victoria, Australia")
+
 TEST_CASES = {
     "Monday A": {"street_address": "6 Mandall Avenue, IVANHOE"},
     "Monday A Geolocation ID": {

@@ -5,6 +5,7 @@ from waste_collection_schedule import Collection, Icons  # type: ignore[attr-def
 from waste_collection_schedule.exceptions import (
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Apps by imactivate"
 DESCRIPTION = "Source for Apps by imactivate."
@@ -43,20 +44,24 @@ EXTRA_INFO = [
         "title": "Leeds",
         "url": "https://www.leeds.gov.uk",
         "default_params": {"town": "Leeds"},
+        "locations": locations_queries("Leeds, United Kingdom"),
     },
     {
         "title": "Fenland",
         "url": "https://www.fenland.gov.uk",
+        "locations": locations_queries("Fenland, United Kingdom"),
     },
     {
         "title": "Rotherham",
         "url": "https://www.rotherham.gov.uk",
         "default_params": {"town": "Rotherham"},
+        "locations": locations_queries("Rotherham, United Kingdom"),
     },
     {
         "title": "Luton",
         "url": "https://www.luton.gov.uk",
         "default_params": {"town": "Luton"},
+        "locations": locations_queries("Luton, United Kingdom"),
     },
 ]
 

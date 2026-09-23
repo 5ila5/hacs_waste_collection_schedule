@@ -3,6 +3,7 @@ from datetime import datetime
 import requests
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
 from waste_collection_schedule.exceptions import SourceArgumentNotFound
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Partille kommun"
 DESCRIPTION = "Source for Partille kommun waste collection."
@@ -10,6 +11,8 @@ URL = "https://vatjanst.partille.se"
 SOURCE_CODEOWNERS = ["@sadjad1"]
 
 COUNTRY = "se"
+LOCATIONS = locations_queries("Partille, Sweden")
+
 
 PARAM_TRANSLATIONS = {
     "en": {

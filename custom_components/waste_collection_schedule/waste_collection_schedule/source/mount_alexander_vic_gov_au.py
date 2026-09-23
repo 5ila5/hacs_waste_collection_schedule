@@ -6,6 +6,7 @@ import logging
 from bs4 import BeautifulSoup
 from curl_cffi import requests
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
+from waste_collection_schedule.locations import locations_queries
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -13,6 +14,8 @@ TITLE = "Mount Alexander Shire Council"
 DESCRIPTION = "Source for Mount Alexander Shire Council, VIC, Australia."
 URL = "https://www.mountalexander.vic.gov.au"
 COUNTRY = "au"
+LOCATIONS = locations_queries("Mount Alexander Shire, Victoria, Australia")
+
 
 TEST_CASES = {
     "Campbells Creek": {"address": "123 Main Road Campbells Creek Victoria 3451"},

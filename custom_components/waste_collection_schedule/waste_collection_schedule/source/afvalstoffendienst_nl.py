@@ -6,6 +6,7 @@ from datetime import date
 import requests
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
 from waste_collection_schedule.exceptions import SourceArgumentException
+from waste_collection_schedule.locations import locations_queries
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -14,6 +15,14 @@ DESCRIPTION = (
     "Source for 's Hertogenbosch, Heusden, Vught, Oisterwijk, Altena, Bernheze"
 )
 URL = "https://www.afvalstoffendienst.nl/"
+LOCATIONS = locations_queries(
+    "'s Hertogenbosch, Netherlands",
+    "Heusden, Netherlands",
+    "Vught, Netherlands",
+    "Oisterwijk, Netherlands",
+    "Altena, Netherlands",
+    "Bernheze, Netherlands",
+)
 
 
 TEST_CASES = {

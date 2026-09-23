@@ -2,6 +2,7 @@ from datetime import datetime
 
 import requests
 from waste_collection_schedule import Collection, Icons
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Australian Capital Territory (ACT)"
 DESCRIPTION = "Source script for Australian Capital Territory (ACT)."
@@ -14,6 +15,7 @@ TEST_CASES = {
     "Dunlop North": {"suburb": "DUNLOP", "split_suburb": "NORTH"},
     "Dunlop South": {"suburb": "DUNLOP", "split_suburb": "south"},
 }
+LOCATIONS = locations_queries("Australian Capital Territory, Australia")
 
 API_URL = "https://www.data.act.gov.au/resource/jzzy-44un.json"
 ICON_MAP = {

@@ -14,6 +14,7 @@ from waste_collection_schedule import parsers
 from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import city, street
+from waste_collection_schedule.locations import locations_ids
 from waste_collection_schedule.retrievers import HttpGetRetriever
 from waste_collection_schedule.transformers import ICSTransformer, label_cleaner
 
@@ -26,6 +27,7 @@ class Source(BaseSource):
     DESCRIPTION = "Source for Abfallbehandlungsgesellschaft Havelland mbH."
     URL = "https://abfall-havelland.de/"
     COUNTRY = "de"
+    LOCATIONS: ClassVar = locations_ids("R1682355")
 
     TEST_CASES: ClassVar[dict] = {
         "Wustermark Drosselgasse": {"ort": "Wustermark", "strasse": "Drosselgasse"},

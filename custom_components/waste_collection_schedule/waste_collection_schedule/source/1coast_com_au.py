@@ -32,6 +32,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgAmbiguousWithSuggestions,
     SourceArgumentNotFound,
 )
+from waste_collection_schedule.locations import locations_ids
 from waste_collection_schedule.parsers import (
     FirstNonEmptyBranch,
     HtmlLabelledDates,
@@ -127,6 +128,8 @@ class Source(BaseSource):
             "address": "56 EVERGLADES CR, WOY WOY. CENTRAL COAST 2256"
         },
     }
+
+    LOCATIONS: ClassVar = locations_ids("R62581")
 
     PARAMS = (street_address(),)
 

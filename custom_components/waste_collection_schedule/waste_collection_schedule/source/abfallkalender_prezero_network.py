@@ -21,6 +21,7 @@ from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import house_number, street, text_field
 from waste_collection_schedule.exceptions import SourceArgumentNotFound
 from waste_collection_schedule.field_terms import CITY
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.regions import region
 from waste_collection_schedule.transformers import ICSTransformer
 
@@ -117,6 +118,7 @@ class Source(BaseSource):
             "Bad Oeynhausen",
             url=f"{_BASE_URL}/bad-oeynhausen",
             city="bad-oeynhausen",
+            locations=locations_queries("Bad Oeynhausen"),
         ),
     )
 

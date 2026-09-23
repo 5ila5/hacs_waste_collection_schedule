@@ -2,11 +2,14 @@ from datetime import datetime
 
 import requests
 from waste_collection_schedule import Collection, Icons
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Chiemgau Recycling - Landkreis Rosenheim"  # Title will show up in README.md and info.md
 DESCRIPTION = "Source script for paper waste collection in Landkreis Rosenheim area"  # Describe your source
 URL = "https://chiemgau-recycling.de"  # Insert url to service homepage. URL will show up in README.md and info.md
 COUNTRY = "de"
+LOCATIONS = locations_queries("Landkreis Rosenheim, Germany")
+
 TEST_CASES = {  # Insert arguments for test cases to be used by test_sources.py script
     "Bruckmühl 1": {"district": "Bruckmühl 1"}
 }

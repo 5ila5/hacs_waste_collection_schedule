@@ -6,10 +6,12 @@ from waste_collection_schedule import Collection, Icons  # type: ignore[attr-def
 from waste_collection_schedule.exceptions import (
     SourceArgumentNotFound,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Greater Cambridge Waste, UK"
 DESCRIPTION = "Source for greatercambridgewaste.org, the shared recycling and waste service for Cambridge City Council and South Cambridgeshire District Council, UK"
 URL = "https://greatercambridgewaste.org"
+LOCATIONS = locations_queries("Cambridge, England, United Kingdom")
 TEST_CASES = {
     "Cambs_uprn": {"uprn": 200004170895},
     "Cambs_houseNumber": {"postcode": "CB13JD", "name_or_number": 37},

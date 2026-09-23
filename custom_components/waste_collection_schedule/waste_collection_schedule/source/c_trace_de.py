@@ -24,6 +24,7 @@ from waste_collection_schedule.config_params import (
     street,
     text_field,
 )
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.regions import region
 from waste_collection_schedule.service.CTrace import (
     SERVICE_MAP,
@@ -115,7 +116,28 @@ class Source(BaseSource):
     # SERVICE_MAP's towns as its own Region so none are dropped from the
     # generated README / sources.json listings.
     REGIONS = tuple(
-        region(entry["title"], url=entry["url"], service=key)
+        region(
+            entry["title"],
+            url=entry["url"],
+            locations=entry.get(
+                "locations",
+                locations_queries(
+                    entry["title"]
+                    .removeprefix("Abfallwirtschaftsbetrieb")
+                    .removeprefix("Abfallwirtschaftsverband")
+                    .removeprefix("Entsorgungs- und Wirtschaftsbetrieb")
+                    .removeprefix("Bau & Service")
+                    .removeprefix("Kreisstadt")
+                    .removeprefix("Stadt")
+                    .removeprefix("Abfallwirtschaft")
+                    .removeprefix("Landratsamt")
+                    .removesuffix("Stadtreinigung")
+                    .strip()
+                    + ", DE",
+                ),
+            ),
+            service=key,
+        )
         for key, entry in SERVICE_MAP.items()
     )
 

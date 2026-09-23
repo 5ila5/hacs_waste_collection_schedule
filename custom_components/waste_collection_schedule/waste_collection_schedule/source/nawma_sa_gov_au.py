@@ -3,12 +3,15 @@ from html.parser import HTMLParser
 
 import requests
 from waste_collection_schedule import Collection
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "North Adelaide Waste Management Authority"
 DESCRIPTION = (
     "Source for nawma.sa.gov.au (Salisbury, Playford, and Gawler South Australia)."
 )
 URL = "https://www.nawma.sa.gov.au"
+LOCATIONS = locations_queries("North Adelaide, South Australia")
+
 TEST_CASES = {
     "128 Bridge Road": {
         "street_number": "128",

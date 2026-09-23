@@ -8,6 +8,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentNotFound,
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Müllmann-App"
 DESCRIPTION = (
@@ -27,56 +28,67 @@ EXTRA_INFO = [
         "title": "Aach",
         "url": "https://aach.muellmann-app.de/",
         "default_params": {"city": "Aach"},
+        "location": locations_queries("Aach, Germany"),
     },
     {
         "title": "Allensbach",
         "url": "https://allensbach.muellmann-app.de/",
         "default_params": {"city": "Allensbach"},
+        "location": locations_queries("Allensbach, Germany"),
     },
     {
         "title": "Bodman-Ludwigshafen",
         "url": "https://bodman.muellmann-app.de/",
         "default_params": {"city": "Bodman-Ludwigshafen"},
+        "location": locations_queries("Bodman-Ludwigshafen, Germany"),
     },
     {
         "title": "Gailingen am Hochrhein",
         "url": "https://gailingen.muellmann-app.de/",
         "default_params": {"city": "Gailingen am Hochrhein"},
+        "location": locations_queries("Gailingen am Hochrhein, Germany"),
     },
     {
         "title": "Hohenfels",
         "url": "https://hohenfels.muellmann-app.de/",
         "default_params": {"city": "Hohenfels"},
+        "location": locations_queries("Hohenfels, Germany"),
     },
     {
         "title": "Karlsruhe",
         "url": "https://karlsruhe.muellmann-app.de/",
         "default_params": {"city": "Karlsruhe", "street": "REPLACE_WITH_YOUR_STREET"},
+        "location": locations_queries("Karlsruhe, Germany"),
     },
     {
         "title": "Konstanz",
         "url": "https://konstanz.muellmann-app.de/",
         "default_params": {"city": "Konstanz", "street": "REPLACE_WITH_YOUR_STREET"},
+        "location": locations_queries("Konstanz, Germany"),
     },
     {
         "title": "Moos",
         "url": "https://moos.muellmann-app.de/",
         "default_params": {"city": "Moos"},
+        "location": locations_queries("Moos, Germany"),
     },
     {
         "title": "Mühlhausen-Ehingen",
         "url": "https://muehlhausen.muellmann-app.de/",
         "default_params": {"city": "Mühlhausen-Ehingen"},
+        "location": locations_queries("Mühlhausen-Ehingen, Germany"),
     },
     {
         "title": "Mühlingen",
         "url": "https://muehlingen.muellmann-app.de/",
         "default_params": {"city": "Mühlingen"},
+        "location": locations_queries("Mühlingen, Germany"),
     },
     {
         "title": "Orsingen-Nenzingen",
         "url": "https://orsingen.muellmann-app.de/",
         "default_params": {"city": "Orsingen-Nenzingen"},
+        "location": locations_queries("Orsingen-Nenzingen, Germany"),
     },
     {
         "title": "Radolfzell am Bodensee",
@@ -85,11 +97,13 @@ EXTRA_INFO = [
             "city": "Radolfzell",
             "street": "REPLACE_WITH_YOUR_STREET",
         },
+        "location": locations_queries("Radolfzell, Germany"),
     },
     {
         "title": "Reichenau",
         "url": "https://reichenau.muellmann-app.de/",
         "default_params": {"city": "Reichenau"},
+        "location": locations_queries("Reichenau, Germany"),
     },
     {
         "title": "Singen (Hohentwiel)",
@@ -98,11 +112,13 @@ EXTRA_INFO = [
             "city": "Singen (Hohentwiel)",
             "street": "REPLACE_WITH_YOUR_STREET",
         },
+        "location": locations_queries("Singen, Germany"),
     },
     {
         "title": "Stockach",
         "url": "https://stockach.muellmann-app.de/",
         "default_params": {"city": "Stockach", "street": "REPLACE_WITH_YOUR_STREET"},
+        "location": locations_queries("Stockach, Germany"),
     },
 ]
 

@@ -5,6 +5,7 @@ from datetime import date, timedelta
 import requests
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_ids
 
 TITLE = "Abfallwirtschaft Kyffhäuserkreis"
 DESCRIPTION = (
@@ -16,6 +17,8 @@ URL = "https://abfall-kyffhaeuser.de"
 COUNTRY = "de"
 
 API_URL = "https://abfall-kyffhaeuser.de/wp-json/tribe/events/v1"
+
+LOCATIONS = locations_ids("R62604")
 
 TEST_CASES = {
     "Ebeleben (single schedule)": {"city": "Ebeleben"},

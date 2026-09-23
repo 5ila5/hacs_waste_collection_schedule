@@ -1,9 +1,14 @@
 from datetime import datetime
 
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.service.CitiesAppsCom import SERVICE_MAP, CitiesApps
 
-EXTRA_INFO = SERVICE_MAP
+EXTRA_INFO = [
+    e | {"locations": locations_queries(e.get("location", f"{e['title']}, Austria"))}
+    for e in SERVICE_MAP
+]
+
 TITLE = "App CITIES"
 DESCRIPTION = "Source for App CITIES."
 URL = "https://citiesapps.com"

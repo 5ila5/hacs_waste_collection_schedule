@@ -6,11 +6,14 @@ from waste_collection_schedule.exceptions import (
     SourceArgAmbiguousWithSuggestions,
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Timrå kommun"
 DESCRIPTION = "Source for Timrå kommun (Sweden) waste collection."
 URL = "https://www.timra.se"
 COUNTRY = "se"
+LOCATIONS = locations_queries("Timrå, Sweden")
+
 TEST_CASES = {
     "Aspen 195": {"address": "Aspen 195"},
     "Tuna 112": {"address": "Tuna 112"},

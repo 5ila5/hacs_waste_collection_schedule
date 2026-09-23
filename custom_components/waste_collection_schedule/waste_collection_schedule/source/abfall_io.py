@@ -114,7 +114,12 @@ class Source(BaseSource):
     parse = AbfallIoParser()
     transform = ICSTransformer()
 
-    REGIONS = regions.from_yaml("abfall_io", key="service_id")
+    REGIONS = regions.from_yaml(
+        "abfall_io",
+        key="service_id",
+        location_queries="title",
+        location_query_override="locations",
+    )
 
     @classmethod
     def get_choices(cls, field: str, selections: dict) -> list[tuple[str, str]]:

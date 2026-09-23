@@ -3,12 +3,14 @@ from datetime import date, datetime, timedelta
 
 import requests
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Amber Valley Borough Council"
 DESCRIPTION = (
     "Source for ambervalley.gov.uk services for Amber Valley Borough Council, UK."
 )
 URL = "https://ambervalley.gov.uk"
+LOCATIONS = locations_queries("Amber Valley, England, United Kingdom")
 TEST_CASES = {
     "Test_001": {"uprn": "100030011612", "predict": True},
     "Test_002": {"uprn": "100030011654"},

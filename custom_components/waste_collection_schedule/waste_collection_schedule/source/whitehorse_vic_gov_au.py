@@ -7,12 +7,15 @@ from waste_collection_schedule import Collection, Icons  # type: ignore[attr-def
 from waste_collection_schedule.exceptions import (
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 _LOGGER = logging.getLogger(__name__)
 
 TITLE = "Whitehorse City Counfil"
 DESCRIPTION = "Source for Whitehorse City Counfil."
 URL = "https://www.whitehorse.vic.gov.au"
+LOCATIONS = locations_queries("Whitehorse, Victoria, Australia")
+
 TEST_CASES = {
     "17 Main Street BLACKBURN": {"address": "17 Main Street BLACKBURN"},
     "6/16 Ashted Road": {"address": "6/16 Ashted Road"},

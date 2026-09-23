@@ -20,9 +20,14 @@ platform is metadata plus ``retrieve = CTraceCalendarRetriever()``.
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from collections.abc import Sequence
+from typing import TYPE_CHECKING, NotRequired, TypedDict
 
 from waste_collection_schedule.exceptions import SourceArgumentRequired
+from waste_collection_schedule.locations import (
+    LocationQuery,
+    locations_queries,
+)
 from waste_collection_schedule.retrievers import Response, RetrieverFunc
 
 if TYPE_CHECKING:
@@ -47,10 +52,21 @@ ICAL_ENCODING = "utf-8-sig"
 # lekarowarschau-abfallkalender
 # web.torgauoschatz2015
 
-SERVICE_MAP: dict[str, dict[str, str]] = {
+
+class SeviceMapEntry(TypedDict):
+    title: str
+    url: str
+    locations: NotRequired[Sequence[LocationQuery]]
+    subdomain: NotRequired[str]
+    full_service_name: NotRequired[str]
+    ical_url_file: NotRequired[str]
+
+
+SERVICE_MAP: dict[str, SeviceMapEntry] = {
     "bremenabfallkalender": {
         "title": "Bremer Stadtreinigung",
         "url": "https://www.die-bremer-stadtreinigung.de/",
+        "locations": locations_queries(city="Bremen", country="DE"),
     },
     "augsburglandkreis": {
         "title": "Abfallwirtschaftsbetrieb Landkreis Augsburg",
@@ -59,6 +75,7 @@ SERVICE_MAP: dict[str, dict[str, str]] = {
     "segebergwzv-abfallkalender": {
         "title": "WZV Kreis Segeberg",
         "url": "https://www.wzv.de/",
+        "locations": locations_queries(county="Kreis Segeberg", country="DE"),
     },
     "maintauberkreis-abfallkalender": {
         "title": "Landratsamt Main-Tauber-Kreis",

@@ -3,10 +3,13 @@ from datetime import datetime
 
 import requests
 from waste_collection_schedule import Collection, Icons
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Győri Hulladékgazdálkodási Nonprofit Kft."
 DESCRIPTION = "Source script using GYHG API at https://gyhg.bluespot.hu/api"
 URL = "https://www.gyhg.hu"
+LOCATIONS = locations_queries("Győr, Hungary")
+
 COUNTRY = "hu"
 TEST_CASES = {
     "Test_1": {"city": "Écs", "street": "Ady Endre utca", "house_number": "1/A"},

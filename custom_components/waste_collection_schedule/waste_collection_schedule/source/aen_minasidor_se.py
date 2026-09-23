@@ -10,11 +10,13 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentRequired,
     SourceArgumentRequiredWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Aneby Miljö & Vatten"
 DESCRIPTION = "Source for Aneby Miljö & Vatten waste collection schedules."
 URL = "https://aen.minasidor.info/"
 COUNTRY = "se"
+LOCATIONS = locations_queries("Aneby, Sweden")
 TEST_CASES = {
     "Nassjo": {
         "email": "!secret aen_minasidor_se_email",

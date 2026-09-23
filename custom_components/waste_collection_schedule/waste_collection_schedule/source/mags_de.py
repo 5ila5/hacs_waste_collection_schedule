@@ -16,6 +16,7 @@ from typing import TYPE_CHECKING, ClassVar, final
 from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import house_number, street, text_field
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.retrievers import HttpGetRetriever
 from waste_collection_schedule.service.ICS import ICS
 from waste_collection_schedule.transformers import ICSTransformer
@@ -55,6 +56,7 @@ class Source(BaseSource):
     DESCRIPTION = "Source for Stadt Mönchengladbach"
     URL = "https://mags.de"
     COUNTRY = "de"
+    LOCATIONS = locations_queries("Mönchengladbach, Germany")
 
     TEST_CASES: ClassVar[dict] = {
         "Schlossacker 43": {"street": "Schlossacker", "number": 43, "turnus": 2},

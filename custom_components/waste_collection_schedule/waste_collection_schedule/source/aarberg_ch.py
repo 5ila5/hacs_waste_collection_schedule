@@ -4,12 +4,14 @@ import requests
 from bs4 import BeautifulSoup
 from waste_collection_schedule import Collection, Icons
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_ids
 from waste_collection_schedule.service.ICS import ICS
 
 TITLE = "Aarberg"
 DESCRIPTION = "Source for Aarberg, Switzerland."
 URL = "https://www.aarberg.ch/"
 COUNTRY = "ch"
+LOCATIONS = locations_ids("R1682355")
 TEST_CASES = {
     "Aarberg": {"zone": "Aarberg"},
     "Grafenmoos": {"zone": "Grafenmoos"},
@@ -18,6 +20,7 @@ TEST_CASES = {
     "Spins": {"zone": "Spins"},
     "Zälgli": {"zone": "Zälgli"},
 }
+
 
 ICON_MAP = {
     "Hauskehricht": Icons.GENERAL_WASTE,

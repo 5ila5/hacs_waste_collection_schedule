@@ -9,6 +9,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentNotFound,
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Babergh and Mid Suffolk District Councils"
 DESCRIPTION = "Source for Babergh and Mid Suffolk District Council bin collections."
@@ -32,12 +33,14 @@ EXTRA_INFO = [
         "url": "https://www.midsuffolk.gov.uk/check-your-collection-day",
         "country": "uk",
         "default_params": {"council": "midsuffolk"},
+        "locations": locations_queries("Mid Suffolk, United Kingdom"),
     },
     {
         "title": "Babergh District Council",
         "url": "https://babergh.gov.uk/check-your-collection-day",
         "country": "uk",
         "default_params": {"council": "babergh"},
+        "locations": locations_queries("Babergh, United Kingdom"),
     },
 ]
 

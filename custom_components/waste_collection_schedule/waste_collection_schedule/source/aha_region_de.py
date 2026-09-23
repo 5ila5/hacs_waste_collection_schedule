@@ -31,6 +31,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentNotFoundWithSuggestions,
     SourceArgumentRequiredWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_ids
 from waste_collection_schedule.parsers import IcsParser
 from waste_collection_schedule.retrievers import LookupChainRetriever
 from waste_collection_schedule.transformers import ICSTransformer
@@ -147,6 +148,7 @@ class Source(BaseSource):
     DESCRIPTION = "Source for Zweckverband Abfallwirtschaft Region Hannover."
     URL = "https://www.aha-region.de/"
     COUNTRY = "de"
+    LOCATIONS = locations_ids("R62764")
     RAISE_ON_EMPTY = True
     WASTE_TYPES: ClassVar[list] = [
         wt.GENERAL_WASTE,

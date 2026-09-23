@@ -8535,7 +8535,7 @@
       "id": "abfall_kyffhaeuser_de"
     },
     {
-      "title": "Abfallwirtschaft Lahn-Dill-Kreises",
+      "title": "Abfallwirtschaft Lahn-Dill-Kreis",
       "module": "awido_de",
       "default_params": {
         "customer": "awld"
@@ -12303,6 +12303,14 @@
       "id": "app_abfallplus_de"
     },
     {
+      "title": "Kreis Mettmann (MyMuell App)",
+      "module": "jumomind_de",
+      "default_params": {
+        "service_id": "mymuell"
+      },
+      "id": "jumomind_de"
+    },
+    {
       "title": "Kreis Miesbach",
       "module": "app_abfallplus_de",
       "default_params": {
@@ -12382,6 +12390,14 @@
         "city": "Kreis Osterholz"
       },
       "id": "app_abfallplus_de"
+    },
+    {
+      "title": "Kreis Paderborn (MyMuell App)",
+      "module": "jumomind_de",
+      "default_params": {
+        "service_id": "mymuell"
+      },
+      "id": "jumomind_de"
     },
     {
       "title": "Kreis Pinneberg",
@@ -13056,14 +13072,6 @@
       "id": "lk_mecklenburgische_seenplatte_de"
     },
     {
-      "title": "Landkreis Mettmann (MyMuell App)",
-      "module": "jumomind_de",
-      "default_params": {
-        "service_id": "mymuell"
-      },
-      "id": "jumomind_de"
-    },
-    {
       "title": "Landkreis M\u00e4rkisch-Oderland",
       "module": "abfall_io_graphql",
       "default_params": {
@@ -13112,14 +13120,6 @@
         "key": "254ef8a2f4aa7cd1bff7f372d5dcfc53"
       },
       "id": "abfall_io_graphql"
-    },
-    {
-      "title": "Landkreis Paderborn (MyMuell App)",
-      "module": "jumomind_de",
-      "default_params": {
-        "service_id": "mymuell"
-      },
-      "id": "jumomind_de"
     },
     {
       "title": "Landkreis Peine",

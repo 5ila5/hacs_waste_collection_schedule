@@ -1,4 +1,5 @@
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.service.OpenCities import (
     OpenCitiesClient,
     OpenCitiesConfig,
@@ -7,6 +8,8 @@ from waste_collection_schedule.service.OpenCities import (
 TITLE = "Mornington Peninsula Shire Council"
 DESCRIPTION = "Source for Mornington Peninsula Shire Council rubbish collection."
 URL = "https://www.mornpen.vic.gov.au"
+LOCATIONS = locations_queries("Mornington Peninsula Shire, Victoria, Australia")
+
 TEST_CASES = {
     "Main Ridge Pony Club": {"street_address": "305 Baldrys Rd Main Ridge VIC 3928"},
     "Laneway Espresso Dromana": {

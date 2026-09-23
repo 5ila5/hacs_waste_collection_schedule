@@ -8,6 +8,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentExceptionMultiple,
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Adur & Worthing Councils"
 DESCRIPTION = "Source for adur-worthing.gov.uk services for Adur & Worthing, UK."
@@ -17,6 +18,7 @@ TEST_CASES = {
     "Test_002": {"postcode": "BN43 5WE", "address": "6 Hebe Road"},
     "Test_003": {"uprn": "100062209109"},
 }
+LOCATIONS = locations_queries("Adur, UK", "Worthing, UK")
 HEADERS = {
     "user-agent": "Mozilla/5.0",
 }

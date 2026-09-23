@@ -6,6 +6,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentException,
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.source.impactapps_com_au import (
     Source as ImpactAppsSource,  # type: ignore[attr-defined]
 )
@@ -13,6 +14,8 @@ from waste_collection_schedule.source.impactapps_com_au import (
 TITLE = "Hobsons Bay City Council"
 DESCRIPTION = "Source for Hobsons Bay City Council waste & recycling collection"
 URL = "https://www.hobsonsbay.vic.gov.au"
+LOCATIONS = locations_queries("City of Hobsons Bay, Victoria, Australia")
+
 COUNTRY = "au"
 TEST_CASES = {
     "Civic Parade Medical Centre": {"street_address": "399 Queen St, Altona Meadows"},

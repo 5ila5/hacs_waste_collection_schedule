@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from dateutil.relativedelta import relativedelta
 from waste_collection_schedule import Collection, Icons
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "FL Abfalltransport AG"
 DESCRIPTION = "Source for FL Abfalltransport AG, Liechtenstein."
@@ -24,6 +25,7 @@ MUNICIPALITIES = [
     "eschen-nendeln",
     "schellenberg",
 ]
+
 
 WASTE_TYPES = {
     "kehricht": "Kehricht",
@@ -107,6 +109,14 @@ def EXTRA_INFO():
         {
             "title": m.replace("-", " ").title(),
             "default_params": {"municipality": m},
+            # Schanwald is part of maruen but Nominatim cannot resolve "mauren-schaanwald" but includes "schanwald" in the municipality of Mauren, so we need to remove schanwald for nominatim to find anything
+            # same for nendeln and badern
+            "locations": locations_queries(
+                city=m.removesuffix("-schaanwald")
+                .removesuffix("-nendeln")
+                .removesuffix("-bendern"),
+                country="LI",
+            ),
         }
         for m in MUNICIPALITIES
     ]

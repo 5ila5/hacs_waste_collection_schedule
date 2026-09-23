@@ -3,12 +3,27 @@ from datetime import datetime
 
 from curl_cffi import requests
 from waste_collection_schedule import Collection, Icons
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Innherred Renovasjon"
 DESCRIPTION = (
     "Source for innherredrenovasjon.no services for Innherred Renovasjon, Norway."
 )
 URL = "https://innherredrenovasjon.no/"
+
+MUNICIPALITIES = [
+    "Frosta",
+    "Inderøy",
+    "Levanger",
+    "Malvik",
+    "Meråker",
+    "Selbu",
+    "Stjørdal",
+    "Tydal",
+    "Verdal",
+]
+LOCATIONS = locations_queries(*[f"{m}, Norway" for m in MUNICIPALITIES])
+
 
 TEST_CASES = {
     "Test_001": {"address": "Gevingåsen 206"},
