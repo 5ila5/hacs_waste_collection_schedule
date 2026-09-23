@@ -47,6 +47,7 @@ from waste_collection_schedule.config_params import (
     validate,
 )
 from waste_collection_schedule.exceptions import SourceArgumentNotFound
+from waste_collection_schedule.locations import Locations
 from waste_collection_schedule.regions import Region
 from waste_collection_schedule.transformers import BaseTransformer
 from waste_collection_schedule.waste_types import WasteType
@@ -67,6 +68,9 @@ class BaseSource(ABC, Generic[ParserType, TransformerType]):
     COUNTRY: str = ""
     TEST_CASES: ClassVar[dict] = {}
     HOWTO: ClassVar[dict[str, str]] = {}  # {"en": "How to find your args...", ...}
+    LOCATIONS: ClassVar[Locations | None] = (
+        None  # Optional per-source location registry
+    )
 
     # --- Configuration parameters (drives the config flow + validation) ---
     # A fixed sequence, read-only once declared: a tuple both documents that and

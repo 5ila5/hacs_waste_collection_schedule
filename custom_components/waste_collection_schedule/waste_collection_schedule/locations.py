@@ -1,4 +1,4 @@
-from collections.abc import Collection
+from collections.abc import Collection, Sequence
 from typing import TypedDict, TypeGuard
 
 type LocationQueryType = str | dict[str, str] | list[str | dict[str, str]]
@@ -26,3 +26,13 @@ def is_location_id(data: Location) -> TypeGuard[LocationID]:
 
 def is_location_query(data: Location) -> TypeGuard[LocationQuery]:
     return "query" in data  # type: ignore[typeddict-item]
+
+
+def locations_queries(*queries: str) -> Sequence[LocationQuery]:
+    """Create a list of location queries from strings."""
+    return [{"query": list(queries)}]
+
+
+def locations_ids(*ids: str) -> Sequence[LocationID]:
+    """Create a list of location IDs from strings."""
+    return [{"id": id} for id in ids]

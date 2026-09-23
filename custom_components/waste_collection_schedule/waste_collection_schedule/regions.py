@@ -56,7 +56,7 @@ class Region:
     doc_filename: str | None = None
     howto: dict[str, str] | None = None
     source_owners: list[str] | None = None
-    locations: list[Location] | None = None
+    locations: Sequence[Location] | None = None
 
 
 def region(
@@ -67,6 +67,7 @@ def region(
     doc_filename: str | None = None,
     howto: dict[str, str] | None = None,
     source_owners: list[str] | None = None,
+    locations: Sequence[Location] | None = None,
     **params: Any,
 ) -> Region:
     """Declare one region a source covers.
@@ -85,6 +86,7 @@ def region(
         doc_filename=doc_filename,
         howto=howto,
         source_owners=source_owners,
+        locations=locations,
     )
 
 
@@ -331,6 +333,7 @@ def from_extra_info(entries: Any) -> list[Region]:
             params=entry.get("default_params", {}) or {},
             url=entry.get("url"),
             country=entry.get("country"),
+            locations=entry.get("locations"),
         )
         for entry in (entries or [])
     ]

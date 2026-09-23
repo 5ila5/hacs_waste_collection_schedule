@@ -748,7 +748,9 @@ def query_osm_polygon(location: Location) -> BaseGeometry:
         region_gdf = ox.geocode_to_gdf(query)
         geom = cast(BaseGeometry, region_gdf.geometry.iloc[0])
         return geom
-    raise ValueError("Location must have either 'id' or 'query' key.")
+    raise ValueError(
+        f"Location must have either 'id' or 'query' key., but got: {location}"
+    )
 
 
 class SourceLocationDict(TypedDict):
