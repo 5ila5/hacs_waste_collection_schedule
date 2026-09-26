@@ -778,15 +778,18 @@ def load_osm_cach_from_file() -> None:
         pass
 
 
-def osm_polygon(locations: Locations) -> str:
+def osm_polygon(locations: Locations) -> str | None:
     cache_key = osm_locations_to_cache_key(locations)
     if cache_key in OSM_LOCATION_CACHE:
         return OSM_LOCATION_CACHE[cache_key]
-
-    polies = (query_osm_polygon(location) for location in locations)
-    union_poly = next(polies)
-    for poly in polies:
-        union_poly = shapely.union(union_poly, poly)
+    try:
+        polies = (query_osm_polygon(location) for location in locations)
+        union_poly = next(polies)
+        for poly in polies:
+            union_poly = shapely.union(union_poly, poly)
+    except Exception as e:
+        print(f"Error querying OSM for locations {locations}: {e}")
+        return None
 
     return shapely.to_wkt(union_poly)
 
@@ -915,14 +918,15 @@ def update_sources_json(countries: dict[str, list[SourceInfo]]) -> None:
 
             if e.osm_locations is not None:
                 poly = osm_polygon(e.osm_locations)
-                source_locations.append(
-                    {
-                        "title": e.title,
-                        "id": id,
-                        "polygon": poly,
-                        "locations": list(e.osm_locations),
-                    }
-                )
+                if poly is not None:
+                    source_locations.append(
+                        {
+                            "title": e.title,
+                            "id": id,
+                            "polygon": poly,
+                            "locations": list(e.osm_locations),
+                        }
+                    )
 
             # ICS providers are keyed by their YAML file stem (e.g. "ab_peine_de")
             # so the notify workflow can match what a bug reporter types in the

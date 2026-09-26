@@ -1,3 +1,4 @@
+import hashlib
 import json
 from pathlib import Path
 
@@ -6,6 +7,10 @@ import folium
 THIS_DIR = Path(__file__).parent
 GEOJSON_FILE = THIS_DIR / "source-map.geojson"
 OUTPUT_FILE = THIS_DIR / "map.html"
+
+
+def get_color(id: str) -> str:
+    return "#" + hashlib.sha256(id.encode("utf-8")).hexdigest()[:6]
 
 
 def main():
@@ -34,6 +39,8 @@ def main():
     consolidated_features = []
     for feat in grouped_features.values():
         records = feat["properties"]["records"]
+        feat["properties"]["fillColor"] = get_color(records[0]["id"])
+
         count = len(records)
 
         # 1. Construct combined tooltip text
@@ -71,6 +78,16 @@ def main():
         consolidated_geojson,
         tooltip=folium.GeoJsonTooltip(fields=["combined_tooltip"], labels=False),
         popup=folium.GeoJsonPopup(fields=["combined_popup"], labels=False),
+        style_function=lambda feature: {
+            "color": feature["properties"]["fillColor"],
+            # "color": "#333333",
+            "weight": 1,
+            "fillOpacity": 0.65,
+        },
+        highlight_function=lambda feature: {
+            "weight": 3,
+            "fillOpacity": 0.9,
+        },
     ).add_to(m)
 
     m.fit_bounds(geo_layer.get_bounds())
