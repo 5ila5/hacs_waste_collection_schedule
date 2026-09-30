@@ -6,6 +6,7 @@ from waste_collection_schedule import Collection, Icons  # type: ignore[attr-def
 from waste_collection_schedule.exceptions import (
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -13,6 +14,17 @@ TITLE = "North West Resource Recovery and Recycling"
 DESCRIPTION = "Source for North West Resource Recovery and Recycling (NWRRR), serving 8 councils in north-west Tasmania, Australia."
 URL = "https://www.nwrrr.com.au"
 COUNTRY = "au"
+LOCATIONS = locations_queries(
+    "Burnie City Council, AU",
+    "Central Coast Council, AU",
+    "Circular Head Council, AU",
+    "Devonport City Council, AU",
+    "King Island Council, AU",
+    "Kentish Council, AU",
+    "Latrobe Council, AU",
+    "Waratah-Wynyard Council, AU",
+    "West Coast Council, AU",
+)
 
 TEST_CASES = {
     "Devonport (Thursday)": {

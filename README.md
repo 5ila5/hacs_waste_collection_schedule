@@ -1703,7 +1703,6 @@ If you already have enough information for your municipality/region, you are ver
 - [Gräfelfing](/doc/ics/mein_abfallkalender_online.md) / graefelfing.de
 - [Grävenwiesbach (MyMuell App)](/doc/source/jumomind_de.md) / mymuell.de
 - [GSAK APP / Krefeld](/doc/source/insert_it_de.md) / insert-it.de/BmsAbfallkalenderKrefeld
-- [Gut Pinkler](/doc/source/nerdbridge_de.md) / abfall.nerdbridge.de
 - [GWA - Kreis Unna mbH](/doc/source/abfallnavi_de.md) / gwa-online.de
 - [Hachborn](/doc/source/123abfallkalender_de.md) / 123abfallkalender.de/abfallkalender/rpecasvg-ebsdorfergrund/5-hachborn
 - [Hachenhausen](/doc/source/nerdbridge_de.md) / abfall.nerdbridge.de
@@ -2987,7 +2986,7 @@ If you already have enough information for your municipality/region, you are ver
 - [ACV Group](/doc/source/ximmio_nl.md) / acv-afvalkalender.nl
 - [Afval Wijzer](/doc/source/mijnafvalwijzer_nl.md) / mijnafvalwijzer.nl
 - [Afvalstoffendienst.nl](/doc/source/afvalstoffendienst_nl.md) / afvalstoffendienst.nl
-- [Alpen an den Rijn](/doc/source/hvcgroep_nl.md) / alphenaandenrijn.nl
+- [Alphen aan den Rijn](/doc/source/hvcgroep_nl.md) / alphenaandenrijn.nl
 - [Ameland](/doc/source/omrin_nl.md) / omrin.nl
 - [Area Afval](/doc/source/ximmio_nl.md) / area-afval.nl
 - [Avalex](/doc/source/ximmio_nl.md) / avalex.nl
@@ -3210,7 +3209,6 @@ If you already have enough information for your municipality/region, you are ver
 - [Gmina Porąbka](/doc/source/sims_pl.md) / sisms.pl
 - [Gmina Pruszcz](/doc/source/sims_pl.md) / sisms.pl
 - [Gmina Przeworno](/doc/source/sims_pl.md) / sisms.pl
-- [Gmina Przykładowa](/doc/source/sims_pl.md) / sisms.pl
 - [Gmina Pyskowice](/doc/source/sims_pl.md) / sisms.pl
 - [Gmina Radoszyce](/doc/source/sims_pl.md) / sisms.pl
 - [Gmina Reda](/doc/source/sims_pl.md) / sisms.pl
@@ -3263,8 +3261,6 @@ If you already have enough information for your municipality/region, you are ver
 - [Kiedy śmieci](/doc/source/kiedysmieci_info.md) / kiedysmieci.info
 - [Kiszkowo](/doc/source/ichisystem_eu.md) / harmonogram.ichisystem.eu/hemar
 - [Kleszczewo/Kostrzyn](/doc/source/zys_harmonogram_pl.md) / puk-zys.pl/index.php
-- [Klient Szablonowy - Ekostrażnik](/doc/source/sims_pl.md) / sisms.pl
-- [Klient Szablonowy - Karty Usług](/doc/source/sims_pl.md) / sisms.pl
 - [KOM-LUB (Luboń, PL)](/doc/source/kom_lub_com_pl.md) / kom-lub.com.pl/aktualny-harmonogram-wywozow
 - [KOMA](/doc/source/koma_pl.md) / koma.pl
 - [KOMUS](/doc/source/sims_pl.md) / sisms.pl
@@ -3319,7 +3315,6 @@ If you already have enough information for your municipality/region, you are ver
 - [Zatoka](/doc/source/bochnia_gmina_pl.md) / bochnia-gmina.pl
 - [Zawada](/doc/source/bochnia_gmina_pl.md) / bochnia-gmina.pl
 - [ZGK Info](/doc/source/ecoharmonogram_pl.md) / ecoharmonogram.pl
-- [ZGPD-7](/doc/source/sims_pl.md) / sisms.pl
 - [Łapczyca](/doc/source/bochnia_gmina_pl.md) / bochnia-gmina.pl
 - [Łódź](/doc/source/lodz_pl.md) / kartalodzianina.pl
 - [Świętochłowice](/doc/source/ecoharmonogram_pl.md) / ecoharmonogram.pl

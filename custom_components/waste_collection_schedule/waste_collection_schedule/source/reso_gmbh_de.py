@@ -20,6 +20,7 @@ from waste_collection_schedule import parsers
 from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import district, municipality
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.regions import region
 from waste_collection_schedule.service.ICS import IcsSessionRetriever
 from waste_collection_schedule.transformers import ICSTransformer
@@ -56,7 +57,14 @@ class Source(BaseSource):
         },
     }
 
-    REGIONS = tuple(region(town, ort=town) for town in _TOWNS)
+    REGIONS = tuple(
+        region(
+            town,
+            ort=town,
+            locations=locations_queries(city=town, country="DE"),
+        )
+        for town in _TOWNS
+    )
 
     PARAMS = (
         municipality(field="ort"),

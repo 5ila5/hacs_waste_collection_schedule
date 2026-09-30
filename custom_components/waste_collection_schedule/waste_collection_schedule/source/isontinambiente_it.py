@@ -3,6 +3,7 @@ import datetime
 import requests
 from bs4 import BeautifulSoup, Tag
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Isontina Ambiente"
 DESCRIPTION = (
@@ -36,6 +37,7 @@ def EXTRA_INFO():
             "url": f"https://isontinambiente.it/it/servizi/servizi-per-il-tuo-comune/{slug}/",
             "country": "it",
             "default_params": {},
+            "locations": locations_queries(city=name, country="IT"),
         }
         for slug, name in [
             ("capriva-del-friuli", "Capriva del Friuli"),

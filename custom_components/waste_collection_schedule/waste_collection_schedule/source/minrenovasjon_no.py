@@ -5,6 +5,7 @@ from urllib.parse import urlencode
 
 import requests
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Min Renovasjon"
 DESCRIPTION = "Source for Norkart Komtek MinRenovasjon (Norway)."
@@ -45,8 +46,21 @@ EXTRA_INFO = [
             "street_code": 12950,
             "county_id": 3205,
         },
+        "locations": locations_queries(
+            city=[  # source: https://virksomhet.brreg.no/nb/oppslag/enheter/965075364
+                "AURSKOG-HØLAND",
+                "ENEBAKK",
+                "GJERDRUM",
+                "LILLESTRØM",
+                "LØRENSKOG",
+                "NITTEDAL",
+                "RÆLINGEN",
+            ],
+            country="NO",
+        ),
     },
 ]
+
 
 API_URL = (
     "https://norkartrenovasjon.azurewebsites.net/proxyserver.ashx?server="

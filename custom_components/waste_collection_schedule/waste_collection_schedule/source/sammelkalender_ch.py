@@ -8,6 +8,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentNotFoundWithSuggestions,
     SourceArgumentRequiredWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Sammelkalender.ch"
 DESCRIPTION = "Source for Sammelkalender.ch."
@@ -60,24 +61,75 @@ SERVICES = {
         "url": "https://www.zebazug.ch",
         "api_url_search": "https://www.zeba.sammelkalender.ch/kunden_WANN_auswahl_form.php",
         "api_url_bin": "https://www.zeba.sammelkalender.ch/kunden_sammlung_ausw_cont.php",
+        "locations": locations_queries(
+            city=[
+                "Baar",
+                "Cham",
+                "Hünenberg",
+                "Menzingen",
+                "Neuheim",
+                "Oberägeri",
+                "Risch",
+                "Steinhausen",
+                "Unterägeri",
+                "Walchwil",
+                "Zug",
+            ],
+            country="CH",
+        ),
     },
     "zkri": {
         "title": "ZKRI",
         "url": "https://zkri.ch",
         "api_url_search": "https://daten.zkri.ch/web/Sammelkalender/kunden_WANN_auswahl_form.php",
         "api_url_bin": "https://daten.zkri.ch/web/Sammelkalender/kunden_sammlung_ausw_cont.php",
+        "locations": locations_queries(
+            city=[  # source: https://daten.zkri.ch/web/Downloads/Statuten_ZKRI_2024.pdf
+                "Gersau",
+                "Küssnacht",
+                "Schwyz",
+                "Arth",
+                "Ingenbohl",
+                "Muotathal",
+                "Steinen",
+                "Sattel",
+                "Rothenthurm",
+                "Lauerz",
+                "Steinerberg",
+                "Morschach",
+                "Illgau",
+            ],
+            country="CH",
+        ),
     },
     "real_luzern": {
         "title": "Real Luzern",
         "url": "https://www.realluzern.ch",
         "api_url_search": "https://www.real.sammelkalender.ch/app/appSelect.php",
         "api_url_bin": "https://www.real.sammelkalender.ch/app/appSammeldaten.php",
+        "locations": locations_queries(
+            city=[
+                None,  # whole of lucerne
+                "Dietwil",
+            ],
+            state=[
+                "Lucerne",
+                "Aargau",  # Dietwil is in Aargau
+            ],
+            country="CH",
+        ),
     },
     "zaku": {
         "title": "ZAKU Entsorgung",
         "url": "https://www.zaku.ch",
         "api_url_search": "https://www.zaku.sammelkalender.ch/appSelect.php",
         "api_url_bin": "https://www.zaku.sammelkalender.ch/appSammeldaten.php",
+        "locations": locations_queries(
+            state=[
+                "Uri",
+            ],
+            country="CH",
+        ),
     },
 }
 
@@ -88,6 +140,7 @@ EXTRA_INFO = [
         "default_params": {
             "service_provider": key,
         },
+        "locations": s["locations"],
     }
     for key, s in SERVICES.items()
 ]

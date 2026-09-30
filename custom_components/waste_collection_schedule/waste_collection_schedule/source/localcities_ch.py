@@ -5,6 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "localcities.ch"
 DESCRIPTION = "Source for waste collection schedules from localcities.ch (Switzerland)."
@@ -61,89 +62,92 @@ TEST_CASES = {
     },
 }
 
-EXTRA_INFO = [
-    {
-        "title": "Volketswil",
-        "url": "https://www.volketswil.ch",
-        "country": "ch",
-        "default_params": {
-            "municipality": "volketswil",
-            "municipality_id": "529",
+EXTRA_INFO = (
+    e | {"locations": locations_queries(city=e["title"], country=COUNTRY)}
+    for e in (
+        {
+            "title": "Volketswil",
+            "url": "https://www.volketswil.ch",
+            "country": "ch",
+            "default_params": {
+                "municipality": "volketswil",
+                "municipality_id": "529",
+            },
         },
-    },
-    {
-        "title": "Grenchen",
-        "url": "https://www.grenchen.ch",
-        "country": "ch",
-        "default_params": {
-            "municipality": "grenchen",
-            "municipality_id": "3533",
+        {
+            "title": "Grenchen",
+            "url": "https://www.grenchen.ch",
+            "country": "ch",
+            "default_params": {
+                "municipality": "grenchen",
+                "municipality_id": "3533",
+            },
         },
-    },
-    {
-        "title": "Wangen bei Olten",
-        "url": "https://www.wangen-bei-olten.ch",
-        "country": "ch",
-        "default_params": {
-            "municipality": "wangen-bei-olten",
-            "municipality_id": "3629",
+        {
+            "title": "Wangen bei Olten",
+            "url": "https://www.wangen-bei-olten.ch",
+            "country": "ch",
+            "default_params": {
+                "municipality": "wangen-bei-olten",
+                "municipality_id": "3629",
+            },
         },
-    },
-    {
-        "title": "Büren an der Aare",
-        "url": "https://www.bueren.ch",
-        "country": "ch",
-        "default_params": {
-            "municipality": "bueren-an-der-aare",
-            "municipality_id": "849",
+        {
+            "title": "Büren an der Aare",
+            "url": "https://www.bueren.ch",
+            "country": "ch",
+            "default_params": {
+                "municipality": "bueren-an-der-aare",
+                "municipality_id": "849",
+            },
         },
-    },
-    {
-        "title": "Liestal",
-        "url": "https://www.liestal.ch",
-        "country": "ch",
-        "default_params": {
-            "municipality": "liestal",
-            "municipality_id": "3833",
+        {
+            "title": "Liestal",
+            "url": "https://www.liestal.ch",
+            "country": "ch",
+            "default_params": {
+                "municipality": "liestal",
+                "municipality_id": "3833",
+            },
         },
-    },
-    {
-        "title": "Therwil",
-        "url": "https://www.therwil.ch",
-        "country": "ch",
-        "default_params": {
-            "municipality": "therwil",
-            "municipality_id": "3757",
+        {
+            "title": "Therwil",
+            "url": "https://www.therwil.ch",
+            "country": "ch",
+            "default_params": {
+                "municipality": "therwil",
+                "municipality_id": "3757",
+            },
         },
-    },
-    {
-        "title": "Beinwil am See",
-        "url": "https://www.beinwil-am-see.ch",
-        "country": "ch",
-        "default_params": {
-            "municipality": "beinwil-am-see",
-            "municipality_id": "5313",
+        {
+            "title": "Beinwil am See",
+            "url": "https://www.beinwil-am-see.ch",
+            "country": "ch",
+            "default_params": {
+                "municipality": "beinwil-am-see",
+                "municipality_id": "5313",
+            },
         },
-    },
-    {
-        "title": "Monthey",
-        "url": "https://www.monthey.ch",
-        "country": "ch",
-        "default_params": {
-            "municipality": "monthey",
-            "municipality_id": "8085",
+        {
+            "title": "Monthey",
+            "url": "https://www.monthey.ch",
+            "country": "ch",
+            "default_params": {
+                "municipality": "monthey",
+                "municipality_id": "8085",
+            },
         },
-    },
-    {
-        "title": "Zofingen",
-        "url": "https://www.zofingen.ch",
-        "country": "ch",
-        "default_params": {
-            "municipality": "zofingen",
-            "municipality_id": "5741",
+        {
+            "title": "Zofingen",
+            "url": "https://www.zofingen.ch",
+            "country": "ch",
+            "default_params": {
+                "municipality": "zofingen",
+                "municipality_id": "5741",
+            },
         },
-    },
-]
+    )
+)
 
 ICON_MAP = {
     "Altpapier": Icons.PAPER,

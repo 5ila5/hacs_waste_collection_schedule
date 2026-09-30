@@ -23,6 +23,7 @@ from waste_collection_schedule.config_params import (
     street,
     text_field,
 )
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.regions import region
 from waste_collection_schedule.service.HausmuellInfo import (
     FromForm,
@@ -38,38 +39,50 @@ SUPPORTED_PROVIDERS: list = [
         "subdomain": "ebkds",
         "title": "Eigenbetrieb Kommunalwirtschaftliche Dienstleistungen Suhl",
         "url": "https://www.ebkds.de/",
+        "locations": locations_queries(city="Suhl", country="DE"),
     },
     {
         "subdomain": "erfurt",
         "title": "Stadtwerke Erfurt, SWE",
         "url": "https://www.stadtwerke-erfurt.de/",
+        "locations": locations_queries(city="Erfurt", country="DE"),
     },
     {
         "subdomain": "schmalkalden-meiningen",
         "title": "Kreiswerke Schmalkalden-Meiningen GmbH",
         "url": "https://www.kwsm.de/",
+        "locations": locations_queries(county="Schmalkalden-Meiningen", country="DE"),
     },
     {
         "subdomain": "ew",
         "title": "Eichsfeldwerke GmbH",
         "url": "https://www.eichsfeldwerke.de/",
+        "locations": locations_queries(county="Eichsfeld", country="DE"),
     },
     {
         "subdomain": "azv",
         "title": "Abfallwirtschaftszweckverband Wartburgkreis (AZV)",
         "url": "https://www.azv-wak-ea.de/",
+        "locations": locations_queries(county="Wartburgkreis", country="DE"),
     },
     {
         "subdomain": "boerde",
         "title": "Landkreis Börde AöR (KsB)",
         "url": "https://www.ks-boerde.de",
+        "locations": locations_queries(county="Börde", country="DE"),
     },
     {
         "subdomain": "asc",
         "title": "Chemnitz (ASR)",
         "url": "https://www.asr-chemnitz.de/",
+        "locations": locations_queries(city="Chemnitz", country="DE"),
     },
-    {"subdomain": "wesel", "title": "ASG Wesel", "url": "https://www.asg-wesel.de/"},
+    {
+        "subdomain": "wesel",
+        "title": "ASG Wesel",
+        "url": "https://www.asg-wesel.de/",
+        "locations": locations_queries(city="Wesel", country="DE"),
+    },
 ]
 
 _REJECTED_TEXT = "Bitte geben Sie Ihre Daten korrekt an."
@@ -197,7 +210,12 @@ class Source(BaseSource):
     # SUPPORTED_PROVIDERS as its own Region so none are dropped by the
     # conversion.
     REGIONS = tuple(
-        region(p["title"], url=p["url"], subdomain=p["subdomain"])
+        region(
+            p["title"],
+            url=p["url"],
+            locations=p.get("locations"),
+            subdomain=p["subdomain"],
+        )
         for p in SUPPORTED_PROVIDERS
     )
 

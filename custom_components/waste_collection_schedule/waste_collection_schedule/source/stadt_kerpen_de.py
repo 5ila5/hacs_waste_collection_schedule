@@ -2,6 +2,7 @@ from typing import ClassVar, final
 
 from waste_collection_schedule import field_terms
 from waste_collection_schedule.config_params import cascading_select, waste_types
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.regions import region
 from waste_collection_schedule.source.abfall_io import Source as AbfallIOSource
 
@@ -23,6 +24,7 @@ class Source(AbfallIOSource):
     DESCRIPTION = "Source for waste collection services in Kerpen."
     URL = "https://www.stadt-kerpen.de"
     COUNTRY = "de"
+    LOCATIONS = locations_queries(city="Kerpen", country="DE")
 
     REGIONS = (region(TITLE, url=URL),)
 

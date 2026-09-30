@@ -4,6 +4,7 @@ from datetime import datetime
 import requests
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
 from waste_collection_schedule.exceptions import SourceArgumentNotFound
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = None
 DESCRIPTION = "Source for the Dutch HVCGroep waste management."
@@ -16,6 +17,12 @@ def EXTRA_INFO():
             "title": s["title"],
             "url": get_main_url(s["api_url"]),
             "default_params": {"service": extract_service_name(s["api_url"])},
+            "locations": s.get(
+                "locations",
+                locations_queries(
+                    city=s["title"].removeprefix("Gemeente"), country="NL"
+                ),
+            ),
         }
         for s in SERVICE_MAP
     ]
@@ -70,7 +77,7 @@ _LOGGER = logging.getLogger(__name__)
 
 SERVICE_MAP = [
     {
-        "title": "Alpen an den Rijn",
+        "title": "Alphen aan den Rijn",
         "api_url": "https://afvalkalender.alphenaandenrijn.nl",
         "icons": {
             "pmd-logo-plastic-blik-drank": Icons.RECYCLING,
@@ -100,6 +107,20 @@ SERVICE_MAP = [
             "doos-karton-papier": Icons.PAPER,
             "zak-grijs-rest": Icons.GENERAL_WASTE,
         },
+        "locations": locations_queries(
+            city=[  # source: https://cyclusnv.nl/afvalkalender-2026-beschikbaar
+                "Bodegraven-Reeuwijk",
+                "Gouda",
+                "Kaag en Braassem",
+                "Krimpen aan den IJssel",
+                "Krimpenerwaard",
+                "Montfoort",
+                "Nieuwkoop",
+                "Waddinxveen",
+                "Zuidplas",
+            ],
+            country="NL",
+        ),
     },
     {
         "title": "Dar",
@@ -111,6 +132,19 @@ SERVICE_MAP = [
             "dar-papier-avond": Icons.PAPER,
             "dar-papier-overdag": Icons.PAPER,
         },
+        "locations": locations_queries(
+            city=[  # source: https://play.google.com/store/apps/details?id=nl.opzet.afvalwijzer.dar
+                "Beuningen",
+                "Druten",
+                "Heumen",
+                "Groesbeek",
+                "Millingen aan de Rijn",
+                "Nijmegen",
+                "Ubbergen",
+                "Wijchen",
+            ],
+            country="NL",
+        ),
     },
     {
         "title": "Den Haag",
@@ -131,6 +165,18 @@ SERVICE_MAP = [
             "doos-karton-papier": Icons.PAPER,
             "kliko-grijs-rest": Icons.GENERAL_WASTE,
         },
+        "locations": locations_queries(
+            city=[  # source: https://gad.nl/afvalwijzer
+                "Blaricum",
+                "Eemnes",
+                "Gooise Meren",
+                "Hilversum",
+                "Huizen",
+                "Laren",
+                "Wijdemeren",
+            ],
+            country="NL",
+        ),
     },
     {
         "title": "Gemeente Berkelland",
@@ -152,6 +198,65 @@ SERVICE_MAP = [
             "papier-en-karton": Icons.PAPER,
             "restafval": Icons.GENERAL_WASTE,
         },
+        "locations": locations_queries(
+            city=[  # source https://www.hvcgroep.nl/ons-verhaal/onze-aandeelhouders
+                "Alblasserdam",
+                "Alkmaar",
+                "Almere",
+                "Bergen",
+                "Beverwijk",
+                "Castricum",
+                "Delft",
+                "Den Helder",
+                "Dordrecht",
+                "Drechterland",
+                "Dronten",
+                "Dijk en Waard",
+                "Edam-Volendam",
+                "Enkhuizen",
+                "Gorinchem",
+                "Haarlem",
+                "Hardinxveld-Giessendam",
+                "Heemskerk",
+                "Heiloo",
+                "Hendrik-Ido-Ambacht",
+                "Hollands Kroon",
+                "Hoorn",
+                "Koggenland",
+                "Leidschendam-Voorburg",
+                "Lelystad",
+                "Maassluis",
+                "Medemblik",
+                "Midden-Delfland",
+                "Molenlanden",
+                "Nieuwegein",
+                "Noordoostpolder",
+                "Opmeer",
+                "Papendrecht",
+                "Pijnacker-Nootdorp",
+                "Purmerend",
+                "Rijswijk",
+                "Schagen",
+                "Sliedrecht",
+                "Smallingerland",
+                "Stede Broec",
+                "Texel",
+                "Uitgeest",
+                "Urk",
+                "Utrecht",
+                "Velsen",
+                "Vijfheerenlanden",
+                "Wassenaar",
+                "Waterland",
+                "Westland",
+                "Wormerland",
+                "Zaanstad",
+                "Zandvoort",
+                "Zeewolde",
+                "Zwijndrecht",
+            ],
+            country="NL",
+        ),
     },
     {
         "title": "Gemeente Lingewaard",
@@ -172,6 +277,10 @@ SERVICE_MAP = [
             "kliko-grijs-oranje-pmd": Icons.RECYCLING,
             "doos-karton-papier": Icons.PAPER,
         },
+        "locations": locations_queries(
+            city=["Middelburg", "Vlissingen"],
+            country="NL",
+        ),
     },
     {
         "title": "Gemeente Peel en Maas",
@@ -192,6 +301,9 @@ SERVICE_MAP = [
             "suez-container": Icons.GENERAL_WASTE,
             "suez-gft": Icons.ORGANIC,
         },
+        "locations": locations_queries(
+            city=["Arnhem", "Wijk bij Duurstede", "Teylingen"], country="NL"
+        ),
     },
     {
         "title": "Purmerend",
@@ -232,6 +344,13 @@ SERVICE_MAP = [
             "papier": Icons.PAPER,
             "pmd": Icons.RECYCLING,
         },
+        "locations": locations_queries(
+            city=[  # source: https://werkenbijspaarnelanden.nl/werkgebieden
+                "Haarlem",
+                "Zandvoort",
+            ],
+            country="NL",
+        ),
     },
     {
         "title": "Gemeente Sudwest-Fryslan",
@@ -282,6 +401,15 @@ SERVICE_MAP = [
             "papier-en-karton": Icons.PAPER,
             "restafval": Icons.GENERAL_WASTE,
         },
+        "locations": locations_queries(
+            city=[  # source: https://www.mijnafvalzaken.nl/contact
+                "Castricum",
+                "Uitgeest",
+                "Bergen",
+                "Heiloo",
+            ],
+            country="NL",
+        ),
     },
     {
         "title": "Reinis",
@@ -292,6 +420,12 @@ SERVICE_MAP = [
             "doos-karton-papier": Icons.PAPER,
             "kliko-grijs-zak-grijs-rest": Icons.GENERAL_WASTE,
         },
+        "locations": locations_queries(
+            city=[  # source: https://reinis.nl/afvalpas-aanvragen
+                "Nissewaard",
+                "Voorne aan Zee",
+            ]
+        ),
     },
     {
         "title": "ZRD",
@@ -302,6 +436,17 @@ SERVICE_MAP = [
             "zak rest rest": Icons.GENERAL_WASTE,  # Restafval
             "karton": Icons.PAPER,  # Papier en karton
         },
+        "locations": locations_queries(
+            city=[  # source: https://zrd.nl/proef-met-camera
+                "Hulst",
+                "Kapelle",
+                "Sluis",
+                "Veere",
+                "Reimerswaal",
+                "Tholen",
+                "Noord-Beveland",
+            ]
+        ),
     },
 ]
 

@@ -2,9 +2,15 @@ import datetime
 import json
 import logging
 import re
-from collections.abc import Mapping
+from collections.abc import Iterable, Mapping
+from pathlib import Path
 from random import randrange
 from typing import TYPE_CHECKING, Any, Literal, TypedDict, get_args
+
+if __name__ == "__main__":
+    import sys
+
+    sys.path.append(str(Path(__file__).parent.parent.parent))
 
 from waste_collection_schedule import response_shape
 from waste_collection_schedule.exceptions import (
@@ -47,6 +53,61 @@ SUPPORTED_APPS = get_args(SUPPORTED_APPS_LITERAL)
 
 SUPPORTED_LANGUAGES_LITERAL = Literal["pl", "en", "uk", "ru"]
 SUPPORTED_LANGUAGES = get_args(SUPPORTED_LANGUAGES_LITERAL)
+
+# Apps/deployments Ecoharmonogram.pl runs under a `customApp` value (the
+# `app` parameter). One structure (this pipeline) covers all of them, so each
+# becomes a Region; the default (no `app`) deployment is listed too, so the
+# region count matches the source's supported-apps list exactly (16: the
+# generic deployment + 15 named apps).
+_APP_LABELS: dict[str, str] = {
+    "eco-przyszlosc": "Eco-Przyszłość",
+    "ogrodzieniec": "Ogrodzieniec",
+    "gdansk": "Gdańsk",
+    "hajnowka": "Hajnówka",
+    "niemce": "Niemce",
+    "zgk-info": "ZGK Info",
+    "ilza": "Iłża",
+    "swietochlowice": "Świętochłowice",
+    "popielow": "Popielów",
+    "mierzecice": "Mierzęcice",
+    "bialapodlaska": "Biała Podlaska",
+    "slupsk": "Słupsk",
+    "trzebownisko": "Trzebownisko",
+    "zory": "Żory",
+    "opole": "Opole",
+}
+
+_APP_LOCATIONS: dict[str, list[str]] = {
+    "eco-przyszlosc": [
+        "Powiat Nowosolski, PL",
+        "Powiat Wschowski, PL",
+        "Gmina Bojadła, PL",
+        "Gmina Kargowa, PL",
+        "Gmina Świdnica, PL",
+        "Zielona Góra, PL",
+    ],
+    "ogrodzieniec": ["Gmina Ogrodzieniec, PL"],
+    "gdansk": ["Gdańsk, PL"],
+    "hajnowka": ["Hajnówka"],
+    "niemce": ["Gmina Niemce"],
+    "zgk-info": [
+        "Gmina Stary Lubotyń, PL",
+        "Gmina Wąsewo, PL",
+        "Gmina Brok, PL",
+        "Gmina Goworowo, PL",
+        "Gmina Nur, PL",
+        "Gmina Ostrów Mazowiecka, PL",
+    ],
+    "ilza": ["Gmina Iłża, PL"],
+    "swietochlowice": ["Gmina Świętochłowice, PL"],
+    "popielow": ["Gmina Popielów, PL"],
+    "mierzecice": ["Gmina Mierzęcice, PL"],
+    "bialapodlaska": ["Miasto Biała Podlaska, PL"],
+    "slupsk": ["Słupsk, PL"],
+    "trzebownisko": ["Gmina Trzebownisko, PL"],
+    "zory": ["Żory, PL"],
+    "opole": ["Opole, PL"],
+}
 
 
 class Town(TypedDict):
@@ -629,3 +690,122 @@ class EcoharmonogramParser(Parser["list[EcoharmonogramRecord]"]):
                     )
 
         return entries
+
+
+def _strip_numbers(value: Town) -> Town:
+    value["name"] = value["name"].strip("0123456789").strip()
+    value["district"] = value["district"].strip("0123456789").strip()
+    value["province"] = value["province"].strip("0123456789").strip()
+    return value
+
+
+def _district_is_town(
+    district: str, town: str, district_counts: dict[str, int]
+) -> bool:
+    return (
+        district.removeprefix("Miasto").removeprefix("Miasta").strip().casefold()[:-1]
+        == town.strip().casefold()[:-1]
+        and district_counts.get(district, 0) == 1
+    )
+
+
+def _make_unique(iterable: Iterable[Town]) -> list[Town]:
+    my_dict: dict[tuple[str, str, str], Town] = {}
+    for item in iterable:
+        key = (item["name"], item["district"], item["province"])
+        my_dict[key] = item
+    return list(my_dict.values())
+
+
+def build_regions_yaml() -> None:
+    import requests
+    import yaml
+
+    yaml_file = (
+        Path(__file__).parent.parent.parent.parent.parent
+        / "doc"
+        / "regions"
+        / "ecoharmonogram_pl.yaml"
+    )
+
+    session = requests.Session()
+    client = EcoharmonogramClient(session)
+    towns = client.fetch_town("")["towns"]
+
+    PROVINCE_OVERRIDES = {
+        "Warmińsko-Mazurksie": "Województwo warmińsko-mazurskie",
+        "Warmińsko-mazurskim": "Województwo warmińsko-mazurskie",
+    }
+    SKIP_PROVINCE_FOR = ["Miasto Opole"]
+
+    towns = _make_unique(
+        map(
+            _strip_numbers,
+            filter(
+                lambda t: (
+                    t["district"] not in ("Demo szablon", "Testowa")
+                    and t["province"] != "Gmina testowa"
+                ),
+                towns,
+            ),
+        )
+    )
+
+    district_counts: dict[str, int] = {}
+    for t in towns:
+        district = t["district"]
+        district_counts[district] = district_counts.get(district, 0) + 1
+
+    non_gmina = {
+        (t["name"], PROVINCE_OVERRIDES.get(t["province"], t["province"]))
+        for t in towns
+        if _district_is_town(t["district"], t["name"], district_counts)
+    }
+    gmina = {
+        (t["district"], PROVINCE_OVERRIDES.get(t["province"], t["province"]))
+        for t in towns
+        if not _district_is_town(t["district"], t["name"], district_counts)
+    }
+
+    location_quries = []
+
+    for district, province in non_gmina:
+        if district in SKIP_PROVINCE_FOR:
+            location_quries.append(
+                f"{district.removeprefix('Miasto').removeprefix('Miasta').strip()}, PL"
+            )
+        else:
+            location_quries.append(
+                f"{district.removeprefix('Miasto').removeprefix('Miasta').strip()}, {province}, PL"
+            )
+    for district, province in gmina:
+        if district in SKIP_PROVINCE_FOR:
+            string = f"gmina {district.removeprefix('Gmina').strip()}, PL"
+        else:
+            string = f"gmina {district.removeprefix('Gmina').strip()}, {province}, PL"
+        location_quries.append(string)
+
+    regions: list[dict[str, Any]] = [
+        {
+            "title": "Ecoharmonogram.pl (generic)",
+            "url": "https://ecoharmonogram.pl",
+            "locations": location_quries,
+        }
+    ]
+
+    for app_id, label in _APP_LABELS.items():
+        regions.append(
+            {
+                "title": label,
+                "url": "https://ecoharmonogram.pl",
+                "app": app_id,
+                "locations": _APP_LOCATIONS[app_id],
+            }
+        )
+
+    with open(yaml_file, "w", encoding="utf-8") as f:
+        yaml.dump(regions, f, allow_unicode=True, sort_keys=False)
+
+
+if __name__ == "__main__":
+    build_regions_yaml()

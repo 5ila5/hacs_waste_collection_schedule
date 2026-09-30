@@ -7,6 +7,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentNotFoundWithSuggestions,
     SourceArgumentRequired,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "ZVO Entsorgung - Zweckverband Ostholstein"
 DESCRIPTION = "Source for ZVO waste collection schedule in Ostholstein, Germany."
@@ -24,7 +25,7 @@ TEST_CASES = {
         "city": "Curau",
     },
 }
-
+LOCATIONS = locations_queries(county="Ostholstein", country=COUNTRY)
 EXTRA_INFO = [
     {
         "title": "ZVO Abfuhrkalender",

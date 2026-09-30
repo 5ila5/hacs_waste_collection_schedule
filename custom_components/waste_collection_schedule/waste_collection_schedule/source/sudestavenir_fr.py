@@ -7,6 +7,7 @@ from datetime import date, timedelta
 import requests
 from waste_collection_schedule import Collection, Icons
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Grand Paris Sud Est Avenir (GPSEA)"
 DESCRIPTION = "Source script for sudestavenir.fr, waste collection schedules for the Grand Paris Sud Est Avenir (GPSEA) intercommunal territory"
@@ -98,6 +99,7 @@ EXTRA_INFO = [
         "title": commune,
         "url": URL,
         "default_params": {"commune": commune},
+        "locations": locations_queries(city=commune, country=COUNTRY),
     }
     for commune in COMMUNES
 ]

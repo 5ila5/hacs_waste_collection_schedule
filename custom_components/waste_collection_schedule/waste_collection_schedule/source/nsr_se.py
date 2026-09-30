@@ -16,6 +16,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentNotFound,
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.regions import region
 from waste_collection_schedule.retrievers import TwoStepRetriever
 from waste_collection_schedule.service.ICS import IcsFeedsParser
@@ -80,6 +81,18 @@ class Source(BaseSource):
     DESCRIPTION = "Source for NSR waste collection schedule in northwest Skåne, Sweden."
     URL = "https://nsr.se"
     COUNTRY = "se"
+    LOCATIONS = locations_queries(
+        city=[
+            "Helsingborg",
+            "Ängelholm",
+            "Höganäs",
+            "Bjuv",
+            "Åstorp",
+            "Båstad",
+        ],
+        county="Skåne",
+        country="SE",
+    )
 
     TEST_CASES: ClassVar[dict] = {
         "Kattarp villa": {"address": "Signestorpsvägen 1"},

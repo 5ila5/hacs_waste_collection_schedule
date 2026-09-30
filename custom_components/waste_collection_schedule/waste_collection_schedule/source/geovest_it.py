@@ -11,58 +11,62 @@ from waste_collection_schedule.exceptions import (
     SourceArgAmbiguousWithSuggestions,
     SourceArgumentNotFound,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Geovest"
 DESCRIPTION = "Source for Geovest, Italy."
 URL = "https://geovest.bluemilk.dev"
 COUNTRY = "it"
 
-EXTRA_INFO = [
-    {
-        "title": "Anzola dell'Emilia",
-        "default_params": {"town_id": "7"},
-    },
-    {
-        "title": "Argelato",
-        "default_params": {"town_id": "12"},
-    },
-    {
-        "title": "Calderara di Reno",
-        "default_params": {"town_id": "8"},
-    },
-    {
-        "title": "Castel Maggiore",
-        "default_params": {"town_id": "10"},
-    },
-    {
-        "title": "Crevalcore",
-        "default_params": {"town_id": "2"},
-    },
-    {
-        "title": "Finale Emilia",
-        "default_params": {"town_id": "1"},
-    },
-    {
-        "title": "Nonantola",
-        "default_params": {"town_id": "6"},
-    },
-    {
-        "title": "Ravarino",
-        "default_params": {"town_id": "9"},
-    },
-    {
-        "title": "Sala Bolognese",
-        "default_params": {"town_id": "4"},
-    },
-    {
-        "title": "San Giovanni in Persiceto",
-        "default_params": {"town_id": "5"},
-    },
-    {
-        "title": "Sant'Agata Bolognese",
-        "default_params": {"town_id": "13"},
-    },
-]
+EXTRA_INFO = (
+    e | {"locations": locations_queries(city=e["title"], country=COUNTRY.upper())}
+    for e in [
+        {
+            "title": "Anzola dell'Emilia",
+            "default_params": {"town_id": "7"},
+        },
+        {
+            "title": "Argelato",
+            "default_params": {"town_id": "12"},
+        },
+        {
+            "title": "Calderara di Reno",
+            "default_params": {"town_id": "8"},
+        },
+        {
+            "title": "Castel Maggiore",
+            "default_params": {"town_id": "10"},
+        },
+        {
+            "title": "Crevalcore",
+            "default_params": {"town_id": "2"},
+        },
+        {
+            "title": "Finale Emilia",
+            "default_params": {"town_id": "1"},
+        },
+        {
+            "title": "Nonantola",
+            "default_params": {"town_id": "6"},
+        },
+        {
+            "title": "Ravarino",
+            "default_params": {"town_id": "9"},
+        },
+        {
+            "title": "Sala Bolognese",
+            "default_params": {"town_id": "4"},
+        },
+        {
+            "title": "San Giovanni in Persiceto",
+            "default_params": {"town_id": "5"},
+        },
+        {
+            "title": "Sant'Agata Bolognese",
+            "default_params": {"town_id": "13"},
+        },
+    ]
+)
 
 TEST_CASES = {
     "Via Antonio Gramsci 228": {

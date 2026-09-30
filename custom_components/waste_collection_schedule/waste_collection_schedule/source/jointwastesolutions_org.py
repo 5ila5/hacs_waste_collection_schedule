@@ -8,6 +8,7 @@ from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
 from waste_collection_schedule import Collection, Icons
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Joint Waste Solutions"
 URL = "https://www.jointwastesolutions.org/"
@@ -18,12 +19,14 @@ EXTRA_INFO = [
         "url": "https://www.woking.gov.uk",
         "country": "uk",
         "default_params": {"borough": "woking"},
+        "locations": locations_queries(city="Woking", country="UK"),
     },
     {
         "title": "Surrey Heath Borough Council",
         "url": "https://www.surreyheath.gov.uk",
         "country": "uk",
         "default_params": {"borough": "surreyheath"},
+        "locations": locations_queries(city="Surrey Heath", country="UK"),
     },
 ]
 DESCRIPTION = "Manages Waste and Recycling services for Elmbridge, Mole Valley, Surrey Heath & Woking"

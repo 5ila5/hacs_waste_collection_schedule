@@ -25,6 +25,7 @@ from typing import ClassVar, final
 from waste_collection_schedule import parsers
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import house_number, municipality, street
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.regions import region
 from waste_collection_schedule.service.ICS import IcsFeedsParser, IcsSessionRetriever
 from waste_collection_schedule.transformers import ICSTransformer
@@ -122,7 +123,10 @@ class Source(BaseSource):
         },
     }
 
-    REGIONS = tuple(region(name, city=name) for name in _CITIES)
+    REGIONS = tuple(
+        region(name, city=name, locations=locations_queries(city=name, country="DE"))
+        for name in _CITIES
+    )
 
     PARAMS = (
         municipality(field="city"),

@@ -54,13 +54,26 @@ HEADERS = {
     "Referer": "https://fleurieuregionalwasteauthority.com.au/collection-calendar-downloads",
 }
 EXTRA_INFO = [
-    {"title": "Kangaroo Island Council", "url": "https://www.kangarooisland.sa.gov.au"},
+    {
+        "title": "Kangaroo Island Council",
+        "url": "https://www.kangarooisland.sa.gov.au",
+        "locations": locations_queries("Kangaroo Island, AU"),
+    },
     {
         "title": "District Council of Yankalilla",
         "url": "https://www.yankalilla.sa.gov.au",
+        "locations": locations_queries(city="Yankalilla", country="AU"),
     },
-    {"title": "City of Victor Harbor", "url": "https://www.victor.sa.gov.au"},
-    {"title": "Alexandrina Council", "url": "https://www.alexandrina.sa.gov.au"},
+    {
+        "title": "City of Victor Harbor",
+        "url": "https://www.victor.sa.gov.au",
+        "locations": locations_queries(city="Victor Harbor", country="AU"),
+    },
+    {
+        "title": "Alexandrina Council",
+        "url": "https://www.alexandrina.sa.gov.au",
+        "locations": locations_queries("Alexandrina, AU"),
+    },
 ]
 HOW_TO_GET_ARGUMENTS_DESCRIPTION = {  # Optional dictionary to describe how to get the arguments, will be shown in the GUI configuration form above the input fields, does not need to be translated in all languages
     "en": "Visit https://fleurieuregionalwasteauthority.com.au/collection-calendar-downloads and search for your street. Use the name/number, street name and district name as they appear when your collection schedule in being displayed.",

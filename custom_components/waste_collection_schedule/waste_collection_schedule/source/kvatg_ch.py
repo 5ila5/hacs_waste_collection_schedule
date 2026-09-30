@@ -11,6 +11,7 @@ from pdfminer.high_level import extract_pages
 from pdfminer.layout import LTChar, LTTextContainer, LTTextLine
 from waste_collection_schedule import Collection, Icons
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "KVA Thurgau"
 DESCRIPTION = (
@@ -105,7 +106,14 @@ COMMUNITIES = [
 
 def EXTRA_INFO():
     return [
-        {"title": m, "default_params": {"community": m}, "country": "ch"}
+        {
+            "title": m,
+            "default_params": {"community": m},
+            "country": "ch",
+            "locations": locations_queries(
+                city={"Pfyn-Dettighofen": "Pfyn"}.get(m, m), country=COUNTRY
+            ),
+        }
         for m in COMMUNITIES
     ]
 

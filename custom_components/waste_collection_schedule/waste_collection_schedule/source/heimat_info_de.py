@@ -6,6 +6,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentNotFound,
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Heimat-Info"
 DESCRIPTION = "Source for Heimat-Info (heimat-info.de) waste collection schedules."
@@ -65,158 +66,173 @@ ICON_MAP = {
 
 API_BASE = "https://heimatinfo-api-platform.azurewebsites.net"
 
-EXTRA_INFO = [
-    {
-        "title": "Aholfing",
-        "url": "https://www.heimat-info.de/gemeinden/aholfing/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "aholfing"},
-    },
-    {
-        "title": "Bellenberg",
-        "url": "https://www.heimat-info.de/gemeinden/bellenberg/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "bellenberg"},
-    },
-    {
-        "title": "Buch",
-        "url": "https://www.heimat-info.de/gemeinden/buch/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "buch"},
-    },
-    {
-        "title": "Eisingen",
-        "url": "https://www.heimat-info.de/gemeinden/eisingen/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "eisingen"},
-    },
-    {
-        "title": "Feichten a. d. Alz",
-        "url": "https://www.heimat-info.de/gemeinden/feichten-alz/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "feichten-alz"},
-    },
-    {
-        "title": "Gaimersheim",
-        "url": "https://www.heimat-info.de/gemeinden/gaimersheim/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "gaimersheim"},
-    },
-    {
-        "title": "Gemeinde Gründau",
-        "url": "https://www.heimat-info.de/gemeinden/gruendau/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "gruendau"},
-    },
-    {
-        "title": "Halsbach",
-        "url": "https://www.heimat-info.de/gemeinden/halsbach/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "halsbach"},
-    },
-    {
-        "title": "Hürtgenwald",
-        "url": "https://www.heimat-info.de/gemeinden/hurtgenwald/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "hurtgenwald"},
-    },
-    {
-        "title": "Kastl (Lkr. AÖ)",
-        "url": "https://www.heimat-info.de/gemeinden/kastl/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "kastl"},
-    },
-    {
-        "title": "Markt Kastl (Lauterachtal)",
-        "url": "https://www.heimat-info.de/gemeinden/kastl-lauterachtal/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "kastl-lauterachtal"},
-    },
-    {
-        "title": "Kirchweidach",
-        "url": "https://www.heimat-info.de/gemeinden/kirchweidach/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "kirchweidach"},
-    },
-    {
-        "title": "Kupferberg",
-        "url": "https://www.heimat-info.de/gemeinden/kupferberg/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "kupferberg"},
-    },
-    {
-        "title": "Loiching",
-        "url": "https://www.heimat-info.de/gemeinden/loiching/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "loiching"},
-    },
-    {
-        "title": "Oberrieden",
-        "url": "https://www.heimat-info.de/gemeinden/oberrieden/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "oberrieden"},
-    },
-    {
-        "title": "Oberroth",
-        "url": "https://www.heimat-info.de/gemeinden/oberroth/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "oberroth"},
-    },
-    {
-        "title": "Pastetten",
-        "url": "https://www.heimat-info.de/gemeinden/pastetten/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "pastetten"},
-    },
-    {
-        "title": "Pfaffenhausen",
-        "url": "https://www.heimat-info.de/gemeinden/pfaffenhausen/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "pfaffenhausen"},
-    },
-    {
-        "title": "Roggenburg",
-        "url": "https://www.heimat-info.de/gemeinden/roggenburg/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "roggenburg"},
-    },
-    {
-        "title": "Röttenbach",
-        "url": "https://www.heimat-info.de/gemeinden/rottenbach/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "rottenbach"},
-    },
-    {
-        "title": "Salgen",
-        "url": "https://www.heimat-info.de/gemeinden/salgen/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "salgen"},
-    },
-    {
-        "title": "Schäftlarn",
-        "url": "https://www.heimat-info.de/gemeinden/schaftlarn/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "schaftlarn"},
-    },
-    {
-        "title": "Trausnitz",
-        "url": "https://www.heimat-info.de/gemeinden/trausnitz/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "trausnitz"},
-    },
-    {
-        "title": "Unterroth",
-        "url": "https://www.heimat-info.de/gemeinden/unterroth/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "unterroth"},
-    },
-    {
-        "title": "Wutach",
-        "url": "https://www.heimat-info.de/gemeinden/wutach/abfallkalender",
-        "country": "de",
-        "default_params": {"commune": "wutach"},
-    },
-]
+EXTRA_INFO = (
+    e
+    | {
+        "locations": e.get(
+            "locations",
+            locations_queries(city=e["title"].removeprefix("Gemeinde"), country="DE"),
+        )
+    }
+    for e in (
+        {
+            "title": "Aholfing",
+            "url": "https://www.heimat-info.de/gemeinden/aholfing/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "aholfing"},
+        },
+        {
+            "title": "Bellenberg",
+            "url": "https://www.heimat-info.de/gemeinden/bellenberg/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "bellenberg"},
+        },
+        {
+            "title": "Buch",
+            "url": "https://www.heimat-info.de/gemeinden/buch/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "buch"},
+        },
+        {
+            "title": "Eisingen",
+            "url": "https://www.heimat-info.de/gemeinden/eisingen/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "eisingen"},
+        },
+        {
+            "title": "Feichten a. d. Alz",
+            "url": "https://www.heimat-info.de/gemeinden/feichten-alz/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "feichten-alz"},
+        },
+        {
+            "title": "Gaimersheim",
+            "url": "https://www.heimat-info.de/gemeinden/gaimersheim/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "gaimersheim"},
+        },
+        {
+            "title": "Gemeinde Gründau",
+            "url": "https://www.heimat-info.de/gemeinden/gruendau/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "gruendau"},
+        },
+        {
+            "title": "Halsbach",
+            "url": "https://www.heimat-info.de/gemeinden/halsbach/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "halsbach"},
+        },
+        {
+            "title": "Hürtgenwald",
+            "url": "https://www.heimat-info.de/gemeinden/hurtgenwald/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "hurtgenwald"},
+        },
+        {
+            "title": "Kastl (Lkr. AÖ)",
+            "url": "https://www.heimat-info.de/gemeinden/kastl/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "kastl"},
+            "locations": locations_queries(
+                city="Kastl", county="Altötting", country="DE"
+            ),
+        },
+        {
+            "title": "Markt Kastl (Lauterachtal)",
+            "url": "https://www.heimat-info.de/gemeinden/kastl-lauterachtal/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "kastl-lauterachtal"},
+            "locations": locations_queries(
+                city="Kastl", county="Amberg-Sulzbach", country="DE"
+            ),
+        },
+        {
+            "title": "Kirchweidach",
+            "url": "https://www.heimat-info.de/gemeinden/kirchweidach/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "kirchweidach"},
+        },
+        {
+            "title": "Kupferberg",
+            "url": "https://www.heimat-info.de/gemeinden/kupferberg/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "kupferberg"},
+        },
+        {
+            "title": "Loiching",
+            "url": "https://www.heimat-info.de/gemeinden/loiching/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "loiching"},
+        },
+        {
+            "title": "Oberrieden",
+            "url": "https://www.heimat-info.de/gemeinden/oberrieden/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "oberrieden"},
+        },
+        {
+            "title": "Oberroth",
+            "url": "https://www.heimat-info.de/gemeinden/oberroth/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "oberroth"},
+        },
+        {
+            "title": "Pastetten",
+            "url": "https://www.heimat-info.de/gemeinden/pastetten/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "pastetten"},
+        },
+        {
+            "title": "Pfaffenhausen",
+            "url": "https://www.heimat-info.de/gemeinden/pfaffenhausen/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "pfaffenhausen"},
+        },
+        {
+            "title": "Roggenburg",
+            "url": "https://www.heimat-info.de/gemeinden/roggenburg/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "roggenburg"},
+        },
+        {
+            "title": "Röttenbach",
+            "url": "https://www.heimat-info.de/gemeinden/rottenbach/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "rottenbach"},
+        },
+        {
+            "title": "Salgen",
+            "url": "https://www.heimat-info.de/gemeinden/salgen/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "salgen"},
+        },
+        {
+            "title": "Schäftlarn",
+            "url": "https://www.heimat-info.de/gemeinden/schaftlarn/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "schaftlarn"},
+        },
+        {
+            "title": "Trausnitz",
+            "url": "https://www.heimat-info.de/gemeinden/trausnitz/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "trausnitz"},
+        },
+        {
+            "title": "Unterroth",
+            "url": "https://www.heimat-info.de/gemeinden/unterroth/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "unterroth"},
+        },
+        {
+            "title": "Wutach",
+            "url": "https://www.heimat-info.de/gemeinden/wutach/abfallkalender",
+            "country": "de",
+            "default_params": {"commune": "wutach"},
+        },
+    )
+)
 
 
 class Source:

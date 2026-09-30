@@ -17,6 +17,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentException,
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Rennes Métropole"
 DESCRIPTION = "Source for Rennes Métropole, France."
@@ -137,6 +138,7 @@ EXTRA_INFO = [
         "url": URL,
         "country": COUNTRY,
         "default_params": {"commune": quarter},
+        "locations": locations_queries(city="Rennes", country=COUNTRY),
     }
     for quarter in sorted(_RENNES_QUARTERS, key=lambda q: int(q.split(" ")[0][1:]))
 ] + [
@@ -145,6 +147,7 @@ EXTRA_INFO = [
         "url": URL,
         "country": COUNTRY,
         "default_params": {"commune": commune},
+        "locations": locations_queries(city=commune, country=COUNTRY),
     }
     for commune in _COMMUNES
 ]

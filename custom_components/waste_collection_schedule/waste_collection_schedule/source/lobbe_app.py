@@ -21,6 +21,7 @@ from waste_collection_schedule.config_params import (
 )
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
 from waste_collection_schedule.field_terms import STATE
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.regions import region
 from waste_collection_schedule.service.ICS import IcsFeedsParser, IcsSessionRetriever
 from waste_collection_schedule.transformers import ICSTransformer
@@ -155,7 +156,12 @@ def _ical_request(
 
 def _extra_info():
     return [
-        region(city, state=state, city=city)
+        region(
+            city,
+            state=state,
+            city=city,
+            locations=locations_queries(city=city, state=state, country="DE"),
+        )
         for state, cities in _PLACES.items()
         for city in cities
     ]

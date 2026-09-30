@@ -7,15 +7,19 @@
   - title: USB Bochum
     url: https://www.usb-bochum.de/
     service_id: Usb
+    location: Bochum, DE
   - title: Abfallwirtschaftsbetriebe Münster
     url: https://www.stadt-muenster.de
     service_id: Awm
+    location: Münster, DE
   - title: Entsorgungsbetrieb Stadt Mainz
     url: https://eb-mainz.de/
     service_id: Ebm
+    location: Mainz, DE
   - title: EVS Entsorgungsverband Saar
     url: https://www.evs.de/
     service_id: Evs
+    location: Saarland, DE
   - title: Landkreis Gießen
     url: https://www.lkgi.de/
     service_id: Lkg
@@ -28,18 +32,22 @@
   - title: TBR Remscheid
     url: https://www.tbr-info.de/
     service_id: Tbr
+    location: Remscheid, DE
   - title: Stadtbildpflege Kaiserslautern
     url: https://www.stadtbildpflege-kl.de/
     service_id: Ask
+    location: Kaiserslautern, DE
   - title: Stadt Hanau
     url: https://www.hanau.de/
     service_id: His
+    location: Hanau, DE
   - title: Stadt Maintal
     url: https://www.maintal.de/
     service_id: Mai
   - title: Stadt Haltern am See
     url: https://www.haltern-am-see.de/
     service_id: Hal
+    location: Haltern am See, DE
   - title: Kreisstadt Friedberg
     url: https://www.friedberg-hessen.de/
     service_id: Efb

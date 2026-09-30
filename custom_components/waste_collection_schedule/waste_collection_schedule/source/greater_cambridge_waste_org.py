@@ -28,10 +28,12 @@ EXTRA_INFO = [
     {
         "title": "Cambridge City Council",
         "url": "https://cambridge.gov.uk/",
+        "locations": locations_queries(city="Cambridge", country=COUNTRY),
     },
     {
         "title": "South Cambridgeshire District Council",
         "url": "https://scambs.gov.uk/",
+        "locations": locations_queries(city="South Cambridgeshire", country=COUNTRY),
     },
 ]
 API_URLS = {

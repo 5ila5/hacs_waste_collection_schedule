@@ -5,6 +5,7 @@ from waste_collection_schedule import recurrence
 from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import coords
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.preprocessors import RecurrenceExpander, Schedule
 from waste_collection_schedule.regions import region
 from waste_collection_schedule.service.ArcGis import (
@@ -134,6 +135,34 @@ _COUNCILS = [
 ]
 
 
+LOCATION_OVERRIDE: dict[str, str | list[str]] = {
+    "City of Adelaide": "Adelaide",
+    "Rural City of Murray Bridge": "The Rural City of Murray Bridge",
+    "City of Norwood Payneham and St Peters": "The City of Norwood Payneham and St Peters",
+    "Council of Copper Coast": "Copper Coast Council",
+    "District Council of Barunga West": "Barunga West Council",
+    "District Council of Loxton Waikerie": "Loxton Waikerie Council",
+    "District Council of Mount Barker": "Mount Barker District Council",
+    "District Council of Streaky Bay": "Streaky Bay Council",
+    "Fleurieu Regional Waste Authority": [
+        "Alexandrina Council",
+        "City of Victor Harbor",
+        "District Council of Yankalilla",
+        "Kangaroo Island Council",
+    ],
+    "Regional Council of Goyder": "The Regional Council of Goyder",
+    "District Council of Cleve": "The District Council of Cleve",
+    "District Council of Mount Remarkable": "The District Council of Mount Remarkable",
+}
+
+
+def location(title: str):
+    council = LOCATION_OVERRIDE.get(title, title)
+    if isinstance(council, str):
+        return locations_queries(f"{council}, AU")
+    return locations_queries(*[f"{t}, AU" for t in council])
+
+
 @final
 class Source(BaseSource):
     TITLE = "App Backend of My Local Services"
@@ -161,7 +190,14 @@ class Source(BaseSource):
         },
     }
 
-    REGIONS = tuple(region(title=title, url=url) for title, url in _COUNCILS)
+    REGIONS = tuple(
+        region(
+            title=title,
+            url=url,
+            locations=location(title),
+        )
+        for title, url in _COUNCILS
+    )
 
     PARAMS = (coords(),)
 

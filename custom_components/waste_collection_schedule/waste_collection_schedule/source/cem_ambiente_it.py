@@ -25,7 +25,14 @@ HEADERS = {
 }
 
 EXTRA_INFO = (
-    (entry | {"locations": locations_queries(entry["title"], entry["country"].upper())})
+    (
+        entry
+        | {
+            "locations": locations_queries(
+                city=entry["title"], country=entry["country"].upper()
+            )
+        }
+    )
     for entry in [
         {"title": "Agrate Brianza", "country": "it"},
         {"title": "Aicurzio", "country": "it"},

@@ -3,6 +3,7 @@ from typing import ClassVar, final
 from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import area_id, municipality
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.regions import region
 from waste_collection_schedule.service.junker_app import (
     TYPE_VALUE_MAP,
@@ -199,7 +200,14 @@ class Source(BaseSource):
         area_id(field="area", optional=True),
     )
 
-    REGIONS = tuple(region(mun, municipality=mun) for mun in MUNICIPALITIES)
+    REGIONS = tuple(
+        region(
+            mun,
+            municipality=mun,
+            locations=locations_queries(city=mun, country=COUNTRY),
+        )
+        for mun in MUNICIPALITIES
+    )
 
     retrieve = JunkerRetriever(
         use_embed_url=True,

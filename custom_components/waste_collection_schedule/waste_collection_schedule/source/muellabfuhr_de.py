@@ -3,6 +3,7 @@ from datetime import datetime
 import requests
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Müllabfuhr Deutschland"
 DESCRIPTION = "Source for Müllabfuhr, Germany"
@@ -55,6 +56,7 @@ EXTRA_INFO = [
     {
         "title": district,
         "default_params": {"client": district},
+        "locations": locations_queries(county=district, country="de"),
     }
     for district in SERVICE_MAP
 ]

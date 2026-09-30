@@ -6,6 +6,7 @@ import requests
 from dateutil.rrule import DAILY, FR, MO, SA, SU, TH, TU, WE, WEEKLY, rrule, rruleset
 from waste_collection_schedule import Collection, Icons
 from waste_collection_schedule.exceptions import SourceArgumentException
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Publidata (Canada) generic source"
 DESCRIPTION = "Publidata is a Canadian public operator. Check if your area is concerned on their website."
@@ -69,6 +70,7 @@ EXTRA_INFO = [
     {
         "title": "MRC Marguerite-D'Youville",
         "url": "https://margueritedyouville.ca/",
+        "locations": locations_queries("Marguerite-D'Youville, Canada"),
     },
 ]
 

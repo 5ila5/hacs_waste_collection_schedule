@@ -11242,14 +11242,6 @@
       "id": "insert_it_de"
     },
     {
-      "title": "Gut Pinkler",
-      "module": "nerdbridge_de",
-      "default_params": {
-        "municipality": "Gut Pinkler"
-      },
-      "id": "nerdbridge_de"
-    },
-    {
       "title": "GWA - Kreis Unna mbH",
       "module": "abfallnavi_de",
       "default_params": {
@@ -20045,7 +20037,7 @@
       "id": "afvalstoffendienst_nl"
     },
     {
-      "title": "Alpen an den Rijn",
+      "title": "Alphen aan den Rijn",
       "module": "hvcgroep_nl",
       "default_params": {
         "service": "alphenaandenrijn"
@@ -21538,14 +21530,6 @@
       "id": "sims_pl"
     },
     {
-      "title": "Gmina Przyk\u0142adowa",
-      "module": "sims_pl",
-      "default_params": {
-        "owner": "Gmina Przyk\u0142adowa"
-      },
-      "id": "sims_pl"
-    },
-    {
       "title": "Gmina Pyskowice",
       "module": "sims_pl",
       "default_params": {
@@ -21944,22 +21928,6 @@
       "module": "zys_harmonogram_pl",
       "default_params": {},
       "id": "zys_harmonogram_pl"
-    },
-    {
-      "title": "Klient Szablonowy - Ekostra\u017cnik",
-      "module": "sims_pl",
-      "default_params": {
-        "owner": "Klient Szablonowy - Ekostra\u017cnik"
-      },
-      "id": "sims_pl"
-    },
-    {
-      "title": "Klient Szablonowy - Karty Us\u0142ug",
-      "module": "sims_pl",
-      "default_params": {
-        "owner": "Klient Szablonowy - Karty Us\u0142ug"
-      },
-      "id": "sims_pl"
     },
     {
       "title": "KOM-LUB (Lubo\u0144, PL)",
@@ -22366,14 +22334,6 @@
         "app": "zgk-info"
       },
       "id": "ecoharmonogram_pl"
-    },
-    {
-      "title": "ZGPD-7",
-      "module": "sims_pl",
-      "default_params": {
-        "owner": "ZGPD-7"
-      },
-      "id": "sims_pl"
     },
     {
       "title": "\u0141apczyca",

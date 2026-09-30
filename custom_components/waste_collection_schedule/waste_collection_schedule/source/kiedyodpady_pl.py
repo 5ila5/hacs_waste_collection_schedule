@@ -3,6 +3,7 @@ from datetime import date, datetime, timedelta
 import requests
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Kiedy Odpady (kiedyodpady.pl)"
 DESCRIPTION = (
@@ -16,14 +17,16 @@ EXTRA_INFO = [
     {
         "title": "Wieliczka",
         "url": "https://wieliczka.kiedyodpady.pl",
-        "country": "pl",
+        "country": COUNTRY,
         "default_params": {"municipality": "wieliczka"},
+        "locations": locations_queries(city="Wieliczka", country=COUNTRY),
     },
     {
         "title": "Pabianice",
         "url": "https://pabianice.kiedyodpady.pl",
-        "country": "pl",
+        "country": COUNTRY,
         "default_params": {"municipality": "pabianice"},
+        "locations": locations_queries(city="Pabianice", country=COUNTRY),
     },
 ]
 

@@ -4,8 +4,14 @@ import datetime
 import json
 import re
 import unicodedata
+from io import TextIOWrapper
+from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
+if __name__ == "__main__":
+    import sys
+
+    sys.path.append(str(Path(__file__).parent.parent.parent))
 from waste_collection_schedule.exceptions import (
     SourceArgumentException,
     SourceArgumentNotFoundWithSuggestions,
@@ -250,3 +256,85 @@ class JunkerParser(Parser["list[tuple[datetime.date, str]]"]):
             ).date()
             rows.append((collection_date, event["vbin_desc"]))
         return rows
+
+
+ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ âàáäãåæçéèêëíìîïñóòôöõøœßúùûüýÿž".upper()
+
+
+def alphabet(start="A"):
+    start = start.upper()
+    yield from ALPHABET[ALPHABET.index(start) :]
+
+
+URL = "https://api.junkerapp.it/api/v2.0/autocompletecomuni"
+
+#   -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:157.0) Gecko/20100101 Firefox/157.0' \
+#   -H 'Accept: application/json' \
+#   -H 'Accept-Language: en-US,en;q=0.9' \
+#   -H 'Accept-Encoding: gzip, deflate, br, zstd' \
+#   -H 'Content-Type: application/json' \
+#   -H 'x_junker_auth: 78C9D7F1-800F-43E1-BA5A-85DDAC2B15E1' \
+#   -H 'Origin: https://junkerapp.it' \
+#   -H 'DNT: 1' \
+#   -H 'Connection: keep-alive' \
+#   -H 'Referer: https://junkerapp.it/' \
+#   -H 'Sec-Fetch-Dest: empty' \
+#   -H 'Sec-Fetch-Mode: cors' \
+#   -H 'Sec-Fetch-Site: same-site' \
+#   -H 'Sec-GPC: 1' \
+
+
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:157.0) Gecko/20100101 Firefox/157.0",
+    "Accept": "application/json",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Accept-Encoding": "gzip, deflate, br, zstd",
+    "Content-Type": "application/json",
+    "x_junker_auth": "78C9D7F1-800F-43E1-BA5A-85DDAC2B15E1",
+    "Origin": "https://junkerapp.it",
+    "DNT": "1",
+    "Connection": "keep-alive",
+    "Referer": "https://junkerapp.it/",
+    "Sec-Fetch-Dest": "empty",
+    "Sec-Fetch-Mode": "cors",
+    "Sec-Fetch-Site": "same-site",
+    "Sec-GPC": "1",
+}
+
+
+def find_all_regions(session, f: TextIOWrapper, string="", start=""):
+    if string == "":
+        for letter in alphabet():
+            if ord(letter) < ord(start):
+                continue
+            find_all_regions(session, f, letter)
+    for letter in alphabet():
+        # if len(string) < 2:
+        print(f"Searching for regions starting with {string + letter}...")
+        r = session.post(URL, json={"query": string + letter})
+        r.raise_for_status()
+        data = r.json()["comuni"]
+        if len(data) < 20:
+            supported_regions = list(filter(lambda x: x["customerPagamento"], data))
+            if supported_regions:
+                f.write(
+                    json.dumps(supported_regions, ensure_ascii=False, indent=2) + ",\n"
+                )
+            # found_regions.extend(list(filter(lambda x: x["customerPagamento"], data)))
+        else:
+            find_all_regions(
+                session,
+                f,
+                string + letter,
+            )
+
+
+if __name__ == "__main__":
+    with open("junker_regions.json", "a", encoding="utf-8") as f:
+        import requests
+
+        session = requests.Session()
+        session.headers.update(HEADERS)
+        # f.write("[\n")
+        find_all_regions(session, f, start="B")
+        f.write("]\n")

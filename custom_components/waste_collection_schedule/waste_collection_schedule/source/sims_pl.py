@@ -4,6 +4,7 @@ from typing import TypedDict
 import requests
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_ids, locations_queries
 
 TITLE = "SISMS.pl / BLISKO"
 DESCRIPTION = "Source for SISMS.pl / BLISKO."
@@ -209,15 +210,55 @@ OWNER_IDS = {
 }
 # https://gospodarkakomunalna.strefamieszkanca.pl/?ownerId=188&colorAccent=%83ef9546&colorButtonBg=%23ef9546&colorButtonBgHover=%53ffaa60
 
-EXTRA_INFO = [
+EXTRA_INFO_LOCATION_OVERRIDE = {
+    "ABRUKO PLUS": locations_queries(
+        city=["Gmina Władysławowo", "Gmina Jastarnia"], country="pl"
+    ),
+    "Gmina Polanica-Zdrój": locations_queries(city="Polanica-Zdrój", country="pl"),
+    "Gmina Pyskowice": locations_queries(city="Pyskowice", country="pl"),
+    "Gminne Przedsiębiorstwo Komunalne Sp. z o.o. w Skarszewach": locations_queries(
+        city="Gmina Skarszewy", country="pl"
+    ),
+    "Przedsiębiorstwo Gospodarki Komunalnej w Wołowie Sp. z o.o.": locations_queries(
+        city="Gmina Wołów", country="pl"
+    ),
+    "Gmina Ostrowiec Świętokrzyski": locations_ids("R2908854"),
+    "KOMUS": None,  # seems to be mostly Strzelin which is already covered
+}
+
+
+def title_to_location(name: str):
+    if name in EXTRA_INFO_LOCATION_OVERRIDE:
+        return EXTRA_INFO_LOCATION_OVERRIDE[name]
+    if " - " in name:
+        name = name.split(" - ")[1]
+    name = (
+        name.removeprefix("Miasto i ")
+        .removeprefix("Miasto ")
+        .removeprefix("Gmina Miejska")
+        .strip()
+    )
+    name = name.replace("Gmina i Miasto", "Gmina")
+    return locations_queries(name.strip() + ", PL")
+
+
+EXTRA_INFO = (
     {
         "title": name.strip(),
         "default_params": {
             "owner": name.strip(),
         },
+        "locations": title_to_location(name.strip()),
     }
     for name in OWNER_IDS.values()
-]
+    if name.strip()
+    not in (
+        "Gmina Przykładowa",
+        "Klient Szablonowy - Ekostrażnik",
+        "Klient Szablonowy - Karty Usług",
+        "ZGPD-7",
+    )  # useless Developer/testing entreies
+)
 
 PARAM_TRANSLATION = {
     "en": {

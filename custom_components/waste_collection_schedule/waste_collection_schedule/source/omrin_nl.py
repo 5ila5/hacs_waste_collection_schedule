@@ -6,6 +6,7 @@ from datetime import datetime
 import requests
 from waste_collection_schedule import Collection, Icons
 from waste_collection_schedule.exceptions import SourceArgumentException
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Omrin"
 DESCRIPTION = "Source for Omrin waste collection schedules."
@@ -36,7 +37,12 @@ MUNICIPALITIES = (
 )
 
 EXTRA_INFO = [
-    {"title": municipality, "url": URL, "country": COUNTRY}
+    {
+        "title": municipality,
+        "url": URL,
+        "country": COUNTRY,
+        "locations": locations_queries(city=municipality, country=COUNTRY),
+    }
     for municipality in MUNICIPALITIES
 ]
 TEST_CASES = {

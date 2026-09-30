@@ -28,6 +28,7 @@ from waste_collection_schedule.config_params import (
     text_field,
 )
 from waste_collection_schedule.exceptions import SourceArgumentNotFound
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.parsers import EachResponse, IcsParser
 from waste_collection_schedule.regions import region
 from waste_collection_schedule.retrievers import FanOutRetriever
@@ -214,24 +215,48 @@ class Source(BaseSource):
             url="https://bogenschuetz-entsorgung.de",
             country="de",
             customer="bogenschütz",
+            locations=locations_queries(county="Landkreis Tübingen", country="DE"),
         ),
         region(
             "Innsbrucker Kommunalbetriebe",
             url="https://ikb.at",
             country="at",
             customer="ikb",
+            locations=locations_queries(city="Innsbruck", country="AT"),
         ),
         region(
             "Stadt Salzburg",
             url="https://stadt-salzburg.at",
             country="at",
             customer="salzburg",
+            locations=locations_queries(city="Salzburg", country="AT"),
         ),
         region(
             "Abfallverband Schwechat",
             url="https://schwechat.umweltverbaende.at/",
             country="at",
             customer="av-schwechat",
+            locations=locations_queries(
+                city=[
+                    "Ebergassing",
+                    "Fischamend",
+                    "Gerasdorf bei Wien",
+                    "Gramatneusiedl",
+                    "Haslau-Maria Ellend",
+                    "Himberg",
+                    "Klein-Neusiedl",
+                    "Lanzendorf",
+                    "Leopoldsdorf",
+                    "Maria Lanzendorf",
+                    "Moosbrunn",
+                    "Rauchenwarth",
+                    "Schwadorf",
+                    "Schwechat",
+                    "Seyring",
+                    "Zwölfaxing",
+                ],
+                country="AT",
+            ),
         ),
     )
 

@@ -10,7 +10,7 @@ from waste_collection_schedule.config_params import (
     text_field,
 )
 from waste_collection_schedule.field_terms import DISTRICT, STREET
-from waste_collection_schedule.regions import Region, region
+from waste_collection_schedule.regions import from_yaml
 from waste_collection_schedule.service.EcoHarmonogramPL import (
     SUPPORTED_APPS,
     SUPPORTED_LANGUAGES,
@@ -88,36 +88,6 @@ TYPE_VALUE_MAP = {
     "zielone": wt.GARDEN_WASTE,
 }
 
-# Apps/deployments Ecoharmonogram.pl runs under a `customApp` value (the
-# `app` parameter). One structure (this pipeline) covers all of them, so each
-# becomes a Region; the default (no `app`) deployment is listed too, so the
-# region count matches the source's supported-apps list exactly (16: the
-# generic deployment + 15 named apps).
-_APP_LABELS: dict[str, str] = {
-    "eco-przyszlosc": "Eco-Przyszłość",
-    "ogrodzieniec": "Ogrodzieniec",
-    "gdansk": "Gdańsk",
-    "hajnowka": "Hajnówka",
-    "niemce": "Niemce",
-    "zgk-info": "ZGK Info",
-    "ilza": "Iłża",
-    "swietochlowice": "Świętochłowice",
-    "popielow": "Popielów",
-    "mierzecice": "Mierzęcice",
-    "bialapodlaska": "Biała Podlaska",
-    "slupsk": "Słupsk",
-    "trzebownisko": "Trzebownisko",
-    "zory": "Żory",
-    "opole": "Opole",
-}
-
-
-def _regions() -> list[Region]:
-    regions = [region("Ecoharmonogram.pl (generic)", url="https://ecoharmonogram.pl")]
-    for app_id, label in _APP_LABELS.items():
-        regions.append(region(label, url="https://ecoharmonogram.pl", app=app_id))
-    return regions
-
 
 @final
 class Source(BaseSource):
@@ -126,7 +96,7 @@ class Source(BaseSource):
     URL = "https://ecoharmonogram.pl"
     COUNTRY = "pl"
 
-    REGIONS = _regions
+    REGIONS = from_yaml("ecoharmonogram_pl", app="app", location_queries="locations")
 
     HOWTO: ClassVar[dict] = {
         "en": (

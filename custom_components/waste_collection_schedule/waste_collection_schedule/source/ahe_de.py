@@ -1,9 +1,11 @@
 import waste_collection_schedule.service.AppAbfallplusDe as AppAbfallplusDe
 from waste_collection_schedule import Collection, Icons  # type: ignore[attr-defined]
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "AHE Ennepe-Ruhr-Kreis"
 DESCRIPTION = "Source for AHE Ennepe-Ruhr-Kreis."
 URL = "https://ahe.de"
+LOCATIONS = locations_queries(county="Ennepe-Ruhr-Kreis")
 COUNTRY = "de"
 TEST_CASES = {
     "Wetter Ahornstraße 1": {

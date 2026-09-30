@@ -10,6 +10,7 @@ from waste_collection_schedule.config_params import (
     district,
     municipality,
 )
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.preprocessors import (
     Compose,
     Disambiguate,
@@ -182,7 +183,7 @@ class Source(BaseSource):
     # different `commune`), surfaced as its own README / sources.json listing.
     REGIONS = (
         *(
-            region(name, commune=name)
+            region(name, commune=name, locations=locations_queries(f"{name}, FR"))
             for name in (
                 "Bantzenheim",
                 "Bruebach",
@@ -224,7 +225,12 @@ class Source(BaseSource):
                 "Staffelfelden",
             )
         ),
-        region("Mulhouse", commune="Mulhouse", quartier="Centre Ville"),
+        region(
+            "Mulhouse",
+            commune="Mulhouse",
+            quartier="Centre Ville",
+            locations=locations_queries("Mulhouse, FR"),
+        ),
     )
 
     PARAMS = (

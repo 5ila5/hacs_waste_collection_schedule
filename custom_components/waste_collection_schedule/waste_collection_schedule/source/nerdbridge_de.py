@@ -1,5 +1,5 @@
 import datetime
-from typing import Any
+from typing import Any, Generator
 
 import requests
 from waste_collection_schedule import (
@@ -7,6 +7,7 @@ from waste_collection_schedule import (
     Icons,
 )
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Landkreis Northeim (unofficial)"
 DESCRIPTION = "Unofficial waste collection schedule for Landkreis Northeim via abfall.nerdbridge.de."
@@ -55,7 +56,58 @@ HOW_TO_GET_ARGUMENTS_DESCRIPTION: dict[str, str] = {
 INDEX_URL = "https://abfall.nerdbridge.de/ical/index.json"
 DATA_URL = "https://abfall.nerdbridge.de/json/{year}/abfall-nom-{town_id}-{year}.json"
 
-EXTRA_INFO = [
+
+def EXTRA_INFO() -> Generator[dict[str, Any]]:
+    SMALL_MUNICIPALITIES = {  # Too small towns don't have a nominatim entry so we map them to the city that includes the small town
+        "Albrechtshausen": locations_queries(city="Katlenburg", country=COUNTRY),
+        "Amelith": locations_queries(city="Bodenfelde", country=COUNTRY),
+        "Brunstein": locations_queries(city="Langenholtensen", country=COUNTRY),
+        "Abbecke": locations_queries(
+            city="Sievershausen", county="Dassel", country=COUNTRY
+        ),
+        "Sievershausen (Einbeck)": locations_queries(city="Einbeck", country=COUNTRY),
+        "Erichsburg": locations_queries(
+            city="Hunnesrück", county="Dassel", country=COUNTRY
+        ),
+        "Goseplack": locations_queries(city="Lichtenborn", country=COUNTRY),
+        "Hilprechtshausen": locations_queries(city="Heckenbeck", country=COUNTRY),
+        "Juliusmühle": locations_queries(city="Einbeck", country=COUNTRY),
+        "Levershausen": locations_queries(city="Bühle", country=COUNTRY),
+        "Müllershausen": locations_queries(
+            city="Vogelbeck", county="Einbeck", country=COUNTRY
+        ),
+        "Polier": locations_queries(city="Nienover", country=COUNTRY),
+        "Relliehausen": locations_queries(city="Dassel", country=COUNTRY),
+        "Rimmerode": locations_queries(city="Einbeck", country=COUNTRY),
+        "Rosenplänter": locations_queries(city="Einbeck", country=COUNTRY),
+        "Schachtenbeck": locations_queries(city="Wrescherode", country=COUNTRY),
+        "Vorwerk Holtensen": locations_queries(city="Moringen", country=COUNTRY),
+        "Weddehagen": locations_queries(city="Naensen", country=COUNTRY),
+        "Wetze": locations_queries(city="Stöckheim", country=COUNTRY),
+        "Wiebrechtshausen": locations_queries(city="Denkershausen", country=COUNTRY),
+        "Tönnieshof": locations_queries(city="Fredelsloh", country=COUNTRY),
+    }
+    for municipality in MUNICIPALITIES:
+        if municipality["title"] == "Gut Pinkler":  # No clue where this should be
+            continue
+        yield municipality | {
+            "locations": municipality.get(
+                "locations",
+                SMALL_MUNICIPALITIES.get(
+                    municipality["title"],
+                    locations_queries(
+                        city=municipality["title"]
+                        .rstrip("1234567890) ")
+                        .removesuffix("Bezirk")
+                        .rstrip("( "),
+                        country="de",
+                    ),
+                ),
+            ),
+        }
+
+
+MUNICIPALITIES = [
     {
         "title": "Abbecke",
         "url": "https://abfall.nerdbridge.de/",
@@ -367,12 +419,18 @@ EXTRA_INFO = [
         "url": "https://abfall.nerdbridge.de/",
         "country": "de",
         "default_params": {"municipality": "Ellierode (Bad Gandersheim)"},
+        "locations": locations_queries(
+            city="Ellierode", county="Bad Gandersheim", country=COUNTRY
+        ),
     },
     {
         "title": "Ellierode (Hardegsen)",
         "url": "https://abfall.nerdbridge.de/",
         "country": "de",
         "default_params": {"municipality": "Ellierode (Hardegsen)"},
+        "locations": locations_queries(
+            city="Ellierode", county="Hardegsen", country=COUNTRY
+        ),
     },
     {
         "title": "Elvershausen",
@@ -841,12 +899,18 @@ EXTRA_INFO = [
         "url": "https://abfall.nerdbridge.de/",
         "country": "de",
         "default_params": {"municipality": "Oldenrode (Kalefeld)"},
+        "locations": locations_queries(
+            city="Oldenrode", county="Kalefeld", country=COUNTRY
+        ),
     },
     {
         "title": "Oldenrode (Moringen)",
         "url": "https://abfall.nerdbridge.de/",
         "country": "de",
         "default_params": {"municipality": "Oldenrode (Moringen)"},
+        "locations": locations_queries(
+            city="Oldenrode", county="Moringen", country=COUNTRY
+        ),
     },
     {
         "title": "Oldershausen",
@@ -985,6 +1049,9 @@ EXTRA_INFO = [
         "url": "https://abfall.nerdbridge.de/",
         "country": "de",
         "default_params": {"municipality": "Sievershausen (Dassel)"},
+        "locations": locations_queries(
+            city="Sievershausen", county="Dassel", country=COUNTRY
+        ),
     },
     {
         "title": "Sievershausen (Einbeck)",

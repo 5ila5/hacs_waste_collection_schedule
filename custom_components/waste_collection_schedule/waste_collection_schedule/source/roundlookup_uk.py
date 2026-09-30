@@ -9,6 +9,7 @@ from waste_collection_schedule import Collection, Icons  # type: ignore[attr-def
 from waste_collection_schedule.exceptions import (
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 # With verify=True the POST fails due to a SSLCertVerificationError.
 # Using verify=False works, but is not ideal. The following links may provide a better way of dealing with this:
@@ -64,6 +65,9 @@ EXTRA_INFO = [
         "url": value["url"],
         "title": key,
         "default_params": {"council": key},
+        "locations": locations_queries(
+            city=key.removesuffix("City").strip(), country="UK"
+        ),
     }
     for key, value in SERVICE_MAP.items()
 ]

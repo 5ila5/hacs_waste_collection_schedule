@@ -6,6 +6,7 @@ import urllib3
 from bs4 import BeautifulSoup
 from dateutil import parser
 from waste_collection_schedule import Collection, Icons
+from waste_collection_schedule.locations import locations_queries
 
 # With verify=True the POST fails due to a SSLCertVerificationError.
 # Using verify=False works, but is not ideal. The following links may provide a better way of dealing with this:
@@ -29,16 +30,19 @@ EXTRA_INFO = [
         "title": "Harborough District Council",
         "url": "https://harborough.gov.uk",
         "default_params": {"region": "harborough"},
+        "locations": locations_queries(city="Harborough", country="UK"),
     },
     {
         "title": "South Hams District Council",
         "url": "https://southhams.gov.uk/",
         "default_params": {"region": "southhams"},
+        "locations": locations_queries(city="South Hams", country="UK"),
     },
     {
         "title": "West Devon Borough Council",
         "url": "https://www.westdevon.gov.uk/",
         "default_params": {"region": "westdevon"},
+        "locations": locations_queries(city="West Devon", country="UK"),
     },
 ]
 

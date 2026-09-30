@@ -7,6 +7,7 @@ from typing import ClassVar
 import requests
 from waste_collection_schedule import Collection, Icons
 from waste_collection_schedule.exceptions import SourceArgumentException
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Bordeaux Métropole"
 DESCRIPTION = "Source script for opendata.bordeaux-metropole.fr"
@@ -90,86 +91,107 @@ EXTRA_INFO = [
     {
         "title": "Bordeaux",
         "default_params": {"city": "Bordeaux"},
+        "locations": locations_queries(city="Bordeaux", country="fr"),
     },
     {
         "title": "Mérignac",
         "default_params": {"city": "Mérignac"},
+        "locations": locations_queries(city="Mérignac", country="fr"),
     },
     {
         "title": "Gradignan",
         "default_params": {"city": "Gradignan"},
+        "locations": locations_queries(city="Gradignan", country="fr"),
     },
     {
         "title": "Talence",
         "default_params": {"city": "Talence"},
+        "locations": locations_queries(city="Talence", country="fr"),
     },
     {
         "title": "Saint-Médard-en-Jalles",
         "default_params": {"city": "Saint-Médard-en-Jalles"},
+        "locations": locations_queries(city="Saint-Médard-en-Jalles", country="fr"),
     },
     {
         "title": "Villenave-d'Ornon",
         "default_params": {"city": "Villenave-d'Ornon"},
+        "locations": locations_queries(city="Villenave-d'Ornon", country="fr"),
     },
     {
         "title": "Bruges",
         "default_params": {"city": "Bruges"},
+        "locations": locations_queries(city="Bruges", country="fr"),
     },
     {
         "title": "Bègles",
         "default_params": {"city": "Bègles"},
+        "locations": locations_queries(city="Bègles", country="fr"),
     },
     {
         "title": "Le Bouscat",
         "default_params": {"city": "Le Bouscat"},
+        "locations": locations_queries(city="Le Bouscat", country="fr"),
     },
     {
         "title": "Pessac",
         "default_params": {"city": "Pessac"},
+        "locations": locations_queries(city="Pessac", country="fr"),
     },
     {
         "title": "Ambarès-et-Lagrave",
         "default_params": {"city": "Ambarès-et-Lagrave"},
+        "locations": locations_queries(city="Ambarès-et-Lagrave", country="fr"),
     },
     {
         "title": "Ambès",
         "default_params": {"city": "Ambès"},
+        "locations": locations_queries(city="Ambès", country="fr"),
     },
     {
         "title": "Blanquefort",
         "default_params": {"city": "Blanquefort"},
+        "locations": locations_queries(city="Blanquefort", country="fr"),
     },
     {
         "title": "Eysines",
         "default_params": {"city": "Eysines"},
+        "locations": locations_queries(city="Eysines", country="fr"),
     },
     {
         "title": "Le Haillan",
         "default_params": {"city": "Le Haillan"},
+        "locations": locations_queries(city="Le Haillan", country="fr"),
     },
     {
         "title": "Le Taillan-Médoc",
         "default_params": {"city": "Le Taillan-Médoc"},
+        "locations": locations_queries(city="Le Taillan-Médoc", country="fr"),
     },
     {
         "title": "Martignas-sur-Jalle",
         "default_params": {"city": "Martignas-sur-Jalle"},
+        "locations": locations_queries(city="Martignas-sur-Jalle", country="fr"),
     },
     {
         "title": "Parempuyre",
         "default_params": {"city": "Parempuyre"},
+        "locations": locations_queries(city="Parempuyre", country="fr"),
     },
     {
         "title": "Saint-Aubin-de-Médoc",
         "default_params": {"city": "Saint-Aubin-de-Médoc"},
+        "locations": locations_queries(city="Saint-Aubin-de-Médoc", country="fr"),
     },
     {
         "title": "Saint-Louis-de-Montferrand",
         "default_params": {"city": "Saint-Louis-de-Montferrand"},
+        "locations": locations_queries(city="Saint-Louis-de-Montferrand", country="fr"),
     },
     {
         "title": "Saint-Vincent-de-Paul",
         "default_params": {"city": "Saint-Vincent-de-Paul"},
+        "locations": locations_queries(city="Saint-Vincent-de-Paul", country="fr"),
     },
 ]
 

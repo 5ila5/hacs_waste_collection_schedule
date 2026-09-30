@@ -4,12 +4,21 @@ import requests
 from bs4 import BeautifulSoup
 from dateutil.parser import parse
 from waste_collection_schedule import Collection, Icons
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Environment First"
 URL = "https://environmentfirst.co.uk"
 EXTRA_INFO = [
-    {"title": "Eastbourne Borough Council", "url": "https://lewes-eastbourne.gov.uk"},
-    {"title": "Lewes District Council", "url": "https://lewes-eastbourne.gov.uk"},
+    {
+        "title": "Eastbourne Borough Council",
+        "url": "https://lewes-eastbourne.gov.uk",
+        "locations": locations_queries(city="Eastbourne", country="UK"),
+    },
+    {
+        "title": "Lewes District Council",
+        "url": "https://lewes-eastbourne.gov.uk",
+        "locations": locations_queries(city="Lewes", country="UK"),
+    },
 ]
 DESCRIPTION = """Consolidated source for waste collection services from:
         Eastbourne Borough Council

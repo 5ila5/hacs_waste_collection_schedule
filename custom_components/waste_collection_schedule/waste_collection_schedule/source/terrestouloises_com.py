@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from dateutil.rrule import FR, MO, SA, SU, TH, TU, WE, WEEKLY, rrule
 from waste_collection_schedule import Collection, Icons
 from waste_collection_schedule.exceptions import SourceArgumentNotFoundWithSuggestions
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Terres Touloises"  # Title will show up in README.md and info.md
 DESCRIPTION = "Source script for terrestouloises.com (Communauté de Communes Terres Touloises, France)"  # Describe your source
@@ -82,6 +83,7 @@ EXTRA_INFO = [
         "title": commune,
         "url": URL,
         "default_params": {"commune": commune},
+        "locations": locations_queries(city=commune, country=COUNTRY),
     }
     for commune in COMMUNES
 ]

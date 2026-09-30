@@ -9,6 +9,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentException,
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Roslagsvatten"
 DESCRIPTION = (
@@ -38,7 +39,11 @@ TEST_CASES = {
 }
 
 EXTRA_INFO = [
-    {"title": v, "default_params": {"municipality": k}}
+    {
+        "title": v,
+        "default_params": {"municipality": k},
+        "locations": locations_queries(city=v, country="se"),
+    }
     for k, v in VALID_MUNICIPALITIES.items()
 ]
 

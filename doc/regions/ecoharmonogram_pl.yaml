@@ -1,0 +1,433 @@
+---
+  - title: Ecoharmonogram.pl (generic)
+    url: https://ecoharmonogram.pl
+    locations:
+      - Ruda Śląska, Śląskie, PL
+      - Bytom, Śląskie, PL
+      - Pruszków, Mazowieckie, PL
+      - Nowy Sącz, Małopolskie, PL
+      - Sulmierzyce, Wielkopolskie, PL
+      - Puszczykowo, Wielkopolskie, PL
+      - Żory, Śląskie, PL
+      - Zabrze, Śląskie, PL
+      - Kętrzyn, Warmińsko-Mazurskie, PL
+      - Kobiór, Śląskie, PL
+      - Mikołów, Śląskie, PL
+      - Piekary Śląskie, Śląskie, PL
+      - Maków Mazowiecki, Mazowieckie, PL
+      - Jastrzębie-Zdrój, Śląskie, PL
+      - Zduńska Wola, Łódzkie, PL
+      - Częstochowa, Śląskie, PL
+      - Mrągowo, Województwo warmińsko-mazurskie, PL
+      - Bolesławiec, Dolnośląskie, PL
+      - Darłowo, Zachodniopomorskie, PL
+      - Wojkowice, Śląskie, PL
+      - Łaziska Górne, Śląskie, PL
+      - Kozy, Śląskie, PL
+      - Kwidzyn, Pomorskie, PL
+      - Brzeziny, Łódzkie, PL
+      - Leszno, Wielkopolskie, PL
+      - Turek, Wielkopolskie, PL
+      - Białystok, Podlaskie, PL
+      - Chełm, Lubelskie, PL
+      - Cieszyn, Śląskie, PL
+      - Tarnowskie Góry, Śląskie, PL
+      - Ustroń, Śląskie, PL
+      - Ciechocinek, Kujawsko-Pomorskie, PL
+      - Mysłowice, Śląskie, PL
+      - Oława, Dolnośląskie, PL
+      - Lędziny, Śląskie, PL
+      - Marklowice, Śląskie, PL
+      - Kościerzyna, Pomorskie, PL
+      - Sopot, Pomorskie, PL
+      - Wejherowo, Pomorskie, PL
+      - Siedlce, Mazowieckie, PL
+      - Oleśnica, Dolnośląskie, PL
+      - Bieruń, Śląskie, PL
+      - Kłodzko, Dolnośląskie, PL
+      - Knurów, Śląskie, PL
+      - Skórcz, Pomorskie, PL
+      - Imielin, Śląskie, PL
+      - Pszów, Śląskie, PL
+      - Jejkowice, Śląskie, PL
+      - Węgrów, Mazowieckie, PL
+      - Zielonka, Mazowieckie, PL
+      - Myszków, Śląskie, PL
+      - Sławków, Śląskie, PL
+      - Tychy, Śląskie, PL
+      - Jedlina-Zdrój, Dolnośląskie, PL
+      - Tarnobrzeg, Podkarpackie, PL
+      - Golub-Dobrzyń, Kujawsko-Pomorskie, PL
+      - Hrubieszów, Lubelskie, PL
+      - Chełm Śląski, Śląskie, PL
+      - Kościan, Wielkopolskie, PL
+      - Lubartów, Lubelskie, PL
+      - Radlin, Śląskie, PL
+      - Łęknica, Lubuskie, PL
+      - Kalisz, Wielkopolskie, PL
+      - Radzionków, Śląskie, PL
+      - Orzesze, Śląskie, PL
+      - Racibórz, Śląskie, PL
+      - Lubliniec, Śląskie, PL
+      - Grudziądz, Kujawsko-Pomorskie, PL
+      - Ornontowice, Śląskie, PL
+      - gmina Stoszowice, Dolnośląskie, PL
+      - gmina Lelis, Mazowieckie, PL
+      - gmina Krotoszyn, Wielkopolskie, PL
+      - gmina Dąbrowa Białostocka, Podlaskie, PL
+      - gmina Brzeszcze, Małopolskie, PL
+      - gmina Chmielnik, Podkarpackie, PL
+      - gmina Stara Kiszewa, Pomorskie, PL
+      - gmina Suszec, Śląskie, PL
+      - gmina Karlino, Zachodniopomorskie, PL
+      - gmina Ustka, Pomorskie, PL
+      - gmina Szczytniki, Wielkopolskie, PL
+      - gmina Kochanowice, Śląskie, PL
+      - gmina Nowe Miasto Lubawskie, Warmińsko-Mazurskie, PL
+      - gmina Smętowo Graniczne, Pomorskie, PL
+      - gmina Chorzele, Mazowieckie, PL
+      - gmina Wronki, Wielkopolskie, PL
+      - gmina Szamotuły, Wielkopolskie, PL
+      - gmina Pogorzela, Wielkopolskie, PL
+      - gmina Goszczanów, Łódzkie, PL
+      - gmina Miedźna, Śląskie, PL
+      - gmina Kuźnia Raciborska, Śląskie, PL
+      - gmina Czarny Dunajec, Małopolskie, PL
+      - gmina Czernica, Dolnośląskie, PL
+      - gmina Rokietnica, Wielkopolskie, PL
+      - gmina Mstów, Śląskie, PL
+      - gmina Łęki Szlacheckie, Łódzkie, PL
+      - gmina Pawłowice, Śląskie, PL
+      - gmina Łomianki, Mazowieckie, PL
+      - gmina Kotla, Dolnośląskie, PL
+      - gmina Buk, Wielkopolskie, PL
+      - gmina Chojna, Zachodniopomorskie, PL
+      - gmina Polkowice, Dolnośląskie, PL
+      - gmina Borowa, Podkarpackie, PL
+      - gmina Świdwin, Zachodniopomorskie, PL
+      - gmina Gilowice, Śląskie, PL
+      - gmina Powiat Szamotuły, Wielkopolskie, PL
+      - gmina Brwinów, Mazowieckie, PL
+      - gmina Mosina, Wielkopolskie, PL
+      - gmina Baranowo, Mazowieckie, PL
+      - gmina Skoroszyce, Opolskie, PL
+      - gmina Krobia, Wielkopolskie, PL
+      - gmina Tuliszków, Wielkopolskie, PL
+      - gmina Goleszów, Śląskie, PL
+      - gmina Chmielnik, Świętokrzyskie, PL
+      - gmina Zbąszyń, Wielkopolskie, PL
+      - gmina Jasieniec, Mazowieckie, PL
+      - gmina Malanów, Wielkopolskie, PL
+      - gmina Baranów, Wielkopolskie, PL
+      - gmina Trzebinia, Małopolskie, PL
+      - gmina Święciechowa, Wielkopolskie, PL
+      - gmina Michałowice, Małopolskie, PL
+      - gmina Barwice, Zachodniopomorskie, PL
+      - gmina Pułtusk, Mazowieckie, PL
+      - gmina Morzeszczyn, Pomorskie, PL
+      - gmina Komorniki, Wielkopolskie, PL
+      - gmina Nędza, Śląskie, PL
+      - gmina Stęszew, Wielkopolskie, PL
+      - gmina Tuszów Narodowy, Podkarpackie, PL
+      - gmina Śrem, Wielkopolskie, PL
+      - gmina Jarosław, Podkarpackie, PL
+      - gmina Żórawina, Dolnośląskie, PL
+      - gmina Rudnik, Śląskie, PL
+      - gmina Lipnica Wielka, Małopolskie, PL
+      - gmina Zawiercie, Śląskie, PL
+      - gmina Gaszowice, Śląskie, PL
+      - gmina Susz, Województwo warmińsko-mazurskie, PL
+      - gmina Poczesna, Śląskie, PL
+      - gmina Kaźmierz, Wielkopolskie, PL
+      - gmina Kosakowo, Pomorskie, PL
+      - gmina Trąbki Wielkie, Pomorskie, PL
+      - gmina Skoki, Wielkopolskie, PL
+      - gmina Trzemeszno, Wielkopolskie, PL
+      - gmina Wijewo, Wielkopolskie, PL
+      - gmina Bledzew, Lubuskie, PL
+      - gmina Nysa, Opolskie, PL
+      - gmina Czempiń, Wielkopolskie, PL
+      - gmina Starogard Gdański, Pomorskie, PL
+      - gmina Ostrówek, Lubelskie, PL
+      - gmina Choszczno, Zachodniopomorskie, PL
+      - gmina Pszczyna, Śląskie, PL
+      - gmina Grodzisk Wielkopolski, Wielkopolskie, PL
+      - gmina Brodnica, Wielkopolskie, PL
+      - gmina Kisielice, Województwo warmińsko-mazurskie, PL
+      - gmina Buczkowice, Śląskie, PL
+      - gmina Duszniki, Wielkopolskie, PL
+      - gmina Cieszków, Dolnośląskie, PL
+      - gmina Mielno, Zachodniopomorskie, PL
+      - gmina Żukowice, Dolnośląskie, PL
+      - gmina Damasławek, Wielkopolskie, PL
+      - gmina Pilchowice, Śląskie, PL
+      - gmina Krzeszowice, Małopolskie, PL
+      - gmina Świecie nad Osą, Kujawsko-Pomorskie, PL
+      - gmina Wieczfnia Kościelna, Mazowieckie, PL
+      - gmina Mycielin, Wielkopolskie, PL
+      - gmina Koszęcin, Śląskie, PL
+      - gmina Ostrów Lubelski, Lubelskie, PL
+      - gmina Odolanów, Wielkopolskie, PL
+      - gmina Raba Wyżna, Małopolskie, PL
+      - gmina Radwanice, Dolnośląskie, PL
+      - gmina Mrągowo, Warmińsko-mazurskie, PL
+      - gmina Suchy Las, Wielkopolskie, PL
+      - gmina Tuchola, Kujawsko-Pomorskie, PL
+      - gmina Gorzyce, Śląskie, PL
+      - gmina Miłkowice, Dolnośląskie, PL
+      - gmina Wodzierady, Łódzkie, PL
+      - gmina Przeworno, Dolnośląskie, PL
+      - gmina Jerzmanowa, Dolnośląskie, PL
+      - gmina Koźminek, Wielkopolskie, PL
+      - gmina Ozorków, Łódzkie, PL
+      - gmina Lgota Wielka, Łódzkie, PL
+      - gmina Kościerzyna, Pomorskie, PL
+      - gmina Czernichów, Małopolskie, PL
+      - gmina Skórcz, Pomorskie, PL
+      - gmina Parzęczew, Łódzkie, PL
+      - gmina Kobylin, Wielkopolskie, PL
+      - gmina Janów Lubelski, Lubelskie, PL
+      - gmina Gołuchów, Wielkopolskie, PL
+      - gmina Michałowice, Mazowieckie, PL
+      - gmina Dąbrowa Zielona, Śląskie, PL
+      - gmina Lipno, Wielkopolskie, PL
+      - gmina Rawicz, Wielkopolskie, PL
+      - gmina Branice, Opolskie, PL
+      - gmina Sicienko, Kujawsko-Pomorskie, PL
+      - gmina Brzeziny, Wielkopolskie, PL
+      - gmina Libiąż, Małopolskie, PL
+      - gmina Zduny, Wielkopolskie, PL
+      - gmina Pępowo, Wielkopolskie, PL
+      - gmina Skawina, Małopolskie, PL
+      - gmina Serock, Mazowieckie, PL
+      - gmina Grębocice, Dolnośląskie, PL
+      - gmina Zabierzów, Małopolskie, PL
+      - gmina Jednorożec, Mazowieckie, PL
+      - gmina Siechnice, Dolnośląskie, PL
+      - gmina Krzywiń, Wielkopolskie, PL
+      - gmina Lisków, Wielkopolskie, PL
+      - gmina Przechlewo, Pomorskie, PL
+      - gmina Pruchnik, Podkarpackie, PL
+      - gmina Werbkowice, Lubelskie, PL
+      - gmina Ręczno, Łódzkie, PL
+      - gmina Police, Zachodniopomorskie, PL
+      - gmina Błaszki, Łódzkie, PL
+      - gmina Świerklany, Śląskie, PL
+      - gmina Żelazków, Wielkopolskie, PL
+      - gmina Dębowiec, Śląskie, PL
+      - gmina Wasilków, Podlaskie, PL
+      - gmina Darłowo, Zachodniopomorskie, PL
+      - gmina Żukowo, Pomorskie, PL
+      - gmina Łubianka, Kujawsko-Pomorskie, PL
+      - gmina Gaworzyce, Dolnośląskie, PL
+      - gmina Kamienica Polska, Śląskie, PL
+      - gmina Czerwionka-Leszczyny, Śląskie, PL
+      - gmina Biały Dunajec, Małopolskie, PL
+      - gmina Pelplin, Pomorskie, PL
+      - gmina Bojszowy, Śląskie, PL
+      - gmina Kościan, Wielkopolskie, PL
+      - gmina Brzesko, Małopolskie, PL
+      - gmina Gołańcz, Wielkopolskie, PL
+      - gmina Bobowo, Pomorskie, PL
+      - gmina Rakoniewice, Wielkopolskie, PL
+      - gmina Kuślin, Wielkopolskie, PL
+      - gmina Chrzanów, Małopolskie, PL
+      - gmina Chocianów, Dolnośląskie, PL
+      - gmina Padew Narodowa, Podkarpackie, PL
+      - gmina Bestwina, Śląskie, PL
+      - gmina Żary, Lubuskie, PL
+      - gmina Rudniki, Opolskie, PL
+      - gmina Warta Bolesławiecka, Dolnośląskie, PL
+      - gmina Sępólno Krajeńskie, Kujawsko-pomorskie, PL
+      - gmina Pruszcz Gdański, Pomorskie, PL
+      - gmina Miasto Opole, PL
+      - gmina Ryjewo, Pomorskie, PL
+      - gmina Oleśnica, Dolnośląskie, PL
+      - gmina Sierakowice, Pomorskie, PL
+      - gmina Lyski, Śląskie, PL
+      - gmina Sanok, Podkarpackie, PL
+      - gmina Kamieniec, Wielkopolskie, PL
+      - gmina Pęcław, Dolnośląskie, PL
+      - gmina Ząbkowice Śląskie, Dolnośląskie, PL
+      - gmina Bojanowo, Wielkopolskie, PL
+      - gmina Przemków, Dolnośląskie, PL
+      - gmina Osieczna, Wielkopolskie, PL
+      - gmina Blizanów, Wielkopolskie, PL
+      - gmina Bolków, Dolnośląskie, PL
+      - gmina Dobryszyce, Łódzkie, PL
+      - gmina Janowiec Wielkopolski, Kujawsko-Pomorskie, PL
+      - gmina Lubartów, Lubelskie, PL
+      - gmina Mikołajki Pomorskie, Pomorskie, PL
+      - gmina Mogilany, Małopolskie, PL
+      - gmina Łysomice, Kujawsko-Pomorskie, PL
+      - gmina Prabuty, Pomorskie, PL
+      - gmina Bochnia, Małopolskie, PL
+      - gmina Śmigiel, Wielkopolskie, PL
+      - gmina Przywidz, Pomorskie, PL
+      - gmina Jabłonka, Małopolskie, PL
+      - gmina Secemin, Świętokrzyskie, PL
+      - gmina Wielichowo, Wielkopolskie, PL
+      - gmina Syców, Dolnośląskie, PL
+      - gmina Godziesze Wielkie, Wielkopolskie, PL
+      - gmina Kępno, Wielkopolskie, PL
+      - gmina Aleksandrów Łódzki, Łódzkie, PL
+      - gmina Pawonków, Śląskie, PL
+      - gmina Sadlinki, Pomorskie, PL
+      - gmina Jabłonna, Mazowieckie, PL
+      - gmina Mogilno, Kujawsko-Pomorskie, PL
+      - gmina Kawęczyn, Wielkopolskie, PL
+      - gmina Dębnica Kaszubska, Pomorskie, PL
+      - gmina Długołęka, Dolnośląskie, PL
+      - gmina Czosnów, Mazowieckie, PL
+      - gmina Poniec, Wielkopolskie, PL
+      - gmina Subkowy, Pomorskie, PL
+      - gmina Dopiewo, Wielkopolskie, PL
+      - gmina Zabłudów, Podlaskie, PL
+      - gmina Pniewy, Wielkopolskie, PL
+      - gmina Stara Dąbrowa, Zachodniopomorskie, PL
+      - gmina Tarnowiec, Podkarpackie, PL
+      - gmina Wyry, Śląskie, PL
+      - gmina Kwidzyn, Pomorskie, PL
+      - gmina Ciepłowody, Dolnośląskie, PL
+      - gmina Białogard, Zachodniopomorskie, PL
+      - gmina Nowy Targ, Małopolskie, PL
+      - gmina Ceków-Kolonia, Wielkopolskie, PL
+      - gmina Gardeja, Pomorskie, PL
+      - gmina Lubichowo, Pomorskie, PL
+      - gmina Pobiedziska, Wielkopolskie, PL
+      - gmina Wróblew, Łódzkie, PL
+      - gmina Rydzyna, Wielkopolskie, PL
+      - gmina Opatówek, Wielkopolskie, PL
+      - gmina Czechowice-Dziedzice, Śląskie, PL
+      - gmina Lipusz, Pomorskie, PL
+      - gmina Ładzice, Łódzkie, PL
+      - gmina Mińsk Mazowiecki, Mazowieckie, PL
+      - gmina Mirosławiec, Zachodniopomorskie, PL
+      - gmina Kepno, Wielkopolskie, PL
+      - gmina Opalenica, Wielkopolskie, PL
+      - gmina Godów, Śląskie, PL
+      - gmina Serniki, Lubelskie, PL
+      - gmina Krzemieniewo, Wielkopolskie, PL
+      - gmina Mszana, Śląskie, PL
+      - gmina Borów, Dolnośląskie, PL
+      - gmina Biały Bór, Zachodniopomorskie, PL
+      - gmina Szczucin, Małopolskie, PL
+      - gmina Tuplice, Lubuskie, PL
+      - gmina Kobiele Wielkie, Łódzkie, PL
+      - gmina Bogatynia, Dolnośląskie, PL
+      - gmina Brojce, Zachodniopomorskie, PL
+      - gmina Murowana Goślina, Wielkopolskie, PL
+      - gmina Świerklaniec, Śląskie, PL
+      - gmina Granowo, Wielkopolskie, PL
+      - gmina Stężyca, Pomorskie, PL
+      - gmina Trzebiel, Lubuskie, PL
+      - gmina Radziejowice, Mazowieckie, PL
+      - gmina Dobra, Wielkopolskie, PL
+      - gmina Kłomnice, Śląskie, PL
+      - gmina Polanów, Zachodniopomorskie, PL
+      - gmina Sieradz, Łódzkie, PL
+      - gmina Pomiechówek, Mazowieckie, PL
+      - gmina Stawiszyn, Wielkopolskie, PL
+      - gmina Suchy Dąb, Pomorskie, PL
+      - gmina Pszczółki, Pomorskie, PL
+      - gmina Dywity, Województwo warmińsko-mazurskie, PL
+      - gmina Goniądz, Podlaskie, PL
+      - gmina Pakosław, Wielkopolskie, PL
+      - gmina Tczew, Pomorskie, PL
+      - gmina Nowa Karczma, Pomorskie, PL
+      - gmina Dolsk, Wielkopolskie, PL
+      - gmina Nowy Żmigród, Podkarpackie, PL
+      - gmina Lubniewice, Lubuskie, PL
+      - gmina Gostyń, Wielkopolskie, PL
+      - gmina Sztum, Pomorskie, PL
+      - gmina Warta, Łódzkie, PL
+      - gmina Jutrosin, Wielkopolskie, PL
+      - gmina Bukowina Tatrzańska, Małopolskie, PL
+      - gmina Miejska Górka, Wielkopolskie, PL
+      - gmina Gomunice, Łódzkie, PL
+      - gmina Gierałtowice, Śląskie, PL
+  - title: Eco-Przyszłość
+    url: https://ecoharmonogram.pl
+    app: eco-przyszlosc
+    locations:
+      - Powiat Nowosolski, PL
+      - Powiat Wschowski, PL
+      - Gmina Bojadła, PL
+      - Gmina Kargowa, PL
+      - Gmina Świdnica, PL
+      - Zielona Góra, PL
+  - title: Ogrodzieniec
+    url: https://ecoharmonogram.pl
+    app: ogrodzieniec
+    locations:
+      - Gmina Ogrodzieniec, PL
+  - title: Gdańsk
+    url: https://ecoharmonogram.pl
+    app: gdansk
+    locations:
+      - Gdańsk, PL
+  - title: Hajnówka
+    url: https://ecoharmonogram.pl
+    app: hajnowka
+    locations:
+      - Hajnówka
+  - title: Niemce
+    url: https://ecoharmonogram.pl
+    app: niemce
+    locations:
+      - Gmina Niemce
+  - title: ZGK Info
+    url: https://ecoharmonogram.pl
+    app: zgk-info
+    locations:
+      - Gmina Stary Lubotyń, PL
+      - Gmina Wąsewo, PL
+      - Gmina Brok, PL
+      - Gmina Goworowo, PL
+      - Gmina Nur, PL
+      - Gmina Ostrów Mazowiecka, PL
+  - title: Iłża
+    url: https://ecoharmonogram.pl
+    app: ilza
+    locations:
+      - Gmina Iłża, PL
+  - title: Świętochłowice
+    url: https://ecoharmonogram.pl
+    app: swietochlowice
+    locations:
+      - Gmina Świętochłowice, PL
+  - title: Popielów
+    url: https://ecoharmonogram.pl
+    app: popielow
+    locations:
+      - Gmina Popielów, PL
+  - title: Mierzęcice
+    url: https://ecoharmonogram.pl
+    app: mierzecice
+    locations:
+      - Gmina Mierzęcice, PL
+  - title: Biała Podlaska
+    url: https://ecoharmonogram.pl
+    app: bialapodlaska
+    locations:
+      - Biała Podlaska, PL
+  - title: Słupsk
+    url: https://ecoharmonogram.pl
+    app: slupsk
+    locations:
+      - Słupsk, PL
+  - title: Trzebownisko
+    url: https://ecoharmonogram.pl
+    app: trzebownisko
+    locations:
+      - Gmina Trzebownisko, PL
+  - title: Żory
+    url: https://ecoharmonogram.pl
+    app: zory
+    locations:
+      - Żory, PL
+  - title: Opole
+    url: https://ecoharmonogram.pl
+    app: opole
+    locations:
+      - Opole, PL

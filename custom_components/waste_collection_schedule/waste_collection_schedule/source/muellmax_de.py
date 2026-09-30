@@ -94,4 +94,9 @@ class Source(BaseSource):
     parse = parsers.IcsParser(min_events=1)
     transform = ICSTransformer(clean=_clean, type_value_map=_TYPE_VALUE_MAP)
 
-    REGIONS = regions.from_yaml("muellmax_de", service="service_id")
+    REGIONS = regions.from_yaml(
+        "muellmax_de",
+        service="service_id",
+        location_queries="title",
+        location_query_override="location",
+    )

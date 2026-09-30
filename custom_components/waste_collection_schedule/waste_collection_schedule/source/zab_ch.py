@@ -2,6 +2,7 @@ from typing import final
 
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import district, municipality
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.regions import region
 from waste_collection_schedule.service.A_region_ch import (
     TYPE_VALUE_MAP,
@@ -75,7 +76,10 @@ class Source(BaseSource):
         district(field="district", optional=True),
     )
 
-    REGIONS = tuple(region(m, municipality=m) for m in MUNICIPALITIES)
+    REGIONS = tuple(
+        region(m, municipality=m, locations=locations_queries(f"{m}, CH"))
+        for m in MUNICIPALITIES
+    )
 
     retrieve = ARegionRetriever(service="zab", municipalities=MUNICIPALITIES)
     parse = ARegionIcsParser()

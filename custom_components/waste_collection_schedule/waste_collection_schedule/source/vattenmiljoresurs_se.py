@@ -7,6 +7,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentNotFound,
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Vatten och Miljöresurs"
 DESCRIPTION = "Source for Vatten och Miljöresurs waste collection in Jämtland, Sweden."
@@ -40,18 +41,21 @@ EXTRA_INFO = [
         "url": "https://www.vattenmiljoresurs.se/bracke/avfall-och-atervinning/avfallshamtning/nar-kommer-sopbilen",
         "country": "se",
         "default_params": {"municipality": "bracke"},
+        "locations": locations_queries(city="Bräcke", country="se"),
     },
     {
         "title": "Berg",
         "url": "https://www.vattenmiljoresurs.se/berg/avfall-och-atervinning/avfallshamtning/nar-kommer-sopbilen",
         "country": "se",
         "default_params": {"municipality": "berg"},
+        "locations": locations_queries(city="Berg", country="se"),
     },
     {
         "title": "Härjedalen",
         "url": "https://www.vattenmiljoresurs.se/harjedalen/avfall-och-atervinning/avfallshamtning/nar-kommer-sopbilen",
         "country": "se",
         "default_params": {"municipality": "harjedalen"},
+        "locations": locations_queries(city="Härjedalen", country="se"),
     },
 ]
 

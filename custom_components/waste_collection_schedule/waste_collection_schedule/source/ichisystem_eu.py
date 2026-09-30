@@ -5,6 +5,7 @@ from typing import ClassVar, final
 from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.base_source import BaseSource
 from waste_collection_schedule.config_params import city, house_number, street
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.regions import region
 from waste_collection_schedule.service.Sepan import SepanReportParser, SepanRetriever
 from waste_collection_schedule.transformers import RowTransformer
@@ -52,8 +53,15 @@ class Source(BaseSource):
     }
 
     REGIONS = (
-        region("Pobiedziska", url=API_BASE, city="Pobiedziska"),
-        region("Kiszkowo", url=API_BASE, city="Kiszkowo"),
+        region(
+            "Pobiedziska",
+            url=API_BASE,
+            city="Pobiedziska",
+            locations=locations_queries("Gmina Pobiedziska, PL"),
+        ),
+        region(
+            "Kiszkowo", url=API_BASE, city="Kiszkowo"
+        ),  # Not sure if this is even correct so I did not add a location query
     )
 
     PARAMS = (

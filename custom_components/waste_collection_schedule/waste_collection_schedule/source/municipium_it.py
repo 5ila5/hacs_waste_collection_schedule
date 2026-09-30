@@ -8,6 +8,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentNotFoundWithSuggestions,
     SourceArgumentRequiredWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Municipium"
 DESCRIPTION = (
@@ -60,6 +61,7 @@ def EXTRA_INFO():
             "title": f"{name} ({province})",
             "country": "it",
             "default_params": {"municipality": name},
+            "locations": locations_queries(city=name, country="IT"),
         }
 
 

@@ -2,6 +2,7 @@ from typing import ClassVar, final
 
 from waste_collection_schedule import waste_types as wt
 from waste_collection_schedule.config_params import text_field
+from waste_collection_schedule.locations import locations_queries
 from waste_collection_schedule.regions import region
 from waste_collection_schedule.source.jumomind_de import Source as JumomindSource
 
@@ -17,6 +18,7 @@ class Source(JumomindSource):
     DESCRIPTION = "Source for RHE (Rhein Hunsrück Entsorgung)."
     URL = "https://www.rh-entsorgung.de"
     COUNTRY = "de"
+    LOCATIONS = locations_queries(county="Rhein-Hunsrück kreis", country="DE")
 
     # Canonical types observed from the live Jumomind "rhe" service. Declared
     # rather than derived: this transformer carries no type_value_map, so there

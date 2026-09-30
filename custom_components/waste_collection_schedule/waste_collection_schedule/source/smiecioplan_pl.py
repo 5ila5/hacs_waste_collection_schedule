@@ -6,6 +6,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentNotFoundWithSuggestions,
     SourceArgumentRequired,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "SmiecioPlan"
 DESCRIPTION = "Source for SmiecioPlan.pl waste collection schedules."
@@ -51,21 +52,25 @@ EXTRA_INFO = [
         "title": "Szczecin",
         "url": "https://smiecioplan.pl",
         "default_params": {"city": "szczecin"},
+        "locations": locations_queries(city="Szczecin", country="pl"),
     },
     {
         "title": "Gdańsk",
         "url": "https://smiecioplan.pl",
         "default_params": {"city": "gdansk"},
+        "locations": locations_queries(city="Gdańsk", country="pl"),
     },
     {
         "title": "Gdynia",
         "url": "https://smiecioplan.pl",
         "default_params": {"city": "gdynia"},
+        "locations": locations_queries(city="Gdynia", country="pl"),
     },
     {
         "title": "Sopot",
         "url": "https://smiecioplan.pl",
         "default_params": {"city": "sopot"},
+        "locations": locations_queries(city="Sopot", country="pl"),
     },
 ]
 

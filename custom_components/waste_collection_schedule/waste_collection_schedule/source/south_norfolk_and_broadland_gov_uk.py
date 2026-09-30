@@ -15,14 +15,17 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentNotFound,
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Broadland District Council"
 DESCRIPTION = "Source for southnorfolkandbroadland.gov.uk services for South Norfolk and Broadland, UK"
 URL = "https://area.southnorfolkandbroadland.gov.uk/"
+LOCATIONS = locations_queries("South Norfolk, England, United Kingdom")
 EXTRA_INFO = [
     {
         "title": "South Norfolk Council",
         "url": "https://southnorfolkandbroadland.gov.uk/",
+        "locations": locations_queries(city="South Norfolk", country="UK"),
     },
 ]
 TEST_CASES = {

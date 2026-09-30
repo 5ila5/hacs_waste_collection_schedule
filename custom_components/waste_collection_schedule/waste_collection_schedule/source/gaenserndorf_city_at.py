@@ -18,9 +18,9 @@ DESCRIPTION = (
     "Uses the Jolioo mobile app API."
 )
 URL = "https://www.gaenserndorf.at/"
-LOCATIONS = locations_queries("Gänserndorf, Austria")
-
 COUNTRY = "at"
+LOCATIONS = locations_queries(city="Gänserndorf", country="AT")
+
 EXTRA_INFO = [
     {
         "title": "Gänserndorf",

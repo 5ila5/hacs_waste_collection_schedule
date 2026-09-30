@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 
 import requests
 from waste_collection_schedule import Collection  # type: ignore[attr-defined]
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Ximmio"
 DESCRIPTION = "Source for Ximmio B.V. waste collection."
@@ -14,6 +15,12 @@ def EXTRA_INFO():
             "title": s["title"],
             "url": s["url"],
             "default_params": {"company": s["company"]},
+            "locations": s.get(
+                "locations",
+                locations_queries(
+                    city=s["title"].removeprefix("Gemeente").strip(), country="nl"
+                ),
+            ),
         }
         for s in SERVICE_MAP
     ]
@@ -46,6 +53,16 @@ SERVICE_MAP = [
         "url": "https://www.acv-afvalkalender.nl/",
         "uuid": "f8e2844a-095e-48f9-9f98-71fceb51d2c3",
         "company": "acv",
+        "locations": locations_queries(
+            city=[
+                "Ede",
+                "Renkum",
+                "Renswoude",
+                "Veenendaal",
+                "Wageningen",
+            ],  # source: https://www.acv-groep.nl/
+            country="nl",
+        ),
     },
     {
         "title": "Gemeente Almere",
@@ -58,24 +75,52 @@ SERVICE_MAP = [
         "url": "https://www.area-afval.nl/",
         "uuid": "adc418da-d19b-11e5-ab30-625662870761",
         "company": "areareiniging",
+        "locations": locations_queries(
+            city=[
+                "Coevorden",
+                "Emmen",
+                "Hoogeveen",
+            ],  # source: https://www.area-afval.nl/over-area
+            country="nl",
+        ),
     },
     {
         "title": "Avalex",
         "url": "https://www.avalex.nl/",
         "uuid": "f7a74ad1-fdbf-4a43-9f91-44644f4d4222",
         "company": "avalex",
+        "locations": locations_queries(
+            city=[
+                "Delft",
+                "Rijswijk",
+                "Wassenaar",
+                "Midden-Delfland",
+                "Leidschendam-Voorburg",
+                "Pijnacker-Nootdorp",
+            ],  # source Meta title of https://avalex.nl/
+            country="nl",
+        ),
     },
     {
         "title": "Avri",
         "url": "https://www.avri.nl/",
         "uuid": "78cd4156-394b-413d-8936-d407e334559a",
         "company": "avri",
+        "locations": locations_queries("Rivierenland, NL"),
     },
     {
         "title": "Bar Afvalbeheer",
         "url": "https://www.bar-afvalbeheer.nl/",
         "uuid": "bb58e633-de14-4b2a-9941-5bc419f1c4b0",
         "company": "bar",
+        "locations": locations_queries(
+            city=[
+                "Barendrecht",
+                "Albrandswaard",
+                "Ridderkerk",
+            ],  # source: https://www.bar-afvalbeheer.nl/
+            country="nl",
+        ),
     },
     {
         "title": "Gemeente Hellendoorn",
@@ -88,6 +133,19 @@ SERVICE_MAP = [
         "url": "https://meerlanden.nl/",
         "uuid": "800bf8d7-6dd1-4490-ba9d-b419d6dc8a45",
         "company": "meerlanden",
+        "locations": locations_queries(
+            city=[
+                "Aalsmeer",
+                "Bloemendaal",
+                "Diemen",
+                "Haarlemmermeer",
+                "Heemstede",
+                "Hillegom",
+                "Lisse",
+                "Noordwijk",
+            ],  # source: https://www.meerlanden.nl/over-meerlanden/corporate-governance
+            country="nl",
+        ),
     },
     {
         "title": "Gemeente Meppel",
@@ -100,24 +158,69 @@ SERVICE_MAP = [
         "url": "https://mijnblink.nl/",
         "uuid": "252d30d0-2e74-469c-8f1e-c0e2e434eb58",
         "company": "mijnblink",
+        "locations": locations_queries(
+            city=[
+                "Asten",
+                "Deurne",
+                "Gemert-Bakel",
+                "Heeze-Leende",
+                "Helmond",
+                "Laarbeek",
+                "Nuenen",
+                "Someren",
+                "Son en Breugel",
+            ],  # source: https://www.deurne.nl/blink
+            country="nl",
+        ),
     },
     {
         "title": "RAD BV",
         "url": "https://www.radbv.nl",
         "uuid": "13a2cad9-36d0-4b01-b877-efcb421a864d",
         "company": "rad",
+        "locations": locations_queries(
+            city=[
+                "Hoeksche Waard",
+                "Goeree-Overflakkee",
+            ],
+            country="nl",
+        ),
     },
     {
         "title": "Twente Milieu",
         "url": "https://www.twentemilieu.nl/",
         "uuid": "8d97bb56-5afd-4cbc-a651-b4f7314264b4",
         "company": "twentemilieu",
+        "locations": locations_queries(
+            city=[
+                "Almelo",
+                "Berkelland",
+                "Borne",
+                "Enschede",
+                "Haaksbergen",
+                "Hengelo",
+                "Hof van Twente",
+                "Losser",
+                "Oldenzaal",
+                "Wierden",
+            ],  # source: https://www.twentemilieu.nl/
+            country="nl",
+        ),
     },
     {
         "title": "Waardlanden",
         "url": "https://www.waardlanden.nl/",
         "uuid": "942abcf6-3775-400d-ae5d-7380d728b23c",
         "company": "waardlanden",
+        "locations": locations_queries(
+            city=[
+                "Gorinchem",
+                "Hardinxveld-Giessendam",
+                "Molenlanden",
+                "Vijfheerenlanden",
+            ],  # source: https://www.waardlanden.nl/
+            country="nl",
+        ),
     },
     {
         "title": "Gemeente Westland",
@@ -136,6 +239,13 @@ SERVICE_MAP = [
         "url": "https://www.woerden.nl/",
         "uuid": "06856f74-6826-4c6a-aabf-69bc9d20b5a6",
         "company": "woerdenoudewater",
+        "locations": locations_queries(
+            city=[
+                "Woerden",
+                "Oudewater",
+            ],
+            country="nl",
+        ),
     },
 ]
 

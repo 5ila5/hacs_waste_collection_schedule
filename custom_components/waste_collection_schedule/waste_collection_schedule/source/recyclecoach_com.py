@@ -7,6 +7,7 @@ from waste_collection_schedule.exceptions import (
     SourceArgumentNotFound,
     SourceArgumentNotFoundWithSuggestions,
 )
+from waste_collection_schedule.locations import locations_queries
 
 TITLE = "Recycle Coach"
 DESCRIPTION = "Source loader for recyclecoach.com"
@@ -83,7 +84,45 @@ ICON_MAP = {
     "3 Bags of Waste": Icons.GENERAL_WASTE,
 }
 
-EXTRA_INFO = [
+
+def EXTRA_INFO():
+    COUNTIES = ["Chatham-Kent", "Orillia", "Norfolk County"]
+    UNSTRUCTURED_QUERIES = ["Glenorchy City Council"]
+
+    for service in SERVICE_MAP:
+        city = service.get("default_params", {}).get("city")
+        state = service.get("default_params", {}).get("state")
+        if city is None:
+            city = service["title"].split("(")[0].strip()
+        if state is None:
+            state = service["title"].split("(")[-1].split("-")[0].strip(") ")
+        country = service.get("country", COUNTRY)
+        if city in UNSTRUCTURED_QUERIES:
+            yield service | {
+                "locations": locations_queries(f"{city}, {state}, {country}"),
+            }
+            continue
+        county = None
+        if city in COUNTIES:
+            county = city
+            city = None
+
+        if city is None and county is None:
+            raise ValueError(
+                f"Service '{service['title']}' does not have a default city or county defined. Please provide one of these parameters."
+            )
+
+        yield service | {
+            "locations": locations_queries(
+                city=city,
+                state=state,
+                county=county,
+                country=country,
+            ),
+        }
+
+
+SERVICE_MAP = [
     {
         "title": "Albuquerque, New Mexico, USA",
         "url": "https://recyclecoach.com/cities/usa-nm-city-of-albuquerque/",
