@@ -84,7 +84,7 @@ class BaseSource(ABC, Generic[ParserType, TransformerType]):
     # municipality/provider (or a callable returning them, for large external
     # registries) when one structure serves many. Drives the per-region README /
     # sources.json listings. The typed successor to the legacy EXTRA_INFO dicts.
-    REGIONS: "ClassVar[tuple[Region, ...] | Callable[[], list[Region]]]" = ()
+    REGIONS: "ClassVar[Iterable[Region] | Callable[[], Iterable[Region]]]" = ()
 
     # --- Waste types this source produces ---
     # DECLARE THIS. It drives the config-flow waste-type dropdown, so it has to
